@@ -1,2 +1,2 @@
 # COE356-VorTech
-Test repository
+Marketplace application built on flutter
