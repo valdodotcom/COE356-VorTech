@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../ui/product.dart';
+import '../ui/vendor_page.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class Home extends StatelessWidget {
                       fontSize: 50.0,
                     ),
                   ),
-                  new OutlinedButton(
+                  new ElevatedButton(
                       child: new Text("Sign in"),
                       onPressed: () {
                         var router = new MaterialPageRoute(
@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
                       fontSize: 14.0,
                     ),
                   ),
-                  new OutlinedButton(
+                  new ElevatedButton(
                       child: new Text("Create new account"),
                       onPressed: () {
                         var router = new MaterialPageRoute(
@@ -83,11 +83,11 @@ class SignInPage extends StatelessWidget {
             new TextButton(
                 onPressed: () => debugPrint("Forgot password pressed"),
                 child: new Text("Forgot your password?")),
-            new OutlinedButton(
+            new ElevatedButton(
                 child: new Text("Sign in"),
                 onPressed: () {
                   var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new ProductPage());
+                      builder: (BuildContext context) => new VendorPage());
                   Navigator.of(context).push(router);
                 }),
             new TextButton(
@@ -103,5 +103,3 @@ class SignInPage extends StatelessWidget {
     );
   }
 }
-
-
