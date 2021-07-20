@@ -4,6 +4,7 @@ import '../ui/wishlist.dart';
 
 // import '../ui/item_in_category.dart';
 import '../ui/shop_page.dart';
+import 'item_in_category.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -25,7 +26,150 @@ class _SettingsPageState extends State<SettingsPage> {
             title: new Text("Settings"),
           ),
 
-          // body: ,
+          body: new ListView(
+            padding: EdgeInsets.all(15.0),
+            children: <Widget>[
+              new Column(
+                children: <Widget>[
+                  new InkWell(
+                      onTap: () {
+                        var router = new MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                            new ItemInCategory());
+
+                        Navigator.of(context).push(router);
+                      },
+                      child: new Container(
+                        color: Colors.grey.shade200,
+                        padding: EdgeInsets.all(15.0),
+                        child: new Row(
+                          children: <Widget>[
+                            new Icon(
+                              Icons.person,
+                              size: 40,
+                              color: Colors.blue,
+                            ),
+                            new Text(
+                              "\t\t\t My Account",
+                              style: new TextStyle(
+                                  fontSize: 20.0, color: Colors.blue.shade800),
+                            ),
+                          ],
+                        ),
+                      )),
+                  new Padding(padding: EdgeInsets.all(10)),
+                  new InkWell(
+                    onTap: () {
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                          new ItemInCategory());
+
+                      Navigator.of(context).push(router);
+                    },
+                    child: new Container(
+                        color: Colors.grey.shade200,
+                        padding: EdgeInsets.all(15.0),
+                        child: new Row(
+                          children: <Widget>[
+                            new Icon(
+                              Icons.library_books,
+                              size: 40,
+                              color: Colors.blue,
+                            ),
+                            new Text(
+                              "\t\t\t Orders",
+                              style: new TextStyle(
+                                  fontSize: 20.0, color: Colors.blue.shade800),
+                            ),
+                          ],
+                        )),
+                  ),
+                  new Padding(padding: EdgeInsets.all(10)),
+                  new InkWell(
+                    onTap: () {
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                          new ItemInCategory());
+
+                      Navigator.of(context).push(router);
+                    },
+                    child: new Container(
+                        color: Colors.grey.shade200,
+                        padding: EdgeInsets.all(15.0),
+                        child: new Row(
+                          children: <Widget>[
+                            new Icon(
+                              Icons.info,
+                              size: 40,
+                              color: Colors.blue,
+                            ),
+                            new Text(
+                              "\t\t\t Info",
+                              style: new TextStyle(
+                                  fontSize: 20.0, color: Colors.blue.shade800),
+                            ),
+                          ],
+                        )),
+                  ),
+                  new Padding(padding: EdgeInsets.all(10)),
+                  new InkWell(
+                    onTap: () {
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                          new ItemInCategory());
+
+                      Navigator.of(context).push(router);
+                    },
+                    child: new Container(
+                        color: Colors.grey.shade200,
+                        padding: EdgeInsets.all(15.0),
+                        child: new Row(
+                          children: <Widget>[
+                            new Icon(
+                              Icons.app_settings_alt,
+                              size: 40,
+                              color: Colors.blue,
+                            ),
+                            new Text(
+                              "\t\t\t Device Settings",
+                              style: new TextStyle(
+                                  fontSize: 20.0, color: Colors.blue.shade800),
+                            ),
+                          ],
+                        )),
+                  ),
+                  new Padding(padding: EdgeInsets.all(10)),
+                  new InkWell(
+                    onTap: () {
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                          new ItemInCategory());
+
+                      Navigator.of(context).push(router);
+                    },
+                    child: new Container(
+                      color: Colors.grey.shade200,
+                      padding: EdgeInsets.all(15.0),
+                      child: new Row(
+                        children: <Widget>[
+                          new Icon(
+                            Icons.logout,
+                            size: 40,
+                            color: Colors.blue,
+                          ),
+                          new Text(
+                            "\t\t\t Log Out",
+                            style: new TextStyle(
+                                fontSize: 20.0, color: Colors.blue.shade800),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
 
           bottomNavigationBar: new Theme(
             data: Theme.of(context).copyWith(
