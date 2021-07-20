@@ -72,13 +72,7 @@ class _ProductPageState extends State<ProductPage> {
                             content: new Text("Item added to wishlist!"),
                             action: SnackBarAction(
                               label: "Undo",
-                              onPressed: () {
-                                // var router = new MaterialPageRoute(
-                                //     builder: (BuildContext context) =>
-                                //         new WishlistPage());
-                                //
-                                // Navigator.of(context).push(router);
-                              },
+                              onPressed: () {},
                             ),
                           );
                           ScaffoldMessenger.of(context)

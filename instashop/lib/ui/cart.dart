@@ -13,7 +13,10 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-
+      appBar: new AppBar(
+        title: new Text("My Cart"),
+        backgroundColor: Color(0xff00eaff),
+      ),
     );
   }
 }

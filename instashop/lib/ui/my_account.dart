@@ -45,10 +45,6 @@ class _MyAccountState extends State<MyAccount> {
                   icon: Icon(Icons.person),
                   label: 'My Account',
                 ),
-                // BottomNavigationBarItem(
-                //   icon: Icon(Icons.settings),
-                //   label: 'Settings',
-                // ),
               ],
               onTap: (int i) {
                 setState(() {
@@ -72,12 +68,6 @@ class _MyAccountState extends State<MyAccount> {
 
                   Navigator.of(context).push(router);
                 }
-                // if (i == 3){
-                //   var router = new MaterialPageRoute(
-                //       builder: (BuildContext context) => new WishlistPage());
-                //
-                //   Navigator.of(context).push(router);
-                // }
 
               }),
         )

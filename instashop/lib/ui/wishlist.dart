@@ -46,10 +46,6 @@ class _WishlistPageState extends State<WishlistPage> {
                   icon: Icon(Icons.person),
                   label: 'My Account',
                 ),
-                // BottomNavigationBarItem(
-                //   icon: Icon(Icons.settings),
-                //   label: 'Settings',
-                // ),
               ],
               onTap: (int i) {
                 setState(() {
@@ -73,13 +69,6 @@ class _WishlistPageState extends State<WishlistPage> {
 
                   Navigator.of(context).push(router);
                 }
-                // if (i == 3){
-                //   var router = new MaterialPageRoute(
-                //       builder: (BuildContext context) => new WishlistPage());
-                //
-                //   Navigator.of(context).push(router);
-                // }
-
               }),
         ));
   }
