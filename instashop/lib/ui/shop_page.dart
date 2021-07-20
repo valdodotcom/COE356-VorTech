@@ -17,7 +17,11 @@ class _ShopPageState extends State<ShopPage> {
     return new Scaffold(
         appBar: new AppBar(
           backgroundColor: Color(0xff00eaff),
-          title: new Text('Products & Services'),
+          title: new TextFormField(
+            decoration: new InputDecoration(
+              hintText: "Enter a vendor name",
+            ),
+          ),
           actions: <Widget>[
             new IconButton(
                 onPressed: () => debugPrint("Search pressed"),
