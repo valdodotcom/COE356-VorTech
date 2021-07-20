@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../ui/wishlist.dart';
 
 // import '../ui/item_in_category.dart';
 import '../ui/shop_page.dart';
 
-class MyAccount extends StatefulWidget {
-  const MyAccount({Key? key}) : super(key: key);
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
-  _MyAccountState createState() => _MyAccountState();
+  _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _MyAccountState extends State<MyAccount> {
+class _SettingsPageState extends State<SettingsPage> {
   int _index = 2;
 
   @override
@@ -21,13 +22,10 @@ class _MyAccountState extends State<MyAccount> {
           appBar: new AppBar(
             leading: new Container(),
             backgroundColor: Color(0xff00eaff),
-            title: new Text("My Account"),
-            // actions: <Widget>[
-            //   new IconButton(
-            //       onPressed: () => debugPrint("Search pressed"),
-            //       icon: new Icon(Icons.search)),
-            // ],
+            title: new Text("Settings"),
           ),
+
+          // body: ,
 
           bottomNavigationBar: new Theme(
             data: Theme.of(context).copyWith(
@@ -46,8 +44,8 @@ class _MyAccountState extends State<MyAccount> {
                     label: 'Wishlist',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.person),
-                    label: 'My Account',
+                    icon: Icon(Icons.settings),
+                    label: 'Settings',
                   ),
                 ],
                 onTap: (int i) {
@@ -68,7 +66,7 @@ class _MyAccountState extends State<MyAccount> {
                   }
                   if (i == 2) {
                     var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new MyAccount());
+                        builder: (BuildContext context) => new SettingsPage());
 
                     Navigator.of(context).push(router);
                   }
@@ -79,3 +77,5 @@ class _MyAccountState extends State<MyAccount> {
 
   }
 }
+
+onWillPop(context) async { SystemChannels.platform.invokeMethod('SystemNavigator.pop'); return false; }

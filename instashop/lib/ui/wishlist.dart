@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../ui/shop_page.dart';
-import '../ui/my_account.dart';
+import '../ui/settings.dart';
 // import '../ui/wishlist.dart';
 // import '../ui/item_in_category.dart';
 
@@ -45,8 +45,8 @@ class _WishlistPageState extends State<WishlistPage> {
                   label: 'Wishlist',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'My Account',
+                  icon: Icon(Icons.settings),
+                  label: 'Settings',
                 ),
               ],
               onTap: (int i) {
@@ -67,7 +67,7 @@ class _WishlistPageState extends State<WishlistPage> {
                 }
                 if (i == 2){
                   var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new MyAccount());
+                      builder: (BuildContext context) => new SettingsPage());
 
                   Navigator.of(context).push(router);
                 }

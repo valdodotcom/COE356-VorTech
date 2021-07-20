@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
-import 'package:instashop/ui/my_account.dart';
+import 'package:instashop/ui/settings.dart';
 import '../ui/wishlist.dart';
 import '../ui/item_in_category.dart';
 
@@ -194,8 +194,8 @@ class _ShopPageState extends State<ShopPage> {
                     label: 'Wishlist',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.person),
-                    label: 'My Account',
+                    icon: Icon(Icons.settings),
+                    label: 'Settings',
                   ),
                 ],
                 onTap: (int i) {
@@ -216,7 +216,7 @@ class _ShopPageState extends State<ShopPage> {
                   }
                   if (i == 2) {
                     var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new MyAccount());
+                        builder: (BuildContext context) => new SettingsPage());
 
                     Navigator.of(context).push(router);
                   }
