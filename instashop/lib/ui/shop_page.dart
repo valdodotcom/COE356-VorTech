@@ -11,7 +11,8 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
- int _index = 0;
+  int _index = 0;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -29,31 +30,36 @@ class _ShopPageState extends State<ShopPage> {
           ],
         ),
         body: new Container(
-          padding: EdgeInsets.all(40.0),
+          padding: EdgeInsets.all(15.0),
           child: new Column(
             children: <Widget>[
               new InkWell(
-                onTap: () {
-                  var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new ItemInCategory());
+                  onTap: () {
+                    var router = new MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            new ItemInCategory());
 
-                  Navigator.of(context).push(router);
-                },
-                child: new Row(
-                  children: <Widget>[
-                    new Icon(
-                      Icons.shopping_bag_rounded,
-                      size: 40,
-                      color: Colors.blue,
+                    Navigator.of(context).push(router);
+                  },
+                  child: new Container(
+                    color: Colors.grey.shade200,
+                    padding: EdgeInsets.all(15.0),
+                    child: new Row(
+                      children: <Widget>[
+                        new Icon(
+                          Icons.shopping_bag_rounded,
+                          size: 40,
+                          color: Colors.blue,
+                        ),
+                        new Text(
+                          "\t\t\t Clothes & Accessories",
+                          style: new TextStyle(
+                              fontSize: 20.0, color: Colors.blue.shade800),
+                        ),
+                      ],
                     ),
-                    new Text(
-                      "\t\t\t Clothes & Accessories",
-                      style: new TextStyle(
-                          fontSize: 20.0, color: Colors.blue.shade800),
-                    ),
-                  ],
-                ),
-              ),
+                  )),
+              new Padding(padding: EdgeInsets.all(10)),
               new InkWell(
                 onTap: () {
                   var router = new MaterialPageRoute(
@@ -61,21 +67,25 @@ class _ShopPageState extends State<ShopPage> {
 
                   Navigator.of(context).push(router);
                 },
-                child: new Row(
-                  children: <Widget>[
-                    new Icon(
-                      Icons.fastfood,
-                      size: 40,
-                      color: Colors.blue,
-                    ),
-                    new Text(
-                      "\t\t\t Food",
-                      style: new TextStyle(
-                          fontSize: 20.0, color: Colors.blue.shade800),
-                    ),
-                  ],
-                ),
+                child: new Container(
+                    color: Colors.grey.shade200,
+                    padding: EdgeInsets.all(15.0),
+                    child: new Row(
+                      children: <Widget>[
+                        new Icon(
+                          Icons.fastfood,
+                          size: 40,
+                          color: Colors.blue,
+                        ),
+                        new Text(
+                          "\t\t\t Food",
+                          style: new TextStyle(
+                              fontSize: 20.0, color: Colors.blue.shade800),
+                        ),
+                      ],
+                    )),
               ),
+              new Padding(padding: EdgeInsets.all(10)),
               new InkWell(
                 onTap: () {
                   var router = new MaterialPageRoute(
@@ -83,21 +93,25 @@ class _ShopPageState extends State<ShopPage> {
 
                   Navigator.of(context).push(router);
                 },
-                child: new Row(
-                  children: <Widget>[
-                    new Icon(
-                      Icons.phonelink,
-                      size: 40,
-                      color: Colors.blue,
-                    ),
-                    new Text(
-                      "\t\t\t Tech & Gadgets",
-                      style: new TextStyle(
-                          fontSize: 20.0, color: Colors.blue.shade800),
-                    ),
-                  ],
-                ),
+                child: new Container(
+                    color: Colors.grey.shade200,
+                    padding: EdgeInsets.all(15.0),
+                    child: new Row(
+                      children: <Widget>[
+                        new Icon(
+                          Icons.phonelink,
+                          size: 40,
+                          color: Colors.blue,
+                        ),
+                        new Text(
+                          "\t\t\t Tech & Gadgets",
+                          style: new TextStyle(
+                              fontSize: 20.0, color: Colors.blue.shade800),
+                        ),
+                      ],
+                    )),
               ),
+              new Padding(padding: EdgeInsets.all(10)),
               new InkWell(
                 onTap: () {
                   var router = new MaterialPageRoute(
@@ -105,21 +119,25 @@ class _ShopPageState extends State<ShopPage> {
 
                   Navigator.of(context).push(router);
                 },
-                child: new Row(
-                  children: <Widget>[
-                    new Icon(
-                      Icons.face_retouching_natural,
-                      size: 40,
-                      color: Colors.blue,
-                    ),
-                    new Text(
-                      "\t\t\t Beauty & Personal Care",
-                      style: new TextStyle(
-                          fontSize: 20.0, color: Colors.blue.shade800),
-                    ),
-                  ],
-                ),
+                child: new Container(
+                    color: Colors.grey.shade200,
+                    padding: EdgeInsets.all(15.0),
+                    child: new Row(
+                      children: <Widget>[
+                        new Icon(
+                          Icons.face_retouching_natural,
+                          size: 40,
+                          color: Colors.blue,
+                        ),
+                        new Text(
+                          "\t\t\t Beauty & Personal Care",
+                          style: new TextStyle(
+                              fontSize: 20.0, color: Colors.blue.shade800),
+                        ),
+                      ],
+                    )),
               ),
+              new Padding(padding: EdgeInsets.all(10)),
               new InkWell(
                 onTap: () {
                   var router = new MaterialPageRoute(
@@ -127,19 +145,23 @@ class _ShopPageState extends State<ShopPage> {
 
                   Navigator.of(context).push(router);
                 },
-                child: new Row(
-                  children: <Widget>[
-                    new Icon(
-                      Icons.local_florist,
-                      size: 40,
-                      color: Colors.blue,
-                    ),
-                    new Text(
-                      "\t\t\t Arts & Crafts",
-                      style: new TextStyle(
-                          fontSize: 20.0, color: Colors.blue.shade800),
-                    ),
-                  ],
+                child: new Container(
+                  color: Colors.grey.shade200,
+                  padding: EdgeInsets.all(15.0),
+                  child: new Row(
+                    children: <Widget>[
+                      new Icon(
+                        Icons.local_florist,
+                        size: 40,
+                        color: Colors.blue,
+                      ),
+                      new Text(
+                        "\t\t\t Arts & Crafts",
+                        style: new TextStyle(
+                            fontSize: 20.0, color: Colors.blue.shade800),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -149,47 +171,45 @@ class _ShopPageState extends State<ShopPage> {
           data: Theme.of(context).copyWith(
             canvasColor: Color(0xff00eaff),
           ),
-          child: new BottomNavigationBar (
+          child: new BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               currentIndex: _index,
               items: const <BottomNavigationBarItem>[
-                 BottomNavigationBarItem(
+                BottomNavigationBarItem(
                   icon: Icon(Icons.shopping_bag),
                   label: 'Shop',
                 ),
-                 BottomNavigationBarItem(
+                BottomNavigationBarItem(
                   icon: Icon(Icons.bookmark_add),
                   label: 'Wishlist',
                 ),
-                 BottomNavigationBarItem(
+                BottomNavigationBarItem(
                   icon: Icon(Icons.person),
                   label: 'My Account',
                 ),
-
               ],
               onTap: (int i) {
                 setState(() {
                   // _index = i;
                 });
-                if (i == 0){
+                if (i == 0) {
                   var router = new MaterialPageRoute(
                       builder: (BuildContext context) => new ShopPage());
 
                   Navigator.of(context).push(router);
                 }
-                if (i == 1){
+                if (i == 1) {
                   var router = new MaterialPageRoute(
                       builder: (BuildContext context) => new WishlistPage());
 
                   Navigator.of(context).push(router);
                 }
-                if (i == 2){
+                if (i == 2) {
                   var router = new MaterialPageRoute(
                       builder: (BuildContext context) => new MyAccount());
 
                   Navigator.of(context).push(router);
                 }
-
               }),
         ));
   }
