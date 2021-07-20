@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-
-// import 'package:test_searchbar/DataList.dart';
+import 'package:instashop/ui/my_account.dart';
+import '../ui/wishlist.dart';
 import '../ui/item_in_category.dart';
 
-class VendorPage extends StatefulWidget {
-  const VendorPage({Key? key}) : super(key: key);
+class ShopPage extends StatefulWidget {
+  const ShopPage({Key? key}) : super(key: key);
 
   @override
-  _VendorPageState createState() => _VendorPageState();
+  _ShopPageState createState() => _ShopPageState();
 }
 
-class _VendorPageState extends State<VendorPage> {
+class _ShopPageState extends State<ShopPage> {
+ int _index = 0;
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -144,32 +145,60 @@ class _VendorPageState extends State<VendorPage> {
           data: Theme.of(context).copyWith(
             canvasColor: Color(0xff00eaff),
           ),
-          child: new BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: 0,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_bag),
-                label: 'Shop',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.bookmark_add),
-                label: 'Wishlist',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'My Account',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Settings',
-              ),
-            ],
-          ),
+          child: new BottomNavigationBar (
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _index,
+              items: const <BottomNavigationBarItem>[
+                 BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_bag),
+                  label: 'Shop',
+                ),
+                 BottomNavigationBarItem(
+                  icon: Icon(Icons.bookmark_add),
+                  label: 'Wishlist',
+                ),
+                 BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'My Account',
+                ),
+                 // BottomNavigationBarItem(
+                 //  icon: Icon(Icons.settings),
+                 //  label: 'Settings',
+                // ),
+              ],
+              onTap: (int i) {
+                setState(() {
+                  // _index = i;
+                });
+                if (i == 0){
+                  var router = new MaterialPageRoute(
+                      builder: (BuildContext context) => new ShopPage());
+
+                  Navigator.of(context).push(router);
+                }
+                if (i == 1){
+                  var router = new MaterialPageRoute(
+                      builder: (BuildContext context) => new WishlistPage());
+
+                  Navigator.of(context).push(router);
+                }
+                if (i == 2){
+                  var router = new MaterialPageRoute(
+                      builder: (BuildContext context) => new MyAccount());
+
+                  Navigator.of(context).push(router);
+                }
+                // if (i == 3){
+                //   var router = new MaterialPageRoute(
+                //       builder: (BuildContext context) => new WishlistPage());
+                //
+                //   Navigator.of(context).push(router);
+                // }
+
+              }),
         ));
   }
 }
-
 
 /*
 •	Appliances

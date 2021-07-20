@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../ui/vendor_page.dart';
+import '../ui/shop_page.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -87,7 +87,7 @@ class SignInPage extends StatelessWidget {
                 child: new Text("Sign in"),
                 onPressed: () {
                   var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new VendorPage());
+                      builder: (BuildContext context) => new ShopPage());
                   Navigator.of(context).push(router);
                 }),
             new TextButton(

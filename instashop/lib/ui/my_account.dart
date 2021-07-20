@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
-import '../ui/shop_page.dart';
-import '../ui/my_account.dart';
-// import '../ui/wishlist.dart';
+import '../ui/wishlist.dart';
 // import '../ui/item_in_category.dart';
+import '../ui/shop_page.dart';
 
-class WishlistPage extends StatefulWidget {
-  const WishlistPage({Key? key}) : super(key: key);
+class MyAccount extends StatefulWidget {
+  const MyAccount({Key? key}) : super(key: key);
 
   @override
-  _WishlistPageState createState() => _WishlistPageState();
+  _MyAccountState createState() => _MyAccountState();
 }
 
-class _WishlistPageState extends State<WishlistPage> {
-  int _index = 1;
+class _MyAccountState extends State<MyAccount> {
+  int _index = 2;
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          backgroundColor: Color(0xff00eaff),
-          title: new Text("Wishlist"),
-          // actions: <Widget>[
-          //   new IconButton(
-          //       onPressed: () => debugPrint("Search pressed"),
-          //       icon: new Icon(Icons.search)),
-          // ],
-        ),
+      appBar: new AppBar(
+        backgroundColor: Color(0xff00eaff),
+        title: new Text("My Account"),
+        // actions: <Widget>[
+        //   new IconButton(
+        //       onPressed: () => debugPrint("Search pressed"),
+        //       icon: new Icon(Icons.search)),
+        // ],
+      ),
 
         bottomNavigationBar: new Theme(
           data: Theme.of(context).copyWith(
@@ -81,6 +80,8 @@ class _WishlistPageState extends State<WishlistPage> {
                 // }
 
               }),
-        ));
+        )
+
+    );
   }
 }
