@@ -15,8 +15,10 @@ class _WishlistPageState extends State<WishlistPage> {
   int _index = 1;
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return WillPopScope(onWillPop: () async => false,
+    child: new Scaffold(
         appBar: new AppBar(
+          leading: new Container(),
           backgroundColor: Color(0xff00eaff),
           title: new Text("Wishlist"),
           // actions: <Widget>[
@@ -70,6 +72,6 @@ class _WishlistPageState extends State<WishlistPage> {
                   Navigator.of(context).push(router);
                 }
               }),
-        ));
+        )),);
   }
 }
