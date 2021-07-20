@@ -45,7 +45,7 @@ class Home extends StatelessWidget {
                       onPressed: () {
                         var router = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new SignInPage());
+                                new NewAccountPage());
 
                         Navigator.of(context).push(router);
                       }),
@@ -102,10 +102,97 @@ class SignInPage extends StatelessWidget {
                 new TextButton(
                   onPressed: () {
                     var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new SignInPage());
+                        builder: (BuildContext context) => new NewAccountPage());
                     Navigator.of(context).push(router);
                   },
                   child: new Text("Don't have an account? Sign up"),
+                ),
+              ])
+        ],
+      ),
+    );
+  }
+}
+
+class NewAccountPage extends StatefulWidget {
+  const NewAccountPage({Key? key}) : super(key: key);
+
+  @override
+  _NewAccountPageState createState() => _NewAccountPageState();
+}
+
+class _NewAccountPageState extends State<NewAccountPage> {
+  @override
+  Widget build(BuildContext context) {
+    var _emailController = TextEditingController();
+    var _passwordController = TextEditingController();
+    var _secondPasswordController = TextEditingController();
+    var _firstNameController = TextEditingController();
+    var _lastNameController = TextEditingController();
+
+    return new Scaffold(
+      backgroundColor: Color(0xff00eaff),
+      body: new ListView(
+        padding: EdgeInsets.all(40.0),
+        children: <Widget>[
+          new Column(
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            //   mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Padding(padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0)),
+                new Icon(Icons.shopping_cart_rounded, size: 140.0),
+                new Text(
+                  "Welcome!",
+                  style: new TextStyle(fontSize: 30),
+                ),
+                new Text("Fill in with your details to create account"),
+                new TextField(
+                  controller: _firstNameController,
+                  decoration: new InputDecoration(
+                    labelText: "First Name",
+                  ),
+                ),
+                new TextField(
+                  controller: _lastNameController,
+                  decoration: new InputDecoration(
+                    labelText: "Last Name",
+                  ),
+                ),
+                new TextField(
+                  controller: _emailController,
+                  decoration: new InputDecoration(
+                    labelText: "Email",
+                  ),
+                ),
+                new TextField(
+                  controller: _passwordController,
+                  decoration: new InputDecoration(
+                    labelText: "Password (6 or more characters)",
+                  ),
+                  obscureText: true,
+                ),
+                new TextField(
+                  controller: _secondPasswordController,
+                  decoration: new InputDecoration(
+                    labelText: "Enter password again",
+                  ),
+                  obscureText: true,
+                ),
+                new Padding(padding: EdgeInsets.all(10.0)),
+                new ElevatedButton(
+                    child: new Text("Create account"),
+                    onPressed: () {
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) => new ShopPage());
+                      Navigator.of(context).push(router);
+                    }),
+                new TextButton(
+                  onPressed: () {
+                    var router = new MaterialPageRoute(
+                        builder: (BuildContext context) => new SignInPage());
+                    Navigator.of(context).push(router);
+                  },
+                  child: new Text("Already have an account? Sign in"),
                 ),
               ])
         ],
