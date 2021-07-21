@@ -202,5 +202,3 @@ class _NewAccountPageState extends State<NewAccountPage> {
     );
   }
 }
-
-

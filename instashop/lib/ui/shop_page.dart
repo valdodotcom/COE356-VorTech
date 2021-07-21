@@ -260,5 +260,4 @@ class _ShopPageState extends State<ShopPage> {
 •	Office Products
 •	Pet Supplies
 •	Sports and Outdoors
-
  */
