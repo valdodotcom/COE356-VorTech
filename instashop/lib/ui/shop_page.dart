@@ -42,7 +42,7 @@ class _ShopPageState extends State<ShopPage> {
                       onTap: () {
                         var router = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new ItemInCategory());
+                                new ItemInShop());
 
                         Navigator.of(context).push(router);
                       },
@@ -67,11 +67,13 @@ class _ShopPageState extends State<ShopPage> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-                      var router = new MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              new ItemInCategory());
+                      return debugPrint("Button pressed");
 
-                      Navigator.of(context).push(router);
+                      // var router = new MaterialPageRoute(
+                      //     builder: (BuildContext context) =>
+                      //         new ItemInShop());
+                      //
+                      // Navigator.of(context).push(router);
                     },
                     child: new Container(
                         color: Colors.grey.shade200,
@@ -94,11 +96,13 @@ class _ShopPageState extends State<ShopPage> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-                      var router = new MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              new ItemInCategory());
+                      return debugPrint("Button pressed");
 
-                      Navigator.of(context).push(router);
+                      // var router = new MaterialPageRoute(
+                      //     builder: (BuildContext context) =>
+                      //         new ItemInShop());
+                      //
+                      // Navigator.of(context).push(router);
                     },
                     child: new Container(
                         color: Colors.grey.shade200,
@@ -121,11 +125,13 @@ class _ShopPageState extends State<ShopPage> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-                      var router = new MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              new ItemInCategory());
+                      return debugPrint("Button pressed");
 
-                      Navigator.of(context).push(router);
+                      // var router = new MaterialPageRoute(
+                      //     builder: (BuildContext context) =>
+                      //         new ItemInShop());
+                      //
+                      // Navigator.of(context).push(router);
                     },
                     child: new Container(
                         color: Colors.grey.shade200,
@@ -148,11 +154,13 @@ class _ShopPageState extends State<ShopPage> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-                      var router = new MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              new ItemInCategory());
+                      return debugPrint("Button pressed");
 
-                      Navigator.of(context).push(router);
+                      // var router = new MaterialPageRoute(
+                      //     builder: (BuildContext context) =>
+                      //         new ItemInShop());
+                      //
+                      // Navigator.of(context).push(router);
                     },
                     child: new Container(
                       color: Colors.grey.shade200,

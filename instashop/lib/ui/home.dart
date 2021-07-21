@@ -77,6 +77,7 @@ class SignInPage extends StatelessWidget {
                 ),
                 new Text("Please sign in to continue"),
                 new TextField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   decoration: new InputDecoration(
                     labelText: "Email",
@@ -159,6 +160,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
                   ),
                 ),
                 new TextField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   decoration: new InputDecoration(
                     labelText: "Email",

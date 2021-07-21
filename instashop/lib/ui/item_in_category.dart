@@ -3,14 +3,14 @@ import '../ui/product_page.dart';
 // import '../ui/wishlist.dart';
 // import '../ui/item_in_category.dart';
 
-class ItemInCategory extends StatefulWidget {
-  const ItemInCategory({Key? key}) : super(key: key);
+class ItemInShop extends StatefulWidget {
+  const ItemInShop({Key? key}) : super(key: key);
 
   @override
-  _ItemInCategoryState createState() => _ItemInCategoryState();
+  _ItemInShopState createState() => _ItemInShopState();
 }
 
-class _ItemInCategoryState extends State<ItemInCategory> {
+class _ItemInShopState extends State<ItemInShop> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
