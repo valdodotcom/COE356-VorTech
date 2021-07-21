@@ -176,7 +176,9 @@ class _NewAccountPageState extends State<NewAccountPage> {
                 new TextField(
                   controller: _secondPasswordController,
                   decoration: new InputDecoration(
-                    labelText: "Enter password again",
+
+                    labelText: "Confirm password",
+                    
                   ),
                   obscureText: true,
                 ),
