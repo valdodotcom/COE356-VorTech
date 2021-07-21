@@ -1,77 +1,76 @@
 import 'package:flutter/material.dart';
-import '../ui/wishlist.dart';
-// import '../ui/item_in_category.dart';
-import '../ui/shop_page.dart';
+import 'package:flutter/widgets.dart';
 
-class MyAccount extends StatefulWidget {
-  const MyAccount({Key? key}) : super(key: key);
+class MyAccountPage extends StatefulWidget {
+  const MyAccountPage({Key? key}) : super(key: key);
 
   @override
-  _MyAccountState createState() => _MyAccountState();
+  _MyAccountPageState createState() => _MyAccountPageState();
 }
 
-class _MyAccountState extends State<MyAccount> {
-  int _index = 2;
+class _MyAccountPageState extends State<MyAccountPage> {
+  var _emailController = TextEditingController();
+  var _phoneNumberController = TextEditingController();
+  var _firstNameController = TextEditingController();
+  var _lastNameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        leading: new Container(),
         backgroundColor: Color(0xff00eaff),
-        title: new Text("My Account"),
-        // actions: <Widget>[
-        //   new IconButton(
-        //       onPressed: () => debugPrint("Search pressed"),
-        //       icon: new Icon(Icons.search)),
-        // ],
+        title: new Text("Settings"),
       ),
-
-        bottomNavigationBar: new Theme(
-          data: Theme.of(context).copyWith(
-            canvasColor: Color(0xff00eaff),
-          ),
-          child: new BottomNavigationBar (
-              type: BottomNavigationBarType.fixed,
-              currentIndex: _index,
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_bag),
-                  label: 'Shop',
+      body: new ListView(
+        padding: EdgeInsets.all(40.0),
+        children: <Widget>[
+          new Column(
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Padding(padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0)),
+                new Text(
+                  "Account Details",
+                  style: new TextStyle(fontSize: 20),
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.bookmark_add),
-                  label: 'Wishlist',
+                new TextButton(
+                    onPressed: () => debugPrint("Edit clicked"),
+                    child: new Text("Edit")),
+                new TextField(
+                  controller: _firstNameController,
+                  decoration: new InputDecoration(
+                    labelText: "First Name",
+                  ),
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'My Account',
+                new TextField(
+                  controller: _lastNameController,
+                  decoration: new InputDecoration(
+                    labelText: "Last Name",
+                  ),
                 ),
-              ],
-              onTap: (int i) {
-                setState(() {
-                  // _index = i;
-                });
-                if (i == 0){
-                  var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new ShopPage());
-
-                  Navigator.of(context).push(router);
-                }
-                if (i == 1){
-                  var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new WishlistPage());
-
-                  Navigator.of(context).push(router);
-                }
-                if (i == 2){
-                  var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new MyAccount());
-
-                  Navigator.of(context).push(router);
-                }
-
-              }),
-        )
-
+                new TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  controller: _emailController,
+                  decoration: new InputDecoration(
+                    labelText: "Email",
+                  ),
+                ),
+                new TextField(
+                  keyboardType: TextInputType.numberWithOptions(),
+                  controller: _phoneNumberController,
+                  decoration: new InputDecoration(
+                    labelText: "Phone number",
+                  ),
+                ),
+                new Padding(padding: EdgeInsets.all(12)),
+                new TextButton(
+                    onPressed: () => debugPrint("Change password pressed"),
+                    child: new Text("Tap here to change password")),
+              ])
+        ],
+      ),
     );
   }
 }
+

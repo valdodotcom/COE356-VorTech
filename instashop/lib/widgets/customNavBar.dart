@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instashop/ui/my_account.dart';
+import 'package:instashop/ui/settings.dart';
 import 'package:instashop/ui/shop_page.dart';
 import 'package:instashop/ui/wishlist.dart';
 
@@ -54,7 +54,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             }
             if (i == 2) {
               var router = new MaterialPageRoute(
-                  builder: (BuildContext context) => new MyAccount());
+                  builder: (BuildContext context) => new SettingsPage());
 
               Navigator.of(context).push(router);
             }

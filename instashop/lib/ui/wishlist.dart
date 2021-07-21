@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../ui/shop_page.dart';
-import '../ui/my_account.dart';
+import '../ui/settings.dart';
 // import '../ui/wishlist.dart';
 // import '../ui/item_in_category.dart';
 
@@ -15,8 +15,10 @@ class _WishlistPageState extends State<WishlistPage> {
   int _index = 1;
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return WillPopScope(onWillPop: () async => false,
+    child: new Scaffold(
         appBar: new AppBar(
+          leading: new Container(),
           backgroundColor: Color(0xff00eaff),
           title: new Text("Wishlist"),
           // actions: <Widget>[
@@ -43,8 +45,8 @@ class _WishlistPageState extends State<WishlistPage> {
                   label: 'Wishlist',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'My Account',
+                  icon: Icon(Icons.settings),
+                  label: 'Settings',
                 ),
               ],
               onTap: (int i) {
@@ -65,11 +67,11 @@ class _WishlistPageState extends State<WishlistPage> {
                 }
                 if (i == 2){
                   var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new MyAccount());
+                      builder: (BuildContext context) => new SettingsPage());
 
                   Navigator.of(context).push(router);
                 }
               }),
-        ));
+        )),);
   }
 }

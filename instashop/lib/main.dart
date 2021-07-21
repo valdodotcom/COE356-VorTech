@@ -1,3 +1,4 @@
+import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:flutter/material.dart';
 import './ui/home.dart';
 
@@ -10,10 +11,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "InstaShop",
-      home: new Home(),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      home: DoubleBack(
+        message: "Press back again to close",
+        child: Home(),
+      ), theme: ThemeData(
+      primarySwatch: Colors.blue,
+    ),
     );
   }
 }

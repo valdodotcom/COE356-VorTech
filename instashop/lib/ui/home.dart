@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
                       onPressed: () {
                         var router = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new SignInPage());
+                            new SignInPage());
 
                         Navigator.of(context).push(router);
                       }),
@@ -45,7 +45,7 @@ class Home extends StatelessWidget {
                       onPressed: () {
                         var router = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new NewAccountPage());
+                            new NewAccountPage());
 
                         Navigator.of(context).push(router);
                       }),
@@ -66,8 +66,8 @@ class SignInPage extends StatelessWidget {
         padding: EdgeInsets.all(40.0),
         children: <Widget>[
           new Column(
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
-              //   mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            //   mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Padding(padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0)),
                 new Icon(Icons.shopping_cart_rounded, size: 140.0),
@@ -77,6 +77,7 @@ class SignInPage extends StatelessWidget {
                 ),
                 new Text("Please sign in to continue"),
                 new TextField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   decoration: new InputDecoration(
                     labelText: "Email",
@@ -159,6 +160,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
                   ),
                 ),
                 new TextField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   decoration: new InputDecoration(
                     labelText: "Email",
@@ -174,7 +176,9 @@ class _NewAccountPageState extends State<NewAccountPage> {
                 new TextField(
                   controller: _secondPasswordController,
                   decoration: new InputDecoration(
+
                     labelText: "Confirm password",
+                    
                   ),
                   obscureText: true,
                 ),
