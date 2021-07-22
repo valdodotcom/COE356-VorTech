@@ -13,6 +13,31 @@ class WishlistPage extends StatefulWidget {
 
 class _WishlistPageState extends State<WishlistPage> {
   int _index = 1;
+
+  void _switchPage(int i) {
+    setState(() {
+      // _index = i;
+    });
+    if (i == 0) {
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) => new ShopPage());
+
+      Navigator.of(context).push(router);
+    }
+    if (i == 1) {
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) => new WishlistPage());
+
+      Navigator.of(context).push(router);
+    }
+    if (i == 2) {
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) => new SettingsPage());
+
+      Navigator.of(context).push(router);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(onWillPop: () async => false,
@@ -49,29 +74,8 @@ class _WishlistPageState extends State<WishlistPage> {
                   label: 'Settings',
                 ),
               ],
-              onTap: (int i) {
-                setState(() {
-                  // _index = i;
-                });
-                if (i == 0){
-                  var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new ShopPage());
-
-                  Navigator.of(context).push(router);
-                }
-                if (i == 1){
-                  var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new WishlistPage());
-
-                  Navigator.of(context).push(router);
-                }
-                if (i == 2){
-                  var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new SettingsPage());
-
-                  Navigator.of(context).push(router);
-                }
-              }),
+              onTap: _switchPage,
+              ),
         )),);
   }
 }

@@ -15,6 +15,30 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   int _index = 2;
 
+  void _switchPage(int i) {
+    setState(() {
+      // _index = i;
+    });
+    if (i == 0) {
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) => new ShopPage());
+
+      Navigator.of(context).push(router);
+    }
+    if (i == 1) {
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) => new WishlistPage());
+
+      Navigator.of(context).push(router);
+    }
+    if (i == 2) {
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) => new SettingsPage());
+
+      Navigator.of(context).push(router);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -209,29 +233,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     label: 'Settings',
                   ),
                 ],
-                onTap: (int i) {
-                  setState(() {
-                    // _index = i;
-                  });
-                  if (i == 0) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new ShopPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                  if (i == 1) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new WishlistPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                  if (i == 2) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new SettingsPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                }),
+                onTap: _switchPage,
+                  ),
           )),
     );
   }

@@ -14,6 +14,31 @@ class ShopPage extends StatefulWidget {
 class _ShopPageState extends State<ShopPage> {
   int _index = 0;
 
+  void _switchPage(int i) {
+    setState(() {
+      // _index = i;
+    });
+    if (i == 0) {
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) => new ShopPage());
+
+      Navigator.of(context).push(router);
+    }
+    if (i == 1) {
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) => new WishlistPage());
+
+      Navigator.of(context).push(router);
+    }
+    if (i == 2) {
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) => new SettingsPage());
+
+      Navigator.of(context).push(router);
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -203,10 +228,10 @@ class _ShopPageState extends State<ShopPage> {
             ],
           ),
           bottomNavigationBar: new Theme(
-            data: Theme.of(context).copyWith(
-              canvasColor: Color(0xff00eaff),
-            ),
-            child: new BottomNavigationBar(
+              data: Theme.of(context).copyWith(
+                canvasColor: Color(0xff00eaff),
+              ),
+              child: new BottomNavigationBar (
                 type: BottomNavigationBarType.fixed,
                 currentIndex: _index,
                 items: const <BottomNavigationBarItem>[
@@ -219,34 +244,12 @@ class _ShopPageState extends State<ShopPage> {
                     label: 'Wishlist',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: 'Settings',
+                    icon: Icon(Icons.person),
+                    label: 'My Account',
                   ),
                 ],
-                onTap: (int i) {
-                  setState(() {
-                    // _index = i;
-                  });
-                  if (i == 0) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new ShopPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                  if (i == 1) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new WishlistPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                  if (i == 2) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new SettingsPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                }),
-          )),
+                onTap: _switchPage,
+              ))),
     );
   }
 }
