@@ -22,11 +22,19 @@ class _ShopPageState extends State<ShopPage> {
           appBar: new AppBar(
             leading: new Container(),
             backgroundColor: Color(0xff00eaff),
-            title: new TextFormField(
-              decoration: new InputDecoration(
-                hintText: "Enter a vendor name",
+            title: new Container(
+              padding: EdgeInsets.fromLTRB(9.0, 0.0, 0.0, 0.0),
+              decoration: new BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20.0),
               ),
-            ),
+              child: new TextFormField(
+              decoration: new InputDecoration(
+                hintText: "Search for vendor by name",
+
+              ),
+            ),)
+            ,
             actions: <Widget>[
               new IconButton(
                   onPressed: () => debugPrint("Search pressed"),
@@ -36,6 +44,15 @@ class _ShopPageState extends State<ShopPage> {
           body: new ListView(
             padding: EdgeInsets.all(15.0),
             children: <Widget>[
+              new Container(padding: EdgeInsets.fromLTRB(0,0,0,10),
+          child: new Center(
+                child: new Text("Browse by Category",
+                  style: new TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.blue.shade900,
+                  ),),),),
+             
+
               new Column(
                 children: <Widget>[
                   new InkWell(
