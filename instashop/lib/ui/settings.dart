@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:instashop/ui/my_account.dart';
-import 'package:instashop/widgets/customNavBar.dart';
+import 'package:instashop/widgets/custom_nav_bar.dart';
 import 'home.dart';
+// import 'package:instashop/config/back_twice_to_close_app.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -11,12 +14,24 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  // int _index = 2;
+  DateTime _lastQuitTime = DateTime(0);
 
+  Future<bool> _backTwice() async {
+    if (_lastQuitTime == null ||
+        DateTime.now().difference(_lastQuitTime).inSeconds > 1) {
+      print('Press again Back Button exit');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Press back button again to exit')));
+      _lastQuitTime = DateTime.now();
+      return false;
+    } else {
+      print('sign out');
+      Navigator.of(context).pop(exit(0));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: _backTwice,
       child: new Scaffold(
           appBar: new AppBar(
             leading: new Container(),
