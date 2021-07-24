@@ -3,20 +3,18 @@ import 'package:instashop/ui/settings.dart';
 import 'package:instashop/ui/shop_page.dart';
 import 'package:instashop/ui/wishlist.dart';
 
-
 class CustomNavBar extends StatefulWidget {
-  const CustomNavBar({Key? key}) : super(key: key);
+  final int index;
+
+  const CustomNavBar({Key? key, required this.index}) : super(key: key);
 
   @override
   _CustomNavBarState createState() => _CustomNavBarState();
 }
 
 class _CustomNavBarState extends State<CustomNavBar> {
-  int _index = 0;
-
   void _switchPage(int i) {
     setState(() {
-      // _index = i;
     });
     if (i == 0) {
       var router = new MaterialPageRoute(
@@ -41,12 +39,12 @@ class _CustomNavBarState extends State<CustomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: Theme.of(context).copyWith(
-        canvasColor: Color(0xff00eaff),
-      ),
-      child: new BottomNavigationBar (
+        data: Theme.of(context).copyWith(
+          canvasColor: Color(0xff00eaff),
+        ),
+        child: new BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          currentIndex: _index,
+          currentIndex: widget.index,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_bag),
@@ -57,12 +55,11 @@ class _CustomNavBarState extends State<CustomNavBar> {
               label: 'Wishlist',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'My Account',
+              icon: Icon(Icons.settings),
+              label: 'Settings',
             ),
           ],
           onTap: _switchPage,
-    ));
+        ));
   }
-
 }
