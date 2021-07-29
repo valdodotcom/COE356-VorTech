@@ -1,9 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:instashop/ui/my_account.dart';
-import '../ui/wishlist.dart';
-// import '../ui/item_in_category.dart';
-import '../ui/shop_page.dart';
+import 'package:instashop/widgets/custom_nav_bar.dart';
 import 'home.dart';
+// import 'package:instashop/config/back_twice_to_close_app.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -13,12 +14,24 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  int _index = 2;
+  DateTime _lastQuitTime = DateTime(0);
 
+  Future<bool> _backTwice() async {
+    if (_lastQuitTime == null ||
+        DateTime.now().difference(_lastQuitTime).inSeconds > 1) {
+      print('Press again Back Button exit');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Press back button again to exit')));
+      _lastQuitTime = DateTime.now();
+      return false;
+    } else {
+      print('sign out');
+      Navigator.of(context).pop(exit(0));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: _backTwice,
       child: new Scaffold(
           appBar: new AppBar(
             leading: new Container(),
@@ -188,52 +201,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ],
           ),
-          bottomNavigationBar: new Theme(
-            data: Theme.of(context).copyWith(
-              canvasColor: Color(0xff00eaff),
-            ),
-            child: new BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                currentIndex: _index,
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.shopping_bag),
-                    label: 'Shop',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.bookmark_add),
-                    label: 'Wishlist',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: 'Settings',
-                  ),
-                ],
-                onTap: (int i) {
-                  setState(() {
-                    // _index = i;
-                  });
-                  if (i == 0) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new ShopPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                  if (i == 1) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new WishlistPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                  if (i == 2) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new SettingsPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                }),
-          )),
-    );
+          bottomNavigationBar:  new CustomNavBar(index: 2),
+    ));
   }
 }
 

@@ -1,7 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-import 'package:instashop/ui/settings.dart';
-import '../ui/wishlist.dart';
+import 'package:instashop/widgets/custom_nav_bar.dart';
 import '../ui/item_in_category.dart';
 
 class ShopPage extends StatefulWidget {
@@ -12,21 +12,41 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
-  int _index = 0;
+  DateTime _lastQuitTime = DateTime(0);
 
+  Future<bool> _backTwice() async {
+    if (_lastQuitTime == null ||
+        DateTime.now().difference(_lastQuitTime).inSeconds > 1) {
+      print('Press again Back Button exit');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Press back button again to exit')));
+      _lastQuitTime = DateTime.now();
+      return false;
+    } else {
+      print('sign out');
+      Navigator.of(context).pop(exit(0));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: _backTwice,
       child: new Scaffold(
           appBar: new AppBar(
             leading: new Container(),
             backgroundColor: Color(0xff00eaff),
-            title: new TextFormField(
-              decoration: new InputDecoration(
-                hintText: "Enter a vendor name",
+            title: new Container(
+              padding: EdgeInsets.fromLTRB(9.0, 0.0, 0.0, 0.0),
+              decoration: new BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20.0),
               ),
-            ),
+              child: new TextFormField(
+              decoration: new InputDecoration(
+                hintText: "Search for vendor by name",
+
+              ),
+            ),)
+            ,
             actions: <Widget>[
               new IconButton(
                   onPressed: () => debugPrint("Search pressed"),
@@ -36,6 +56,15 @@ class _ShopPageState extends State<ShopPage> {
           body: new ListView(
             padding: EdgeInsets.all(15.0),
             children: <Widget>[
+              new Container(padding: EdgeInsets.fromLTRB(0,0,0,10),
+          child: new Center(
+                child: new Text("Browse by Category",
+                  style: new TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.blue.shade900,
+                  ),),),),
+             
+
               new Column(
                 children: <Widget>[
                   new InkWell(
@@ -185,51 +214,7 @@ class _ShopPageState extends State<ShopPage> {
               ),
             ],
           ),
-          bottomNavigationBar: new Theme(
-            data: Theme.of(context).copyWith(
-              canvasColor: Color(0xff00eaff),
-            ),
-            child: new BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                currentIndex: _index,
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.shopping_bag),
-                    label: 'Shop',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.bookmark_add),
-                    label: 'Wishlist',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: 'Settings',
-                  ),
-                ],
-                onTap: (int i) {
-                  setState(() {
-                    // _index = i;
-                  });
-                  if (i == 0) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new ShopPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                  if (i == 1) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new WishlistPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                  if (i == 2) {
-                    var router = new MaterialPageRoute(
-                        builder: (BuildContext context) => new SettingsPage());
-
-                    Navigator.of(context).push(router);
-                  }
-                }),
-          )),
+          bottomNavigationBar: new CustomNavBar(index: 0)),
     );
   }
 }
