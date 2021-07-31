@@ -218,31 +218,3 @@ class _ShopPageState extends State<ShopPage> {
     );
   }
 }
-
-
-
-
-
-/*
-•	Appliances
-•	Food
-•	Arts, Crafts and Sewing
-•	Automotive Parts and accessories
-•	Beauty and personal care
-•	Books
-•	CDs and Vinyl*
-•	Cell Phones and Accessories
-•	Clothing, shoes and Jewelry
-•	Collectibles and Fine Art
-•	Computers
-•	Electronic gadgets
-•	Garden and Outdoor*
-•	Grocery
-•	Handmade
-•	Health and Household
-•	Home and Kitchen
-•	Industrial and scientific
-•	Office Products
-•	Pet Supplies
-•	Sports and Outdoors
- */
