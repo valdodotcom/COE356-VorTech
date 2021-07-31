@@ -41,6 +41,9 @@ class _WishlistPageState extends State<WishlistPage> {
           // ],
         ),
 
+
+
+
         bottomNavigationBar: new CustomNavBar(index: 1)),);
   }
 }
