@@ -53,20 +53,34 @@ class ProductPage extends StatelessWidget {
                               child: Image.network(
                                   '${_product[position]['image']}',
                                   fit: BoxFit.fill)),
-                               new Container(
-                                 color:Colors.black12,
-                                child: new Column(
+                                 new Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Text(
+                                    new Container(
+                                      padding: EdgeInsets.all(2),
+                                      decoration: BoxDecoration(
+                                        color: Colors.black54,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Text(
                                       '${_product[position]['title']}',
-                                      style: new TextStyle(fontSize: 20),
+                                      style: new TextStyle(fontSize: 20,
+                                      color: Colors.white),
                                       textAlign: TextAlign.center,
+                                    ),),
+
+                                    new Container(
+                                      padding: EdgeInsets.all(2),
+                                      decoration: BoxDecoration(
+                                        color: Colors.black54,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: new Text('\$ ${_product[position]['price']}',
+                                        style: new TextStyle(fontSize: 20,
+                                        color: Colors.white),),
                                     ),
-                                    Text('Price: ${_product[position]['price']}',
-                                      style: new TextStyle(fontSize: 20),),
                                     new Row(crossAxisAlignment: CrossAxisAlignment.center,
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
@@ -76,7 +90,6 @@ class ProductPage extends StatelessWidget {
                                     ],)
                                   ],
                                 ),
-                              ),
                         ],
                       ),
                       decoration: BoxDecoration(
@@ -91,7 +104,7 @@ class ProductPage extends StatelessWidget {
 }
 
 Future<List> getProduct() async {
-  var apiUrl = Uri.parse('https://fakestoreapi.com/products/category/jewelery');
+  var apiUrl = Uri.parse('https://fakestoreapi.com/products/category/electronics');
 
   http.Response response = await http.get(apiUrl);
 
