@@ -1,17 +1,30 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import '../ui/cart.dart';
+// import '../ui/cart.dart';
+
 // import '../ui/wishlist.dart';
 // import '../ui/item_in_category.dart';
+List _product = [];
+void main() async {
+   _product = await getProduct();
+  print(_product[0]);
 
-class ProductPage extends StatefulWidget {
-  const ProductPage({Key? key}) : super(key: key);
+  for (int i = 0; i < _product.length; i++) {
+    print(_product[i]['title']);
+    print("Description: ${_product[i]['description']}");
+  }
 
-  @override
-  _ProductPageState createState() => _ProductPageState();
+  runApp(new MaterialApp(
+    title: 'ProdPage',
+    home: ProductPage(),
+  ));
 }
 
-class _ProductPageState extends State<ProductPage> {
+class ProductPage extends StatelessWidget {
+  const ProductPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -19,73 +32,37 @@ class _ProductPageState extends State<ProductPage> {
         title: new Text("Accra Thrift"),
         backgroundColor: Color(0xff00eaff),
       ),
-      body: new Container(
-        child: new ListView(
-          children: <Widget>[
-            new Image.asset(
-              'images/clothes.jpeg',
-              width: 200,
-              height: 200,
-            ),
-            new Text("Products",
-                style: new TextStyle(
-                  fontSize: 45.0,
-                  color: Colors.blue.shade900,
-                )),
-            new Column(
-              children: <Widget>[
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    new Padding(padding: EdgeInsets.all(10)),
-                    new Image.asset(
-                      "images/bucket_hat.jpg",
-                      height: 100.0,
-                      width: 100.0,
-                    ),
-                    new Text("Bucket hat",
-                        style: new TextStyle(
-                          fontSize: 20.0,
-                        )),
-                    new OutlinedButton(
-                        onPressed: () {
-                          final addedToCart = SnackBar(
-                            content: new Text("Item added to cart!"),
-                            action: SnackBarAction(
-                              label: "View",
-                              onPressed: () {
-                                var router = new MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        new CartPage());
+      body: new Center(
+        child: new ListView.builder(
+            itemCount: _product.length,
+            padding: const EdgeInsets.all(15.0),
+            itemBuilder:(BuildContext context, int position){
+              // if (position.isOdd) return new Divider();
 
-                                Navigator.of(context).push(router);
-                              },
-                            ),
-                          );
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(addedToCart);
-                        },
-                        child: new Icon(Icons.add_shopping_cart)),
-                    new OutlinedButton(
-                        onPressed: () {
-                          final addedToWishlist = SnackBar(
-                            content: new Text("Item added to wishlist!"),
-                            action: SnackBarAction(
-                              label: "Undo",
-                              onPressed: () {},
-                            ),
-                          );
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(addedToWishlist);
-                        },
-                        child: new Icon(Icons.bookmark_add_outlined)),
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
+
+
+                return new ListTile(
+                  leading: new Image.network('${_product[position]['image']}',
+                  width: 40.0,
+                  height: 40.0,),
+                  title: new Text('${_product[position]['title']}',
+                  style: new TextStyle(fontSize: 18.0)),
+                  subtitle: new Text('${_product[position]['description']}'),
+                  onTap: ()=> debugPrint("${_product[position]['id']}"),
+
+                );
+
+            }),
       ),
     );
   }
+
+
+}
+Future<List> getProduct() async {
+  var apiUrl = Uri.parse('https://fakestoreapi.com/products/category/jewelery');
+
+  http.Response response = await http.get(apiUrl);
+
+  return json.decode(response.body);
 }
