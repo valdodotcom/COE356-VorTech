@@ -94,7 +94,8 @@ class ProductPage extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                           color: Colors.white70,
-                          borderRadius: BorderRadius.circular(15)),
+                          borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.white12)),
                     );
               }),
         )
