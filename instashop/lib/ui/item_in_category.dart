@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import '../ui/product_page.dart';
+import 'cart.dart';
 // import '../ui/wishlist.dart';
 // import '../ui/item_in_category.dart';
 
-class ItemInShop extends StatefulWidget {
-  const ItemInShop({Key? key}) : super(key: key);
+class VendorInShop extends StatefulWidget {
+  const VendorInShop({Key? key}) : super(key: key);
 
   @override
-  _ItemInShopState createState() => _ItemInShopState();
+  _VendorInShopState createState() => _VendorInShopState();
 }
 
-class _ItemInShopState extends State<ItemInShop> {
+class _VendorInShopState extends State<VendorInShop> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -21,6 +22,16 @@ class _ItemInShopState extends State<ItemInShop> {
           new IconButton(
               onPressed: () => debugPrint("Search pressed"),
               icon: new Icon(Icons.search)),
+
+          new IconButton(
+              onPressed: () {
+                var router = new MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                    new CartPage());
+                Navigator.of(context).push(router);
+              },
+              icon: new Icon(Icons.shopping_cart_outlined))
+
         ],
       ),
 

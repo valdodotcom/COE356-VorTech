@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 import '../ui/item_in_category.dart';
+import 'cart.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({Key? key}) : super(key: key);
@@ -50,7 +51,17 @@ class _ShopPageState extends State<ShopPage> {
             actions: <Widget>[
               new IconButton(
                   onPressed: () => debugPrint("Search pressed"),
-                  icon: new Icon(Icons.search))
+                  icon: new Icon(Icons.search)),
+
+              new IconButton(
+                  onPressed: () {
+                    var router = new MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                        new CartPage());
+                    Navigator.of(context).push(router);
+                  },
+                  icon: new Icon(Icons.shopping_cart_outlined))
+
             ],
           ),
           body: new ListView(
@@ -71,7 +82,7 @@ class _ShopPageState extends State<ShopPage> {
                       onTap: () {
                         var router = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new ItemInShop());
+                                new VendorInShop());
 
                         Navigator.of(context).push(router);
                       },

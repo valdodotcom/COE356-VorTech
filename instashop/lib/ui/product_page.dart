@@ -32,6 +32,17 @@ class _ProductPageState extends State<ProductPage> {
         appBar: new AppBar(
           title: new Text("Accra Thrift"),
           backgroundColor: Color(0xff00eaff),
+
+          actions: <Widget>[
+            new IconButton(
+                onPressed: () {
+                  var router = new MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                      new CartPage());
+                  Navigator.of(context).push(router);
+                  },
+                icon: new Icon(Icons.shopping_cart_outlined))
+          ],
         ),
         body: new Center(
           child: FutureBuilder<List<dynamic>>(
@@ -98,8 +109,9 @@ class _ProductPageState extends State<ProductPage> {
                                                 var router = new MaterialPageRoute(
                                                     builder: (BuildContext context) =>
                                                     new CartPage());
-
                                                 Navigator.of(context).push(router);
+
+                                                ScaffoldMessenger.of(context).hideCurrentSnackBar();
                                               },
                                             ),
                                           );
