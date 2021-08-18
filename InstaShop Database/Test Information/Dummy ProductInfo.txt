@@ -1,0 +1,53 @@
+{   
+    "ProductID" : "1"
+    "VendorID" : "1",
+    "Product" : "Jeans",
+    "ProductCategory" : "Fashion & Clothing",
+    "ProductPicture" : "Insertlinkhere",
+    "ProductPrice" : "40",
+    "ProductDescription" : "ripped jeans size 22"
+    }
+
+
+{  
+    "ProductID" : "2" 
+    "VendorID" : "3",
+    "Product" : "Snacks",
+    "ProductCategory" : "Food",
+    "ProductPicture" : "Insertlinkhere",
+    "ProductPrice" : "5",
+    "ProductDescription" : "medium size pizza slice"
+    }
+
+{   
+    "ProductID" : "3",
+    "VendorID" : "2",
+    "Product" : "Bottled Yoghurt",
+    "ProductCategory" : "Food",
+    "ProductPicture" : "Insertlinkhere",
+    "ProductPrice" : "5",
+    "ProductDescription" : "Strawberry floured"
+    }
+
+{
+    "ProductID" : "4",
+    "VendorID" : "4",
+    "Product" : "Durex Condoms",
+    "ProductCategory" : "Other",
+    "ProductPicture" : "Insertlinkhere",
+    "ProductPrice" : "30",
+    "ProductDescription" : "a 6 pack of condoms"
+}
+
+##TO TEST THE DELETE PRODUCT FUNCTION, THE ENTRY ABOVE WAS DELETED AND RE-ENTERED INTO THE DATABASE
+##THE PRODUCT ID CHANGED FROM 4 TO 5, AAS EXPECTED
+
+{
+    "ProductID" : "5",
+    "VendorID" : "4",
+    "Product" : "Durex Condoms",
+    "ProductCategory" : "Other",
+    "ProductPicture" : "Insertlinkhere",
+    "ProductPrice" : "30",
+    "ProductDescription" : "a 6 pack of condoms"
+} 

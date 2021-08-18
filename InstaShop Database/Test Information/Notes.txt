@@ -1,0 +1,83 @@
+def view_wishlist(CustomerID):
+    db = get_db()
+    cursor = db.cursor()
+    statement = "CREATE VIEW WishlistView SELECT CustomerName, WishlistID  FROM  CustomerInfo c, Wishlist w WHERE c.CustomerID=? AND c.CustomerID = w.WishlistID "
+    cursor.execute(statement, [CustomerID])
+    db.commit()
+    ##this will allow a user to view their personal wishlist.
+
+
+@app.route('/ViewWishlist/<CustomerID>', methods=["GET"])
+def view_personal_wishlist(CustomerID): 
+    ViewWishlist = admin.view_wishlist(CustomerID)
+    return jsonify(ViewWishlist)
+    ##this endpoint will allow a user to view their wishlist using their ID
+    ##this view will always be up to date 
+
+THE TWO FUNCTIONS ABOVE WERE SUPPOSED TO HELP US GET A VIEW OF CERTAIN COLUMNS OF DIFFERENT TABLES TO CREATE A SINGLE CUSTOMER'S WISHLIST,
+BUT IT DID NOT WORK OUT. WE'LL REVISE THIS LATER. 
+ON THAT NOTE, ALL OTHER VIEW FUNCTIONS WILL BE TAKEN OUT OF THE DATABASE. THEY'LL BE DONE MANUALLY
+
+def view_cart(CustomerID):
+    db = get_db()
+    cursor = db.cursor()
+    statement = "SELECT CartID, CustomerName, Product, ProductPicture, ProductPrice FROM Cart ca, CustomerInfo c, ProductInfo p WHERE ca.CartID = c.CustomerID AND ca.CartID = p.ProductID AND c.CustomerID =?"
+    cursor.execute(statement, [CustomerID])
+    db.commit()
+    ##this will allow a user to view the items on their cart while shopping.
+
+@app.route('/ViewCart/<CustomerID>', methods=["GET"])
+def view_personal_cart(CustomerID): 
+    ViewCart = admin.view_cart(CustomerID)
+    return jsonify(ViewCart)
+    ##this endpoint will allow a user to view their wishlist using their ID
+    ##this view will always be up to date 
+
+
+
+
+
+
+
+
+def view_order_history(CustomerID):
+    db = get_db()
+    cursor = db.cursor()
+    statement = " SELECT OrderID, CustomerID, VendorName, Product, ProductPicture, ProductPrice, OrderDate FROM OrderHistory o, CustomerInfo c, VendorInfo v, ProductInfo p WHERE o.OrderID = c.CustomerID AND o.OrderID = p.ProductID AND p.ProductID = v.VendorID AND CustomerID=?"
+    cursor.execute(statement, [CustomerID])
+    db.commit()
+    ##this will allow a customer to view their history of orders.
+
+
+
+@app.route('/ViewOrderHistory/<CustomerID>', methods=["GET"])
+def view_customers_history(CustomerID): 
+    ViewOrderHistory = admin.view_order_history(CustomerID)
+    return jsonify(ViewOrderHistory)
+    ##this endpoint will allow a user to view the history of all orders made
+
+
+
+
+
+def view_sale_history(VendorID):
+    db = get_db()
+    cursor = db.cursor()
+    statement = " SELECT OrderID, VendorID, CustomerName, Product, ProductPicture, ProductPrice, OrderDate FROM OrderHistory o, VendorInfo v, CustomerInfo c, ProductInfo p WHERE o.OrderID = c.CustomerID AND o.OrderID = p.ProductID AND p.ProductID = v.VendorID AND VendorID=?"
+    cursor.execute(statement, [VendorID])
+    db.commit()
+    ##this will allow a vendor to view the history of sales they've made
+
+@app.route('/ViewSalesHistory/<VendorID>', methods=["GET"])
+def view_vendors_history(VendorID): 
+    ViewSalesHistory = admin.view_sale_history(VendorID)
+    return jsonify(ViewSalesHistory)
+    ##this endpoint will allow a user to view the history of all orders made
+
+
+
+WE DECIDED TO TAKE AWAY THE VENDOR'S ABILITY TO DELETE A PRODUCT. THAT WAY, IT CANNOT BE DELETED IF IT'S IN 
+A CUSTOMER'S ORDER HISTORY. HOWEVER, PRODUCTS CAN BE TAGGED AS UNAVAILABLE AND CANNOT BE ADDED TO A CART OR WISHLIST
+ONCE IT'S BEEN TAGGED AS SUCH. THAT WAY, UNAVAILABLE PRODUCTS CANNOT BE SOLD IF THEY WERE PLACED ON WISHLISTS BEFORE
+THE VENDOR TAGGED THEM AS UNAVAILABLE
+ 

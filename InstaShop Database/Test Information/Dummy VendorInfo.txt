@@ -1,0 +1,39 @@
+{
+    "VendorName" : "Kate Enyama Arhinful",
+    "VendorEmail" : "arhinfulenyamakate@gmail.com",
+    "VendorPhoneNo" : "0242615970",
+    "VendorPassword" : "katrina",
+    "VendorAddress" : "brunei complex",
+    "VendorID" : "1"
+    
+    }
+
+{
+    "VendorName" : "Carol Antwi",
+    "VendorEmail" : "carolantwi92@gmail.com",
+    "VendorPhoneNo" : "0559504390",
+    "VendorPassword" : "kinggggggggg",
+    "VendorAddress" : "brunei complex 118R",
+    "VendorID" : "2"
+    
+    }
+
+{   
+    "VendorName" : "Deborah Boakye",
+    "VendorEmail" : "afiab990@gmail.com",
+    "VendorPhoneNo" : "0509499799",
+    "VendorPassword" : "illberichsoon",
+    "VendorAddress" : "complex 62Q",
+    "VendorID" : "3"
+    }
+
+
+ {
+    "VendorName" : "Cedric Bansah",
+    "VendorEmail" : "ceddybans@gmail.com",
+    "VendorPhoneNo" : "0209521715",
+    "VendorPassword" : "THEweeKndisABEL",
+    "VendorAddress" : "brunei complex 79s",
+    "VendorID" : "4"
+
+ }
