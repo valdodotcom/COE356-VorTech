@@ -1,0 +1,18 @@
+{   
+    "WishlistID" : "1",
+    "CustomerID" : "1",
+    "ProductID" : "2"
+}
+
+{
+    "WishlistID" : "2",
+    "CustomerID" : "2",
+    "ProductID" : "3"
+}
+
+SELECT WishlistID, CustomerName, Product, ProductPicture, ProductPrice FROM Wishlist w, CustomerInfo c, ProductInfo p WHERE w.WishlistID = c.CustomerID AND w.WishlistID = p.ProductID AND c.CustomerID =?
+
+
+SELECT WishlistID, VendorName, CustomerName, Product, ProductPicture, ProductPrice FROM Wishlist w, VendorInfo v, CustomerInfo c, ProductInfo p, WHERE c.CustomerID = ? AND c.CustomerID = w.WishlistID AND w.WishlistID = p.ProductID AND p.ProductID = VendorID
+
+SELECT WishlistID, CustomerName FROM Wishlist w, CustomerInfo c WHERE CustomerID=? AND w.WIshlsitID = c.CustomerID  

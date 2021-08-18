@@ -1,0 +1,26 @@
+{   
+    "CustomerName" : "Valdo Abruquah",
+    "CustomerEmail" : "valdoato@gmail.com",
+    "CustomerPhoneNo" : "0504147090",
+    "CustomerPassword" : "insertrandomshithere",
+    "CustomerAddress" : "complex 79S",
+    "CustomerID" : "1"
+    }
+
+{   
+    "CustomerName" : "Yoocee Ansah",
+    "CustomerEmail" : "yooceeansah@gmail.com",
+    "CustomerPhoneNo" : "0269807325",
+    "CustomerPassword" : "ihopethisworks",
+    "CustomerAddress" : "hall 7 3N",
+    "CustomerID" : "2"
+    }
+
+{   
+    "CustomerName" : "Yasmeen Dubiure",
+    "CustomerEmail" : "yazyduby@gmail.com",
+    "CustomerPhoneNo" : "0266677730",
+    "CustomerPassword" : "ihateyooceesomuch",
+    "CustomerAddress" : "complex 118R",
+    "CustomerID" : "3"
+    }
