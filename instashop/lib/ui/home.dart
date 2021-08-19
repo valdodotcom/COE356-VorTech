@@ -149,6 +149,38 @@ class NewAccountPage extends StatefulWidget {
 }
 
 class _NewAccountPageState extends State<NewAccountPage> {
+  // key to access the form
+  final _formKey = GlobalKey<FormState>();
+
+  String _userEmail = '';
+  String _userName = '';
+  String _password = '';
+  String _confirmPassword = '';
+
+  // function triggered when user presses sign up
+  void _trySubmitForm() {
+    final isValid = _formKey.currentState!.validate();
+    if (isValid) {
+      print('Everything looks good!');
+      print(_userEmail);
+      print(_userName);
+      print(_password);
+      print(_confirmPassword);
+
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) =>
+          new ShopPage());
+      Navigator.of(context).push(router);
+
+
+
+      /*
+      Continue processing the provided information with your own logic
+      such us sending HTTP requests, saving to SQLite database, etc.
+      */
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var _emailController = TextEditingController();
@@ -173,47 +205,116 @@ class _NewAccountPageState extends State<NewAccountPage> {
                   style: new TextStyle(fontSize: 30),
                 ),
                 new Text("Fill in with your details to create account"),
-                new TextField(
-                  controller: _firstNameController,
-                  decoration: new InputDecoration(
-                    labelText: "First Name",
-                  ),
-                ),
-                new TextField(
-                  controller: _lastNameController,
-                  decoration: new InputDecoration(
-                    labelText: "Last Name",
-                  ),
-                ),
-                new TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  controller: _emailController,
-                  decoration: new InputDecoration(
-                    labelText: "Email",
-                  ),
-                ),
-                new TextField(
-                  controller: _passwordController,
-                  decoration: new InputDecoration(
-                    labelText: "Password (6 or more characters)",
-                  ),
-                  obscureText: true,
-                ),
-                new TextField(
-                  controller: _secondPasswordController,
-                  decoration: new InputDecoration(
-                    labelText: "Confirm password",
-                  ),
-                  obscureText: true,
-                ),
-                new Padding(padding: EdgeInsets.all(10.0)),
-                new ElevatedButton(
-                    child: new Text("Create account"),
-                    onPressed: () {
-                      var router = new MaterialPageRoute(
-                          builder: (BuildContext context) => new ShopPage());
-                      Navigator.of(context).push(router);
-                    }),
+                new Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        new TextFormField(
+                          controller: _firstNameController,
+                          decoration: new InputDecoration(
+                            labelText: "First Name",
+                          ),
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'This field is required';
+                            }
+                            if (value.trim().length < 2) {
+                              return 'Username must be at least 2 characters in length';
+                            }
+                            // Return null if the entered username is valid
+                            return null;
+                          },
+                          onChanged: (value) => _userName = value,
+                        ),
+                        new TextFormField(
+                          controller: _lastNameController,
+                          decoration: new InputDecoration(
+                            labelText: "Last Name",
+                          ),
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'This field is required';
+                            }
+                            if (value.trim().length < 2) {
+                              return 'Username must be at least 2 characters in length';
+                            }
+                            // Return null if the entered username is valid
+                            return null;
+                          },
+                          onChanged: (value) => _userName = value,
+                        ),
+                        new TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          controller: _emailController,
+                          decoration: new InputDecoration(
+                            labelText: "Email",
+                          ),
+
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'Please enter your email address';
+                            }
+                            // Check if the entered email has the right format
+                            if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                              return 'Please enter a valid email address';
+                            }
+                            // Return null if the entered email is valid
+                            return null;
+                          },
+                          onChanged: (value) => _userEmail = value,
+
+                        ),
+                        new TextFormField(
+                          controller: _passwordController,
+                          decoration: new InputDecoration(
+                            labelText: "Password (6 or more characters)",
+                          ),
+                          obscureText: true,
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'This field is required';
+                            }
+                            if (value.trim().length < 6) {
+                              return 'Password must be at least 6 characters in length';
+                            }
+                            // Return null if the entered password is valid
+                            return null;
+                          },
+                          onChanged: (value) => _password = value,
+
+                        ),
+                        new TextFormField(
+                          controller: _secondPasswordController,
+                          decoration: new InputDecoration(
+                            labelText: "Confirm password",
+                          ),
+                          obscureText: true,
+
+                          validator: (value) {
+                            if(value!.isEmpty){
+                              return 'This field is required';
+                            }
+
+                            if (value != _password) {
+                              return 'Confirmation password does not match the entered password';
+                            }
+
+                            return null;
+                          },
+                          onChanged: (value) => _confirmPassword = value,
+
+                        ),
+                        new Padding(padding: EdgeInsets.all(10.0)),
+                        new ElevatedButton(
+                            child: new Text("Create account"),
+                            onPressed: _trySubmitForm /*() {
+                              var router = new MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      new ShopPage());
+                              Navigator.of(context).push(router);
+                            }*/)
+                      ],
+                    )),
                 new TextButton(
                   onPressed: () {
                     var router = new MaterialPageRoute(
