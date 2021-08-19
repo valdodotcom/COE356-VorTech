@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../ui/shop_page.dart';
 
+
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -78,8 +80,39 @@ class _HomeState extends State<Home> {
   }
 }
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
+
+  @override
+  _SignInPageState createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final _formKey = GlobalKey<FormState>();
+
+  String _userEmail = '';
+  String _password = '';
+
+  void _trySubmitForm() {
+    final isValid = _formKey.currentState!.validate();
+    if (isValid) {
+      print('Everything looks good!');
+      print(_userEmail);
+      print(_password);
+
+      var router = new MaterialPageRoute(
+          builder: (BuildContext context) =>
+          new ShopPage());
+      Navigator.of(context).push(router);
+
+
+
+      /*
+      Continue processing the provided information with your own logic
+      such us sending HTTP requests, saving to SQLite database, etc.
+      */
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,30 +134,57 @@ class SignInPage extends StatelessWidget {
                   style: new TextStyle(fontSize: 30),
                 ),
                 new Text("Please sign in to continue"),
-                new TextField(
-                  keyboardType: TextInputType.emailAddress,
+                new Form(key: _formKey, child: Column(children: <Widget>[
+                new TextFormField(
+                keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   decoration: new InputDecoration(
                     labelText: "Email",
                   ),
+                  validator: (value) {
+                    if (value!.trim().isEmpty) {
+                      return 'Please enter your email address';
+                    }
+                    // Check if the entered email has the right format
+                    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                      return 'Please enter a valid email address';
+                    }
+                    // Return null if the entered email is valid
+                    return null;
+                  },
+                  onChanged: (value) => _userEmail = value,
                 ),
-                new TextField(
-                  controller: _passwordController,
-                  decoration: new InputDecoration(
-                    labelText: "Password",
+
+                  new TextFormField(
+                    controller: _passwordController,
+                    decoration: new InputDecoration(
+                      labelText: "Password",
+                    ),
+                    obscureText: true,
+                    validator: (value) {
+                      if (value!.trim().isEmpty) {
+                        return 'This field is required';
+                      }
+                      if (value.trim().length < 6) {
+                        return 'Password must be at least 6 characters in length';
+                      }
+                      // Return null if the entered password is valid
+                      return null;
+                    },
+                    onChanged: (value) => _password = value,
                   ),
-                  obscureText: true,
-                ),
+
+                  new ElevatedButton(
+                      child: new Text("Sign in"),
+                      onPressed: _trySubmitForm),
+
+
+                ],),),
+
                 new TextButton(
                     onPressed: () => debugPrint("Forgot password pressed"),
                     child: new Text("Forgot your password?")),
-                new ElevatedButton(
-                    child: new Text("Sign in"),
-                    onPressed: () {
-                      var router = new MaterialPageRoute(
-                          builder: (BuildContext context) => new ShopPage());
-                      Navigator.of(context).push(router);
-                    }),
+
                 new TextButton(
                   onPressed: () {
                     var router = new MaterialPageRoute(
@@ -140,6 +200,13 @@ class SignInPage extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
 
 class NewAccountPage extends StatefulWidget {
   const NewAccountPage({Key? key}) : super(key: key);
