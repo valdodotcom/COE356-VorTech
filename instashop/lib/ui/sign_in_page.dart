@@ -1,6 +1,7 @@
 import '../ui/new_account_page.dart';
 import 'package:flutter/material.dart';
 import '../ui/shop_page.dart';
+import 'package:http/http.dart' as http;
 
 
 class SignInPage extends StatefulWidget {
@@ -11,24 +12,33 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  var _emailController = TextEditingController();
+  var _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   String _userEmail = '';
   String _password = '';
 
-  void _trySubmitForm() {
+  Future<void> _trySubmitForm() async {
     final isValid = _formKey.currentState!.validate();
     if (isValid) {
-      print('Everything looks good!');
+      var response = await http.post(Uri.parse("https://reqres.in/api/login"),
+          body:({
+        "email": _emailController.text,
+        "password": _passwordController.text
+          }));
+      if (response.statusCode == 200) {
+        var router = new MaterialPageRoute(
+            builder: (BuildContext context) =>
+            new ShopPage());
+        Navigator.of(context).push(router);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Invalid Credentials")));
+      }
+
       print(_userEmail);
       print(_password);
-
-      var router = new MaterialPageRoute(
-          builder: (BuildContext context) =>
-          new ShopPage());
-      Navigator.of(context).push(router);
-
-
 
       /*
       Continue processing the provided information with your own logic
@@ -39,8 +49,7 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _emailController = TextEditingController();
-    var _passwordController = TextEditingController();
+
     return new Scaffold(
       backgroundColor: Color(0xff00eaff),
       body: new ListView(
@@ -99,7 +108,8 @@ class _SignInPageState extends State<SignInPage> {
 
                   new ElevatedButton(
                       child: new Text("Sign in"),
-                      onPressed: _trySubmitForm),
+                      onPressed: _trySubmitForm
+                      ),
 
 
                 ],),),

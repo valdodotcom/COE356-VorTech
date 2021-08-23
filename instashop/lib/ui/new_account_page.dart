@@ -1,6 +1,6 @@
 // import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import '../ui/shop_page.dart';
 import '../ui/sign_in_page.dart';
 
@@ -29,7 +29,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
       print(_userName);
       print(_password);
       print(_confirmPassword);
-      makePostRequest();
 
       var router = new MaterialPageRoute(
           builder: (BuildContext context) => new ShopPage());
@@ -181,6 +180,11 @@ class _NewAccountPageState extends State<NewAccountPage> {
   }
 }
 
+Future<void> login() async {
+  await http.post(Uri.parse("http://10.74.237.27:8000/new-vendor-info"));
+}
+
+/*
 Future<void> makePostRequest() async {
   const urlPrefix = 'http://10.74.236.15:8000/';
 
@@ -192,3 +196,4 @@ Future<void> makePostRequest() async {
   print('Status code: ${response.statusCode}');
   print('Body: ${response.body}');
 }
+*/
