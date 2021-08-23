@@ -64,9 +64,9 @@ class _WishlistPageState extends State<WishlistPage> {
                           alignment: Alignment.center,
                           child: Stack(
                             children: <Widget>[
-                              new Center(
+                              /*new Center(
                                   child: Image.network('${snapshot.data!.toList()[position].image}',
-                                      fit: BoxFit.fill)),
+                                      fit: BoxFit.fill)),*/
                               new Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.max,
@@ -79,7 +79,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
-                                      '${snapshot.data!.toList()[position].title}',
+                                      '${snapshot.data!.toList()[position].vendorName}',
                                       style: new TextStyle(
                                           fontSize: 20, color: Colors.white),
                                       textAlign: TextAlign.center,
@@ -92,7 +92,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: new Text(
-                                      '\$ ${snapshot.data!.toList()[position].price}',
+                                      '\$ ${snapshot.data!.toList()[position].vendorEmail}',
                                       style: new TextStyle(
                                           fontSize: 20, color: Colors.white),
                                     ),
@@ -166,7 +166,7 @@ class _WishlistPageState extends State<WishlistPage> {
 
 Future<List<dynamic>> fetchAlbums() async {
   final response = await http
-      .get(Uri.parse('https://fakestoreapi.com/products/category/jewelery'));
+      .get(Uri.parse('http://10.74.237.27:8000/get-all-vendors'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -181,27 +181,76 @@ Future<List<dynamic>> fetchAlbums() async {
 }
 
 class Album {
-  final num price;
-  final int id;
-  final String title;
-  final String image;
-
-
-
   Album({
-    required this.price,
-    required this.id,
-    required this.title,
-    required this.image,
+    required this.vendorAddress,
+    required this.vendorEmail,
+    required this.vendorId,
+    required this.vendorName,
+    required this.vendorPassword,
+    required this.vendorPhoneNo,
   });
 
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      price: json['price'],
-      id: json['id'],
-      title: json['title'],
-      image: json['image'],
-    );
-  }
+  final String vendorAddress;
+  final String vendorEmail;
+  final String vendorId;
+  final String vendorName;
+  final String vendorPassword;
+  final int vendorPhoneNo;
+
+  factory Album.fromJson(Map<String, dynamic> json) => Album(
+    vendorAddress: json["VendorAddress"],
+    vendorEmail: json["VendorEmail"],
+    vendorId: json["VendorID"],
+    vendorName: json["VendorName"],
+    vendorPassword: json["VendorPassword"],
+    vendorPhoneNo: json["VendorPhoneNo"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "VendorAddress": vendorAddress,
+    "VendorEmail": vendorEmail,
+    "VendorID": vendorId,
+    "VendorName": vendorName,
+    "VendorPassword": vendorPassword,
+    "VendorPhoneNo": vendorPhoneNo,
+  };
 }
 
+/*
+class Album {
+    Album({
+        this.vendorAddress,
+        this.vendorEmail,
+        this.vendorId,
+        this.vendorName,
+        this.vendorPassword,
+        this.vendorPhoneNo,
+    });
+
+    String vendorAddress;
+    String vendorEmail;
+    String vendorId;
+    String vendorName;
+    String vendorPassword;
+    int vendorPhoneNo;
+
+    factory Album.fromJson(Map<String, dynamic> json) => Album(
+        vendorAddress: json["VendorAddress"],
+        vendorEmail: json["VendorEmail"],
+        vendorId: json["VendorID"],
+        vendorName: json["VendorName"],
+        vendorPassword: json["VendorPassword"],
+        vendorPhoneNo: json["VendorPhoneNo"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "VendorAddress": vendorAddress,
+        "VendorEmail": vendorEmail,
+        "VendorID": vendorId,
+        "VendorName": vendorName,
+        "VendorPassword": vendorPassword,
+        "VendorPhoneNo": vendorPhoneNo,
+    };
+}
+
+ */

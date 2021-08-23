@@ -1,8 +1,8 @@
 // import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import '../ui/shop_page.dart';
 import '../ui/sign_in_page.dart';
-
 
 class NewAccountPage extends StatefulWidget {
   const NewAccountPage({Key? key}) : super(key: key);
@@ -29,13 +29,11 @@ class _NewAccountPageState extends State<NewAccountPage> {
       print(_userName);
       print(_password);
       print(_confirmPassword);
+      makePostRequest();
 
       var router = new MaterialPageRoute(
-          builder: (BuildContext context) =>
-          new ShopPage());
+          builder: (BuildContext context) => new ShopPage());
       Navigator.of(context).push(router);
-
-
 
       /*
       Continue processing the provided information with your own logic
@@ -58,8 +56,8 @@ class _NewAccountPageState extends State<NewAccountPage> {
         padding: EdgeInsets.all(40.0),
         children: <Widget>[
           new Column(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
-            //   mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
+              //   mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Padding(padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0)),
                 new Icon(Icons.shopping_cart_rounded, size: 140.0),
@@ -112,7 +110,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
                           decoration: new InputDecoration(
                             labelText: "Email",
                           ),
-
                           validator: (value) {
                             if (value!.trim().isEmpty) {
                               return 'Please enter your email address';
@@ -125,7 +122,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
                             return null;
                           },
                           onChanged: (value) => _userEmail = value,
-
                         ),
                         new TextFormField(
                           controller: _passwordController,
@@ -144,7 +140,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
                             return null;
                           },
                           onChanged: (value) => _password = value,
-
                         ),
                         new TextFormField(
                           controller: _secondPasswordController,
@@ -152,9 +147,8 @@ class _NewAccountPageState extends State<NewAccountPage> {
                             labelText: "Confirm password",
                           ),
                           obscureText: true,
-
                           validator: (value) {
-                            if(value!.isEmpty){
+                            if (value!.isEmpty) {
                               return 'This field is required';
                             }
 
@@ -165,17 +159,11 @@ class _NewAccountPageState extends State<NewAccountPage> {
                             return null;
                           },
                           onChanged: (value) => _confirmPassword = value,
-
                         ),
                         new Padding(padding: EdgeInsets.all(10.0)),
                         new ElevatedButton(
                             child: new Text("Create account"),
-                            onPressed: _trySubmitForm /*() {
-                              var router = new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      new ShopPage());
-                              Navigator.of(context).push(router);
-                            }*/)
+                            onPressed: _trySubmitForm)
                       ],
                     )),
                 new TextButton(
@@ -193,3 +181,14 @@ class _NewAccountPageState extends State<NewAccountPage> {
   }
 }
 
+Future<void> makePostRequest() async {
+  const urlPrefix = 'http://10.74.236.15:8000/';
+
+  final url = Uri.parse('$urlPrefix/new-customer-info');
+  final headers = {"Content-type": "application/json"};
+  final json =
+      '{"CustomerName": "John Smith", "CustomerEmail": johnsmith@trial.com, "CustomerPhoneNo": 0234360065, "CustomerPassword": password1, "CustomerAddress": hall 7 }';
+  final response = await post(url, headers: headers, body: json);
+  print('Status code: ${response.statusCode}');
+  print('Body: ${response.body}');
+}
