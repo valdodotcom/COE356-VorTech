@@ -62,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: Colors.blue,
                             ),
                             new Text(
-                              "\t\t\t My Account",
+                              "    My Account",
                               style: new TextStyle(
                                   fontSize: 20.0, color: Colors.blue.shade800),
                             ),
@@ -90,7 +90,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: Colors.blue,
                             ),
                             new Text(
-                              "\t\t\t Orders",
+                              "    Orders",
                               style: new TextStyle(
                                   fontSize: 20.0, color: Colors.blue.shade800),
                             ),
@@ -119,7 +119,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: Colors.blue,
                             ),
                             new Text(
-                              "\t\t\t Device Settings",
+                              "    Device Settings",
                               style: new TextStyle(
                                   fontSize: 20.0, color: Colors.blue.shade800),
                             ),
@@ -148,7 +148,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: Colors.blue,
                             ),
                             new Text(
-                              "\t\t\t Info",
+                              "    Info",
                               style: new TextStyle(
                                   fontSize: 20.0, color: Colors.blue.shade800),
                             ),
@@ -189,7 +189,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             color: Colors.blue,
                           ),
                           new Text(
-                            "\t\t\t Log Out",
+                            "    Log Out",
                             style: new TextStyle(
                                 fontSize: 20.0, color: Colors.blue.shade800),
                           ),

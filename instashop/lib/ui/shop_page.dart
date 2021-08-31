@@ -97,7 +97,7 @@ class _ShopPageState extends State<ShopPage> {
                               color: Colors.blue,
                             ),
                             new Text(
-                              "\t\t\t Clothes & Accessories",
+                              "    Clothes & Accessories",
                               style: new TextStyle(
                                   fontSize: 20.0, color: Colors.blue.shade800),
                             ),
@@ -126,7 +126,7 @@ class _ShopPageState extends State<ShopPage> {
                               color: Colors.blue,
                             ),
                             new Text(
-                              "\t\t\t Food",
+                              "    Food",
                               style: new TextStyle(
                                   fontSize: 20.0, color: Colors.blue.shade800),
                             ),
@@ -155,7 +155,7 @@ class _ShopPageState extends State<ShopPage> {
                               color: Colors.blue,
                             ),
                             new Text(
-                              "\t\t\t Tech & Gadgets",
+                              "    Tech & Gadgets",
                               style: new TextStyle(
                                   fontSize: 20.0, color: Colors.blue.shade800),
                             ),
@@ -184,7 +184,7 @@ class _ShopPageState extends State<ShopPage> {
                               color: Colors.blue,
                             ),
                             new Text(
-                              "\t\t\t Beauty & Personal Care",
+                              "    Beauty & Personal Care",
                               style: new TextStyle(
                                   fontSize: 20.0, color: Colors.blue.shade800),
                             ),
@@ -213,7 +213,7 @@ class _ShopPageState extends State<ShopPage> {
                             color: Colors.blue,
                           ),
                           new Text(
-                            "\t\t\t Arts & Crafts",
+                            "    Arts & Crafts",
                             style: new TextStyle(
                                 fontSize: 20.0, color: Colors.blue.shade800),
                           ),
@@ -221,6 +221,37 @@ class _ShopPageState extends State<ShopPage> {
                       ),
                     ),
                   ),
+                  new Padding(padding: EdgeInsets.all(10)),
+
+                  new InkWell(
+                    onTap: () {
+                      return debugPrint("Button pressed");
+
+                      // var router = new MaterialPageRoute(
+                      //     builder: (BuildContext context) =>
+                      //         new ItemInShop());
+                      //
+                      // Navigator.of(context).push(router);
+                    },
+                    child: new Container(
+                      color: Colors.grey.shade200,
+                      padding: EdgeInsets.all(15.0),
+                      child: new Row(
+                        children: <Widget>[
+                          new Icon(
+                            Icons.add,
+                            size: 40,
+                            color: Colors.blue,
+                          ),
+                          new Text(
+                            "    Other",
+                            style: new TextStyle(
+                                fontSize: 20.0, color: Colors.blue.shade800),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ],

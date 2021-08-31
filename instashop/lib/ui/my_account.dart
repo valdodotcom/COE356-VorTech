@@ -18,7 +18,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        leading: new Container(),
+        // leading: new Container(),
         backgroundColor: Color(0xff00eaff),
         title: new Text("Settings"),
       ),

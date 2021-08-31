@@ -79,7 +79,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
-                                      '${snapshot.data!.toList()[position].vendorName}',
+                                      '${snapshot.data!.toList()[position].shopName}',
                                       style: new TextStyle(
                                           fontSize: 20, color: Colors.white),
                                       textAlign: TextAlign.center,
@@ -166,7 +166,7 @@ class _WishlistPageState extends State<WishlistPage> {
 
 Future<List<dynamic>> fetchAlbums() async {
   final response = await http
-      .get(Uri.parse('http://10.74.237.27:8000/get-all-vendors'));
+      .get(Uri.parse('http://10.74.238.40:8000/get-all-vendors'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -182,35 +182,43 @@ Future<List<dynamic>> fetchAlbums() async {
 
 class Album {
   Album({
+    required this.shopName,
     required this.vendorAddress,
     required this.vendorEmail,
+    required this.vendorFirstName,
     required this.vendorId,
-    required this.vendorName,
+    required this.vendorLastName,
     required this.vendorPassword,
     required this.vendorPhoneNo,
   });
 
+  final String shopName;
   final String vendorAddress;
   final String vendorEmail;
+  final String vendorFirstName;
   final String vendorId;
-  final String vendorName;
+  final String vendorLastName;
   final String vendorPassword;
   final int vendorPhoneNo;
 
   factory Album.fromJson(Map<String, dynamic> json) => Album(
+    shopName: json["ShopName"],
     vendorAddress: json["VendorAddress"],
     vendorEmail: json["VendorEmail"],
+    vendorFirstName: json["VendorFirstName"],
     vendorId: json["VendorID"],
-    vendorName: json["VendorName"],
+    vendorLastName: json["VendorLastName"],
     vendorPassword: json["VendorPassword"],
     vendorPhoneNo: json["VendorPhoneNo"],
   );
 
   Map<String, dynamic> toJson() => {
+    "ShopName": shopName,
     "VendorAddress": vendorAddress,
     "VendorEmail": vendorEmail,
+    "VendorFirstName": vendorFirstName,
     "VendorID": vendorId,
-    "VendorName": vendorName,
+    "VendorLastName": vendorLastName,
     "VendorPassword": vendorPassword,
     "VendorPhoneNo": vendorPhoneNo,
   };
