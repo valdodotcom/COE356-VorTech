@@ -43,7 +43,7 @@ class _ShopPageState extends State<ShopPage> {
               ),
               child: new TextFormField(
               decoration: new InputDecoration(
-                hintText: "Search for vendor by name",
+                hintText: "Search by shop name",
 
               ),
             ),)
