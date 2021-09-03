@@ -1,6 +1,6 @@
 import '../ui/new_account_page.dart';
 import 'package:flutter/material.dart';
-import '../ui/shop_page.dart';
+import '../ui/categories.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -30,7 +30,7 @@ class _SignInPageState extends State<SignInPage> {
       if (response.statusCode == 200) {
         var router = new MaterialPageRoute(
             builder: (BuildContext context) =>
-            new ShopPage());
+            new Categories());
         Navigator.of(context).push(router);
       } else {
         ScaffoldMessenger.of(context)

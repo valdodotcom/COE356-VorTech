@@ -7,7 +7,7 @@ import 'package:instashop/ui/cart.dart';
 
 /*
 import '../ui/wishlist.dart';
-import '../ui/item_in_category.dart';*/
+import '../ui/shop_in_category.dart';*/
 
 
 class ProductPage extends StatefulWidget {
@@ -63,7 +63,7 @@ class _ProductPageState extends State<ProductPage> {
                         child: Stack(
                           children: <Widget>[
                             new Center(
-                                child: Image.network('${snapshot.data!.toList()[position].image}',
+                                child: Image.network('${snapshot.data!.toList()[position].productPicture}',
                                     fit: BoxFit.fill)),
                             new Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,7 +77,7 @@ class _ProductPageState extends State<ProductPage> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
-                                    '${snapshot.data!.toList()[position].title}',
+                                    '${snapshot.data!.toList()[position].product}',
                                     style: new TextStyle(
                                         fontSize: 20, color: Colors.white),
                                     textAlign: TextAlign.center,
@@ -90,7 +90,7 @@ class _ProductPageState extends State<ProductPage> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: new Text(
-                                    '\$ ${snapshot.data!.toList()[position].price}',
+                                    '¢ ${snapshot.data!.toList()[position].productPrice}',
                                     style: new TextStyle(
                                         fontSize: 20, color: Colors.white),
                                   ),
@@ -161,7 +161,7 @@ class _ProductPageState extends State<ProductPage> {
 
 Future<List<dynamic>> fetchAlbums() async {
   final response = await http
-      .get(Uri.parse('https://fakestoreapi.com/products/category/jewelery'));
+      .get(Uri.parse("http://10.74.238.40:8000/view-shop-products/Kate's Fashion"));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -176,26 +176,41 @@ Future<List<dynamic>> fetchAlbums() async {
 }
 
 class Album {
-  final num price;
-  final int id;
-  final String title;
-  final String image;
-
-
-
   Album({
-    required this.price,
-    required this.id,
-    required this.title,
-    required this.image,
+    required this.product,
+    required this.productCategory,
+    required this.productDescription,
+    required this.productPicture,
+    required this.productPrice,
+    required this.shopName,
+    required this.shopPicture,
   });
 
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      price: json['price'],
-      id: json['id'],
-      title: json['title'],
-      image: json['image'],
-    );
-  }
+  final String product;
+  final String productCategory;
+  final String productDescription;
+  final String productPicture;
+  final double productPrice;
+  final String shopName;
+  final String shopPicture;
+
+  factory Album.fromJson(Map<String, dynamic> json) => Album(
+    product: json["Product"],
+    productCategory: json["ProductCategory"],
+    productDescription: json["ProductDescription"],
+    productPicture: json["ProductPicture"],
+    productPrice: json["ProductPrice"],
+    shopName: json["ShopName"],
+    shopPicture: json["ShopPicture"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "Product": product,
+    "ProductCategory": productCategory,
+    "ProductDescription": productDescription,
+    "ProductPicture": productPicture,
+    "ProductPrice": productPrice,
+    "ShopName": shopName,
+    "ShopPicture": shopPicture,
+  };
 }

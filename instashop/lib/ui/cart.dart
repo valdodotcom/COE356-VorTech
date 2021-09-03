@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 // import '../ui/wishlist.dart';
-// import '../ui/item_in_category.dart';
+// import '../ui/shop_in_category.dart';
 
 
 class CartPage extends StatefulWidget {

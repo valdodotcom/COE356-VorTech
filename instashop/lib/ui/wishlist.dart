@@ -64,9 +64,9 @@ class _WishlistPageState extends State<WishlistPage> {
                           alignment: Alignment.center,
                           child: Stack(
                             children: <Widget>[
-                              /*new Center(
-                                  child: Image.network('${snapshot.data!.toList()[position].image}',
-                                      fit: BoxFit.fill)),*/
+                              new Center(
+                                  child: Image.network('https://drive.google.com/uc?export=view&id=1WELyBDOrZKbP6qPZgzHdtD82yr8ba4Ip',
+                                      fit: BoxFit.fill)),
                               new Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.max,

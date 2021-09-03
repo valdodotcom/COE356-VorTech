@@ -1,18 +1,17 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
-import '../ui/item_in_category.dart';
+import '../ui/shop_in_category.dart';
 import 'cart.dart';
 
-class ShopPage extends StatefulWidget {
-  const ShopPage({Key? key}) : super(key: key);
+class Categories extends StatefulWidget {
+  const Categories({Key? key}) : super(key: key);
 
   @override
-  _ShopPageState createState() => _ShopPageState();
+  _CategoriesState createState() => _CategoriesState();
 }
 
-class _ShopPageState extends State<ShopPage> {
+class _CategoriesState extends State<Categories> {
   DateTime _lastQuitTime = DateTime(0);
 
   Future<bool> _backTwice() async {
@@ -82,7 +81,7 @@ class _ShopPageState extends State<ShopPage> {
                       onTap: () {
                         var router = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new VendorInShop());
+                                new ShopInCategory());
 
                         Navigator.of(context).push(router);
                       },
@@ -92,12 +91,12 @@ class _ShopPageState extends State<ShopPage> {
                         child: new Row(
                           children: <Widget>[
                             new Icon(
-                              Icons.shopping_bag_rounded,
+                              Icons.accessibility,
                               size: 40,
                               color: Colors.blue,
                             ),
                             new Text(
-                              "    Clothes & Accessories",
+                              "    Fashion & Clothing",
                               style: new TextStyle(
                                   fontSize: 20.0, color: Colors.blue.shade800),
                             ),
@@ -107,13 +106,12 @@ class _ShopPageState extends State<ShopPage> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-                      return debugPrint("Button pressed");
 
-                      // var router = new MaterialPageRoute(
-                      //     builder: (BuildContext context) =>
-                      //         new ItemInShop());
-                      //
-                      // Navigator.of(context).push(router);
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              new ShopInCategory());
+
+                      Navigator.of(context).push(router);
                     },
                     child: new Container(
                         color: Colors.grey.shade200,
@@ -136,13 +134,11 @@ class _ShopPageState extends State<ShopPage> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-                      return debugPrint("Button pressed");
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              new ShopInCategory());
 
-                      // var router = new MaterialPageRoute(
-                      //     builder: (BuildContext context) =>
-                      //         new ItemInShop());
-                      //
-                      // Navigator.of(context).push(router);
+                      Navigator.of(context).push(router);
                     },
                     child: new Container(
                         color: Colors.grey.shade200,
@@ -165,13 +161,11 @@ class _ShopPageState extends State<ShopPage> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-                      return debugPrint("Button pressed");
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              new ShopInCategory());
 
-                      // var router = new MaterialPageRoute(
-                      //     builder: (BuildContext context) =>
-                      //         new ItemInShop());
-                      //
-                      // Navigator.of(context).push(router);
+                      Navigator.of(context).push(router);
                     },
                     child: new Container(
                         color: Colors.grey.shade200,
@@ -194,13 +188,11 @@ class _ShopPageState extends State<ShopPage> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-                      return debugPrint("Button pressed");
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              new ShopInCategory());
 
-                      // var router = new MaterialPageRoute(
-                      //     builder: (BuildContext context) =>
-                      //         new ItemInShop());
-                      //
-                      // Navigator.of(context).push(router);
+                      Navigator.of(context).push(router);
                     },
                     child: new Container(
                       color: Colors.grey.shade200,
@@ -225,13 +217,11 @@ class _ShopPageState extends State<ShopPage> {
 
                   new InkWell(
                     onTap: () {
-                      return debugPrint("Button pressed");
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              new ShopInCategory());
 
-                      // var router = new MaterialPageRoute(
-                      //     builder: (BuildContext context) =>
-                      //         new ItemInShop());
-                      //
-                      // Navigator.of(context).push(router);
+                      Navigator.of(context).push(router);
                     },
                     child: new Container(
                       color: Colors.grey.shade200,

@@ -1,7 +1,7 @@
 // import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../ui/shop_page.dart';
+import '../ui/categories.dart';
 import '../ui/sign_in_page.dart';
 
 class NewAccountPage extends StatefulWidget {
@@ -31,7 +31,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
       print(_confirmPassword);
 
       var router = new MaterialPageRoute(
-          builder: (BuildContext context) => new ShopPage());
+          builder: (BuildContext context) => new Categories());
       Navigator.of(context).push(router);
 
       /*
