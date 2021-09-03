@@ -34,7 +34,10 @@ class _CategoriesState extends State<Categories> {
           appBar: new AppBar(
             leading: new Container(),
             backgroundColor: Color(0xff00eaff),
-            title: new Container(
+            title: new Text("instaShop")
+
+
+            /*new Container(
               padding: EdgeInsets.fromLTRB(9.0, 0.0, 0.0, 0.0),
               decoration: new BoxDecoration(
                 color: Colors.white,
@@ -45,13 +48,9 @@ class _CategoriesState extends State<Categories> {
                 hintText: "Search by shop name",
 
               ),
-            ),)
+            ),)*/
             ,
             actions: <Widget>[
-              new IconButton(
-                  onPressed: () => debugPrint("Search pressed"),
-                  icon: new Icon(Icons.search)),
-
               new IconButton(
                   onPressed: () {
                     var router = new MaterialPageRoute(
@@ -60,7 +59,6 @@ class _CategoriesState extends State<Categories> {
                     Navigator.of(context).push(router);
                   },
                   icon: new Icon(Icons.shopping_cart_outlined))
-
             ],
           ),
           body: new ListView(
