@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:instashop/ui/cart.dart';
+import 'package:instashop/ui/util/cart.dart';
 
 /*
 import '../ui/wishlist.dart';
@@ -161,7 +161,7 @@ class _ProductPageState extends State<ProductPage> {
 
 Future<List<dynamic>> fetchAlbums() async {
   final response = await http
-      .get(Uri.parse("http://10.74.238.40:8000/view-shop-products/Kate's Fashion"));
+      .get(Uri.parse("http://10.74.239.230:8000/view-shop-products/Kate's Fashion"));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

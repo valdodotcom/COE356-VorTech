@@ -1,7 +1,7 @@
 import 'dart:io';
-import '../ui/new_account_page.dart';
+import 'new_account_page.dart';
 import 'package:flutter/material.dart';
-import '../ui/sign_in_page.dart';
+import 'sign_in_page.dart';
 
 
 class Home extends StatefulWidget {

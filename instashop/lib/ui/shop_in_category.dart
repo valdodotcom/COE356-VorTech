@@ -102,7 +102,7 @@ class _ShopInCategoryState extends State<ShopInCategory> {
 
 Future<List<dynamic>> fetchAlbums() async {
   final response = await http.get(Uri.parse(
-      'http://10.74.238.40:8000/get-shops/category/Fashion & Clothing'));
+      'http://10.74.239.230:8000/get-shops/category/Fashion & Clothing'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
