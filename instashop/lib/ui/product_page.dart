@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:instashop/ui/util/cart.dart';
+import 'package:instashop/widgets/box_decoration.dart';
 import '../config/link.dart' as link;
 
 
@@ -74,7 +75,7 @@ Widget tempWidget2(String nameOfShop) {
                             fit: BoxFit.fill),
                        borderRadius: BorderRadius.circular(8.0), ),
                         ),
-                            
+
                         new Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,
@@ -153,16 +154,8 @@ Widget tempWidget2(String nameOfShop) {
                     ),
                     margin: EdgeInsets.all(10),
                     padding: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                        color: Colors.white70,
-                        boxShadow: [BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0,3),
-                  )],
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.white12)),
+                    decoration: tempBoxDecoration(),
+
                   );
                 });
           } else if (snapshot.hasError) {

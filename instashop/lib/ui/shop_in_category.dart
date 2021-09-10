@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:instashop/widgets/box_decoration.dart';
 import '../config/link.dart' as link;
 import 'package:flutter/material.dart';
 import 'package:instashop/ui/product_page.dart';
@@ -105,16 +106,8 @@ Widget tempWidget(String categoryName) {
                     ),
                     margin: EdgeInsets.all(10),
                     padding: EdgeInsets.all(23),
-                    decoration: BoxDecoration(
-                        boxShadow: [BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0,3),
-                        )],
-                        color: Colors.white70,
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.white12)),
+                    decoration: tempBoxDecoration(),
+
 
                   ));
             });

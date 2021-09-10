@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:instashop/widgets/box_decoration.dart';
 // import '../ui/wishlist.dart';
 // import '../ui/shop_in_category.dart';
 
@@ -134,16 +135,8 @@ class _CartPageState extends State<CartPage> {
                       ),
                       margin: EdgeInsets.all(10),
                       padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                          boxShadow: [BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0,3),
-                          )],
-                          color: Colors.white70,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Colors.white12)),
+                      decoration: tempBoxDecoration(),
+
                     );
                   });
             } else if (snapshot.hasError) {

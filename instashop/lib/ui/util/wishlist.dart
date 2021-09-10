@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:instashop/config/link.dart' as link;
 
 import 'package:flutter/material.dart';
+import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 
 class WishlistPage extends StatefulWidget {
@@ -150,16 +151,8 @@ class _WishlistPageState extends State<WishlistPage> {
                           ),
                           margin: EdgeInsets.all(10),
                           padding: EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                              boxShadow: [BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: Offset(0,3),
-                              )],
-                              color: Colors.white70,
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(color: Colors.white12)),
+                          decoration: tempBoxDecoration(),
+
                         );
                       });
                 } else if (snapshot.hasError) {

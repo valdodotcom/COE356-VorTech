@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:instashop/ui/shop_in_category.dart';
+import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 import 'util/cart.dart';
 
@@ -70,7 +71,7 @@ class _CategoriesState extends State<Categories> {
                         Navigator.of(context).push(router);
                       },
                       child: new Container(
-                        color: Colors.grey.shade200,
+                        decoration: tempBoxDecoration(),
                         padding: EdgeInsets.all(15.0),
                         child: new Row(
                           children: <Widget>[
@@ -97,7 +98,7 @@ class _CategoriesState extends State<Categories> {
                       Navigator.of(context).push(router);
                     },
                     child: new Container(
-                        color: Colors.grey.shade200,
+                        decoration: tempBoxDecoration(),
                         padding: EdgeInsets.all(15.0),
                         child: new Row(
                           children: <Widget>[
@@ -124,7 +125,8 @@ class _CategoriesState extends State<Categories> {
                       Navigator.of(context).push(router);
                     },
                     child: new Container(
-                        color: Colors.grey.shade200,
+                        decoration: tempBoxDecoration(),
+
                         padding: EdgeInsets.all(15.0),
                         child: new Row(
                           children: <Widget>[
@@ -151,7 +153,8 @@ class _CategoriesState extends State<Categories> {
                       Navigator.of(context).push(router);
                     },
                     child: new Container(
-                        color: Colors.grey.shade200,
+                        decoration: tempBoxDecoration(),
+
                         padding: EdgeInsets.all(15.0),
                         child: new Row(
                           children: <Widget>[
@@ -178,7 +181,8 @@ class _CategoriesState extends State<Categories> {
                       Navigator.of(context).push(router);
                     },
                     child: new Container(
-                      color: Colors.grey.shade200,
+                      decoration: tempBoxDecoration(),
+
                       padding: EdgeInsets.all(15.0),
                       child: new Row(
                         children: <Widget>[
@@ -207,7 +211,8 @@ class _CategoriesState extends State<Categories> {
                       Navigator.of(context).push(router);
                     },
                     child: new Container(
-                      color: Colors.grey.shade200,
+                      decoration: tempBoxDecoration(),
+
                       padding: EdgeInsets.all(15.0),
                       child: new Row(
                         children: <Widget>[
