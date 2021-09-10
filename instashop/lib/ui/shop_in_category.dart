@@ -6,7 +6,9 @@ import 'package:instashop/ui/product_page.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 
 class ShopInCategory extends StatefulWidget {
-  const ShopInCategory({Key? key}) : super(key: key);
+  final String name;
+
+  const ShopInCategory({Key? key, required this.name}) : super(key: key);
 
   @override
   _ShopInCategoryState createState() => _ShopInCategoryState();
@@ -21,7 +23,7 @@ class _ShopInCategoryState extends State<ShopInCategory> {
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums(link.server, link.defaultCategory);
+    // futureAlbums = fetchAlbums(link.server, link.defaultCategory);
   }
 
 
@@ -31,80 +33,87 @@ class _ShopInCategoryState extends State<ShopInCategory> {
     return Scaffold(
         appBar: new AppBar(
           backgroundColor: Color(0xff00eaff),
-          title: new Text("Fashion & Clothing"),
+          title: new Text('${widget.name}'),
         ),
         body: new Center(
-          child: FutureBuilder<List<dynamic>>(
-            future: futureAlbums,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 400,
-                        childAspectRatio: 2 / 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 20),
-                    itemCount: snapshot.data!.toList().length,
-                    padding: EdgeInsets.all(15),
-                    itemBuilder: (BuildContext ctx, int position) {
-                      return InkWell(
-                          onTap: () {
-                            var router = new MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                new ProductPage());
-
-                            Navigator.of(context).push(router);
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Stack(
-                              children: <Widget>[
-                                new Center(
-                                    child: Image.network(
-                                        '${snapshot.data!.toList()[position].shopPicture}',
-                                        fit: BoxFit.fill)),
-                                new Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    new Container(
-                                      padding: EdgeInsets.all(2),
-                                      decoration: BoxDecoration(
-                                        color: Colors.black54,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Text(
-                                        '${snapshot.data!.toList()[position].shopName}',
-                                        style: new TextStyle(
-                                            fontSize: 20, color: Colors.white),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    new Container(),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            decoration: BoxDecoration(
-                                color: Colors.white70,
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(color: Colors.white12)),
-                          ));
-                    });
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            },
-          ),
+          child: tempWidget("${widget.name}"),
         ),
         bottomNavigationBar: new CustomNavBar(index: 0));
   }
 
 
 }
+
+
+Widget tempWidget(String categoryName) {
+  var futureAlbums = fetchAlbums(link.server, categoryName);
+  return new FutureBuilder<List<dynamic>>(
+    future: futureAlbums,
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        return GridView.builder(
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 400,
+                childAspectRatio: 2 / 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 20),
+            itemCount: snapshot.data!.toList().length,
+            padding: EdgeInsets.all(15),
+            itemBuilder: (BuildContext ctx, int position) {
+              return InkWell(
+                  onTap: () {
+                    var router = new MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                        new ProductPage());
+
+                    Navigator.of(context).push(router);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Stack(
+                      children: <Widget>[
+                        new Center(
+                            child: Image.network(
+                                '${snapshot.data!.toList()[position].shopPicture}',
+                                fit: BoxFit.fill)),
+                        new Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            new Container(
+                              padding: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                '${snapshot.data!.toList()[position].shopName}',
+                                style: new TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            new Container(),
+                          ],
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.white70,
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.white12)),
+                  ));
+            });
+      } else if (snapshot.hasError) {
+        return Text('${snapshot.error}');
+      }
+      // By default, show a loading spinner.
+      return const CircularProgressIndicator();
+    },
+  );
+}
+
 
 Future<List<dynamic>> fetchAlbums(String server, String categoryName) async {
   final response = await http.get(Uri.parse(

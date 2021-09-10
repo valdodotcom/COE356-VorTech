@@ -1,13 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:instashop/ui/categories/tech_&_gadgets.dart';
 import 'package:instashop/ui/shop_in_category.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
-import 'categories/arts_&_crafts.dart';
-import 'categories/beauty.dart';
-// import 'categories/fashion_&_clothing.dart';
-import 'categories/food.dart';
-import 'categories/others.dart';
 import 'util/cart.dart';
 
 class Categories extends StatefulWidget {
@@ -68,10 +62,10 @@ class _CategoriesState extends State<Categories> {
                 children: <Widget>[
                   new InkWell(
                       onTap: () {
-                        // String _category = "Fashion & Clothing";
+                        String _category = "Fashion & Clothing";
                         var router = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new ShopInCategory());
+                                new ShopInCategory(name: _category));
 
                         Navigator.of(context).push(router);
                       },
@@ -95,10 +89,10 @@ class _CategoriesState extends State<Categories> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-
+                      String _category = "Food";
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              new Food());
+                              new ShopInCategory(name: _category));
 
                       Navigator.of(context).push(router);
                     },
@@ -122,9 +116,10 @@ class _CategoriesState extends State<Categories> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
+                      String _category = "Tech & Gadgets";
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              new Gadgets());
+                          new ShopInCategory(name: _category));
 
                       Navigator.of(context).push(router);
                     },
@@ -148,9 +143,10 @@ class _CategoriesState extends State<Categories> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
+                      String _category = "Beauty & Personal Care";
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              new Beauty());
+                          new ShopInCategory(name: _category));
 
                       Navigator.of(context).push(router);
                     },
@@ -174,9 +170,10 @@ class _CategoriesState extends State<Categories> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
+                      String _category = "Arts & Crafts";
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              new Arts());
+                          new ShopInCategory(name: _category));
 
                       Navigator.of(context).push(router);
                     },
@@ -202,9 +199,10 @@ class _CategoriesState extends State<Categories> {
 
                   new InkWell(
                     onTap: () {
+                      String _category = "Other";
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              new Others());
+                          new ShopInCategory(name: _category));
 
                       Navigator.of(context).push(router);
                     },
