@@ -68,8 +68,11 @@ class _WishlistPageState extends State<WishlistPage> {
                           child: Stack(
                             children: <Widget>[
                               new Center(
-                                  child: Image.network('https://drive.google.com/uc?export=view&id=1WELyBDOrZKbP6qPZgzHdtD82yr8ba4Ip',
-                                      fit: BoxFit.fill)),
+                                  child: ClipRRect(child: Image.network('https://drive.google.com/uc?export=view&id=1WELyBDOrZKbP6qPZgzHdtD82yr8ba4Ip',
+                              fit: BoxFit.fill),
+                                  borderRadius: BorderRadius.circular(8.0)),),
+
+
                               new Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.max,

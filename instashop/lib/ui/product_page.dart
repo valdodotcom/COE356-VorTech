@@ -70,9 +70,11 @@ Widget tempWidget2(String nameOfShop) {
                     alignment: Alignment.center,
                     child: Stack(
                       children: <Widget>[
-                        new Center(
-                            child: Image.network('${snapshot.data!.toList()[position].productPicture}',
-                                fit: BoxFit.fill)),
+                        new Center( child: ClipRRect(child: Image.network('${snapshot.data!.toList()[position].productPicture}',
+                            fit: BoxFit.fill),
+                       borderRadius: BorderRadius.circular(8.0), ),
+                        ),
+                            
                         new Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,

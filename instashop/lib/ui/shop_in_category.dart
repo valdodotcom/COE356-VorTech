@@ -70,9 +70,13 @@ Widget tempWidget(String categoryName) {
                     child: Stack(
                       children: <Widget>[
                         new Center(
-                            child: Image.network(
-                                '${snapshot.data!.toList()[position].shopPicture}',
-                                fit: BoxFit.fill)),
+                            child: ClipRRect(
+                                child: Image.network(
+                              '${snapshot.data!.toList()[position].shopPicture}',
+                              fit: BoxFit.fill,),
+                            borderRadius: BorderRadius.circular(8.0),)
+                        ),
+
                         new Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,
