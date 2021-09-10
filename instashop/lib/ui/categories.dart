@@ -1,7 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:instashop/categories/arts_&_crafts.dart';
+import 'package:instashop/categories/beauty.dart';
+import 'package:instashop/categories/fashion_&_clothing.dart';
+import 'package:instashop/categories/food.dart';
+import 'package:instashop/categories/others.dart';
+import 'package:instashop/categories/tech_&_gadgets.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
-import '../ui/shop_in_category.dart';
 import 'util/cart.dart';
 
 class Categories extends StatefulWidget {
@@ -79,7 +84,7 @@ class _CategoriesState extends State<Categories> {
                       onTap: () {
                         var router = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new ShopInCategory());
+                                new Fashion());
 
                         Navigator.of(context).push(router);
                       },
@@ -107,7 +112,7 @@ class _CategoriesState extends State<Categories> {
 
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              new ShopInCategory());
+                              new Food());
 
                       Navigator.of(context).push(router);
                     },
@@ -134,7 +139,7 @@ class _CategoriesState extends State<Categories> {
                     onTap: () {
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              new ShopInCategory());
+                              new Gadgets());
 
                       Navigator.of(context).push(router);
                     },
@@ -161,7 +166,7 @@ class _CategoriesState extends State<Categories> {
                     onTap: () {
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              new ShopInCategory());
+                              new Beauty());
 
                       Navigator.of(context).push(router);
                     },
@@ -188,7 +193,7 @@ class _CategoriesState extends State<Categories> {
                     onTap: () {
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              new ShopInCategory());
+                              new Arts());
 
                       Navigator.of(context).push(router);
                     },
@@ -217,7 +222,7 @@ class _CategoriesState extends State<Categories> {
                     onTap: () {
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              new ShopInCategory());
+                              new Others());
 
                       Navigator.of(context).push(router);
                     },
