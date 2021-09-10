@@ -61,7 +61,7 @@ Widget tempWidget(String categoryName) {
                   onTap: () {
                     var router = new MaterialPageRoute(
                         builder: (BuildContext context) =>
-                        new ProductPage(name: "Brimms Bay",));
+                        new ProductPage(name: '${snapshot.data!.toList()[position].shopName}'));
 
                     Navigator.of(context).push(router);
                   },
@@ -81,6 +81,9 @@ Widget tempWidget(String categoryName) {
                             new Container(
                               padding: EdgeInsets.all(2),
                               decoration: BoxDecoration(
+                                boxShadow: [BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5)
+                                )],
                                 color: Colors.black54,
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -96,10 +99,19 @@ Widget tempWidget(String categoryName) {
                         ),
                       ],
                     ),
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(23),
                     decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0,3),
+                        )],
                         color: Colors.white70,
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(color: Colors.white12)),
+
                   ));
             });
       } else if (snapshot.hasError) {
