@@ -17,9 +17,6 @@ class ShopInCategory extends StatefulWidget {
 class _ShopInCategoryState extends State<ShopInCategory> {
   late Future<List<dynamic>> futureAlbums;
 
-
-
-
   @override
   void initState() {
     super.initState();
@@ -64,7 +61,7 @@ Widget tempWidget(String categoryName) {
                   onTap: () {
                     var router = new MaterialPageRoute(
                         builder: (BuildContext context) =>
-                        new ProductPage());
+                        new ProductPage(name: "Brimms Bay",));
 
                     Navigator.of(context).push(router);
                   },

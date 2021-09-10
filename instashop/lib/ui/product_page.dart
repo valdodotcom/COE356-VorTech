@@ -6,13 +6,11 @@ import 'package:flutter/rendering.dart';
 import 'package:instashop/ui/util/cart.dart';
 import '../config/link.dart' as link;
 
-/*
-import '../ui/wishlist.dart';
-import '../ui/shop_in_category.dart';*/
-
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({Key? key}) : super(key: key);
+  final String name;
+
+  const ProductPage({Key? key, required this.name}) : super(key: key);
 
   @override
   _ProductPageState createState() => _ProductPageState();
@@ -24,14 +22,14 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums(link.server);
+    // futureAlbums = fetchAlbums(link.server, link.defaultNameOfShop);
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text("Accra Thrift"),
+          title: new Text("${widget.name}"),
           backgroundColor: Color(0xff00eaff),
 
           actions: <Widget>[
@@ -46,124 +44,129 @@ class _ProductPageState extends State<ProductPage> {
           ],
         ),
         body: new Center(
-          child: FutureBuilder<List<dynamic>>(
-            future: futureAlbums,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-
-                return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 400,
-                        childAspectRatio: 2 / 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 20),
-                    itemCount: snapshot.data!.toList().length,
-                    padding: EdgeInsets.all(15),
-                    itemBuilder: (BuildContext ctx, int position) {
-                      return Container(
-                        alignment: Alignment.center,
-                        child: Stack(
-                          children: <Widget>[
-                            new Center(
-                                child: Image.network('${snapshot.data!.toList()[position].productPicture}',
-                                    fit: BoxFit.fill)),
-                            new Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                new Container(
-                                  padding: EdgeInsets.all(2),
-                                  decoration: BoxDecoration(
-                                    color: Colors.black54,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Text(
-                                    '${snapshot.data!.toList()[position].product}',
-                                    style: new TextStyle(
-                                        fontSize: 20, color: Colors.white),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                new Container(
-                                  padding: EdgeInsets.all(2),
-                                  decoration: BoxDecoration(
-                                    color: Colors.black54,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: new Text(
-                                    '¢ ${snapshot.data!.toList()[position].productPrice}',
-                                    style: new TextStyle(
-                                        fontSize: 20, color: Colors.white),
-                                  ),
-                                ),
-                                new Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          final addedToCart = SnackBar(
-                                            content: new Text("Item added to cart!"),
-                                            action: SnackBarAction(
-                                              label: "View",
-                                              onPressed: () {
-                                                var router = new MaterialPageRoute(
-                                                    builder: (BuildContext context) =>
-                                                    new CartPage());
-                                                Navigator.of(context).push(router);
-
-                                                ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                              },
-                                            ),
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(addedToCart);
-                                        },
-                                        child:
-                                        new Icon(Icons.shopping_cart_outlined)),
-                                    Padding(padding: EdgeInsets.all(10)),
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          final addedToWishlist = SnackBar(
-                                            content: new Text("Item added to wishlist!"),
-                                            action: SnackBarAction(
-                                              label: "Undo",
-                                              onPressed: () {},
-                                            ),
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(addedToWishlist);
-                                        },
-
-                                        child: new Icon(Icons.bookmark_add_outlined)),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                        decoration: BoxDecoration(
-                            color: Colors.white70,
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Colors.white12)),
-                      );
-                    });
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            },
-          ),
+          child: tempWidget2("${widget.name}"),
         ));
     // ),
   }
 }
 
-Future<List<dynamic>> fetchAlbums(String server) async {
+Widget tempWidget2(String nameOfShop) {
+  var futureAlbums = fetchAlbums(link.server, nameOfShop);
+      return new FutureBuilder<List<dynamic>>(
+        future: futureAlbums,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+
+            return GridView.builder(
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 400,
+                    childAspectRatio: 2 / 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 20),
+                itemCount: snapshot.data!.toList().length,
+                padding: EdgeInsets.all(15),
+                itemBuilder: (BuildContext ctx, int position) {
+                  return Container(
+                    alignment: Alignment.center,
+                    child: Stack(
+                      children: <Widget>[
+                        new Center(
+                            child: Image.network('${snapshot.data!.toList()[position].productPicture}',
+                                fit: BoxFit.fill)),
+                        new Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            new Container(
+                              padding: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                '${snapshot.data!.toList()[position].product}',
+                                style: new TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            new Container(
+                              padding: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: new Text(
+                                '¢ ${snapshot.data!.toList()[position].productPrice}',
+                                style: new TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                            ),
+                            new Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                ElevatedButton(
+                                    onPressed: () {
+                                      final addedToCart = SnackBar(
+                                        content: new Text("Item added to cart!"),
+                                        action: SnackBarAction(
+                                          label: "View",
+                                          onPressed: () {
+                                            var router = new MaterialPageRoute(
+                                                builder: (BuildContext context) =>
+                                                new CartPage());
+                                            Navigator.of(context).push(router);
+
+                                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                          },
+                                        ),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(addedToCart);
+                                    },
+                                    child:
+                                    new Icon(Icons.shopping_cart_outlined)),
+                                Padding(padding: EdgeInsets.all(10)),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      final addedToWishlist = SnackBar(
+                                        content: new Text("Item added to wishlist!"),
+                                        action: SnackBarAction(
+                                          label: "Undo",
+                                          onPressed: () {},
+                                        ),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(addedToWishlist);
+                                    },
+
+                                    child: new Icon(Icons.bookmark_add_outlined)),
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.white70,
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.white12)),
+                  );
+                });
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          // By default, show a loading spinner.
+          return const CircularProgressIndicator();
+        },
+      );
+}
+
+Future<List<dynamic>> fetchAlbums(String server, String nameOfShop) async {
   final response = await http
-      .get(Uri.parse("${link.server}view-shop-products/Kate's Fashion"));
+      .get(Uri.parse("${link.server}view-shop-products/$nameOfShop"));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
