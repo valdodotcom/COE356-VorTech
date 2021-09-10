@@ -64,8 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             new Text(
                               "    My Account",
-                              style: new TextStyle(
-                                  fontSize: 20.0, color: Colors.blue.shade800),
+                              style: tempStyle ()
                             ),
                           ],
                         ),
@@ -92,8 +91,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             new Text(
                               "    Orders",
-                              style: new TextStyle(
-                                  fontSize: 20.0, color: Colors.blue.shade800),
+                              style: tempStyle ()
                             ),
                           ],
                         )),
@@ -121,8 +119,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             new Text(
                               "    Device Settings",
-                              style: new TextStyle(
-                                  fontSize: 20.0, color: Colors.blue.shade800),
+                              style: tempStyle ()
                             ),
                           ],
                         )),
@@ -150,8 +147,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             new Text(
                               "    Info",
-                              style: new TextStyle(
-                                  fontSize: 20.0, color: Colors.blue.shade800),
+                              style: tempStyle ()
                             ),
                           ],
                         )),
@@ -191,8 +187,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                           new Text(
                             "    Log Out",
-                            style: new TextStyle(
-                                fontSize: 20.0, color: Colors.blue.shade800),
+                            style: tempStyle ()
                           ),
                         ],
                       ),
@@ -207,3 +202,9 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 }
 
+TextStyle tempStyle () {
+  return new TextStyle(
+    color: Colors.blue.shade800,
+    fontSize: 20.0,
+  );
+}

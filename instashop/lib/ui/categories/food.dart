@@ -1,23 +1,24 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:instashop/config/link.dart' as link;
 import 'package:flutter/material.dart';
 import 'package:instashop/ui/product_page.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 
-class Beauty extends StatefulWidget {
-  const Beauty({Key? key}) : super(key: key);
+class Food extends StatefulWidget {
+  const Food({Key? key}) : super(key: key);
 
   @override
-  _BeautyState createState() => _BeautyState();
+  _FoodState createState() => _FoodState();
 }
 
-class _BeautyState extends State<Beauty> {
+class _FoodState extends State<Food> {
   late Future<List<dynamic>> futureAlbums;
 
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums();
+    futureAlbums = fetchAlbums(link.server);
   }
 
 
@@ -27,7 +28,7 @@ class _BeautyState extends State<Beauty> {
     return Scaffold(
         appBar: new AppBar(
           backgroundColor: Color(0xff00eaff),
-          title: new Text("Beauty & Personal Care"),
+          title: new Text("Food"),
         ),
         body: new Center(
           child: FutureBuilder<List<dynamic>>(
@@ -100,9 +101,9 @@ class _BeautyState extends State<Beauty> {
   }
 }
 
-Future<List<dynamic>> fetchAlbums() async {
+Future<List<dynamic>> fetchAlbums(String server) async {
   final response = await http.get(Uri.parse(
-      'http://10.74.239.230:8000/get-shops/category/Beauty & Fashion'));
+      '${link.server}/get-shops/category/Food'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

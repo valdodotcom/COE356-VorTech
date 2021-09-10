@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:instashop/categories/arts_&_crafts.dart';
-import 'package:instashop/categories/beauty.dart';
-import 'package:instashop/categories/fashion_&_clothing.dart';
-import 'package:instashop/categories/food.dart';
-import 'package:instashop/categories/others.dart';
-import 'package:instashop/categories/tech_&_gadgets.dart';
+import 'package:instashop/ui/categories/tech_&_gadgets.dart';
+import 'package:instashop/ui/shop_in_category.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
+import 'categories/arts_&_crafts.dart';
+import 'categories/beauty.dart';
+// import 'categories/fashion_&_clothing.dart';
+import 'categories/food.dart';
+import 'categories/others.dart';
 import 'util/cart.dart';
 
 class Categories extends StatefulWidget {
@@ -39,22 +40,8 @@ class _CategoriesState extends State<Categories> {
           appBar: new AppBar(
             leading: new Container(),
             backgroundColor: Color(0xff00eaff),
-            title: new Text("instaShop")
+            title: new Text("instaShop"),
 
-
-            /*new Container(
-              padding: EdgeInsets.fromLTRB(9.0, 0.0, 0.0, 0.0),
-              decoration: new BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: new TextFormField(
-              decoration: new InputDecoration(
-                hintText: "Search by shop name",
-
-              ),
-            ),)*/
-            ,
             actions: <Widget>[
               new IconButton(
                   onPressed: () {
@@ -73,18 +60,18 @@ class _CategoriesState extends State<Categories> {
           child: new Center(
                 child: new Text("Browse by Category",
                   style: new TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.blue.shade900,
-                  ),),),),
+                    fontSize: 20, color: Colors.blue.shade900,
+                  )),),),
              
 
               new Column(
                 children: <Widget>[
                   new InkWell(
                       onTap: () {
+                        // String _category = "Fashion & Clothing";
                         var router = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new Fashion());
+                                new ShopInCategory());
 
                         Navigator.of(context).push(router);
                       },
@@ -100,8 +87,7 @@ class _CategoriesState extends State<Categories> {
                             ),
                             new Text(
                               "    Fashion & Clothing",
-                              style: new TextStyle(
-                                  fontSize: 20.0, color: Colors.blue.shade800),
+                              style: tempStyle()
                             ),
                           ],
                         ),
@@ -128,8 +114,7 @@ class _CategoriesState extends State<Categories> {
                             ),
                             new Text(
                               "    Food",
-                              style: new TextStyle(
-                                  fontSize: 20.0, color: Colors.blue.shade800),
+                              style: tempStyle()
                             ),
                           ],
                         )),
@@ -155,8 +140,7 @@ class _CategoriesState extends State<Categories> {
                             ),
                             new Text(
                               "    Tech & Gadgets",
-                              style: new TextStyle(
-                                  fontSize: 20.0, color: Colors.blue.shade800),
+                              style: tempStyle()
                             ),
                           ],
                         )),
@@ -182,8 +166,7 @@ class _CategoriesState extends State<Categories> {
                             ),
                             new Text(
                               "    Beauty & Personal Care",
-                              style: new TextStyle(
-                                  fontSize: 20.0, color: Colors.blue.shade800),
+                              style: tempStyle()
                             ),
                           ],
                         )),
@@ -209,8 +192,7 @@ class _CategoriesState extends State<Categories> {
                           ),
                           new Text(
                             "    Arts & Crafts",
-                            style: new TextStyle(
-                                fontSize: 20.0, color: Colors.blue.shade800),
+                            style: tempStyle()
                           ),
                         ],
                       ),
@@ -238,8 +220,7 @@ class _CategoriesState extends State<Categories> {
                           ),
                           new Text(
                             "    Other",
-                            style: new TextStyle(
-                                fontSize: 20.0, color: Colors.blue.shade800),
+                            style: tempStyle(),
                           ),
                         ],
                       ),
@@ -252,4 +233,11 @@ class _CategoriesState extends State<Categories> {
           bottomNavigationBar: new CustomNavBar(index: 0)),
     );
   }
+}
+
+TextStyle tempStyle () {
+  return new TextStyle(
+    color: Colors.blue.shade800,
+    fontSize: 20.0,
+  );
 }

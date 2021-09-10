@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:instashop/config/link.dart' as link;
+
 import 'package:flutter/material.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 
@@ -18,7 +20,7 @@ class _WishlistPageState extends State<WishlistPage> {
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums();
+    futureAlbums = fetchAlbums(link.server);
   }
 
   DateTime _lastQuitTime = DateTime(0);
@@ -164,9 +166,9 @@ class _WishlistPageState extends State<WishlistPage> {
   }
 }
 
-Future<List<dynamic>> fetchAlbums() async {
+Future<List<dynamic>> fetchAlbums(String server) async {
   final response = await http
-      .get(Uri.parse('http://10.74.239.230:8000/get-all-vendors'));
+      .get(Uri.parse('${link.server}get-all-vendors'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

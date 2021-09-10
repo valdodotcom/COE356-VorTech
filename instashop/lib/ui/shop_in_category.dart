@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../config/link.dart' as link;
 import 'package:flutter/material.dart';
 import 'package:instashop/ui/product_page.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
@@ -14,10 +15,13 @@ class ShopInCategory extends StatefulWidget {
 class _ShopInCategoryState extends State<ShopInCategory> {
   late Future<List<dynamic>> futureAlbums;
 
+
+
+
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums();
+    futureAlbums = fetchAlbums(link.server, link.defaultCategory);
   }
 
 
@@ -98,11 +102,13 @@ class _ShopInCategoryState extends State<ShopInCategory> {
         ),
         bottomNavigationBar: new CustomNavBar(index: 0));
   }
+
+
 }
 
-Future<List<dynamic>> fetchAlbums() async {
+Future<List<dynamic>> fetchAlbums(String server, String categoryName) async {
   final response = await http.get(Uri.parse(
-      'http://10.74.239.230:8000/get-shops/category/Fashion & Clothing'));
+      '${link.server}get-shops/category/$categoryName'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

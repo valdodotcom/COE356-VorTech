@@ -1,23 +1,25 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:instashop/config/link.dart' as link;
+
 import 'package:flutter/material.dart';
 import 'package:instashop/ui/product_page.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 
-class Fashion extends StatefulWidget {
-  const Fashion({Key? key}) : super(key: key);
+class Gadgets extends StatefulWidget {
+  const Gadgets({Key? key}) : super(key: key);
 
   @override
-  _FashionState createState() => _FashionState();
+  _GadgetsState createState() => _GadgetsState();
 }
 
-class _FashionState extends State<Fashion> {
+class _GadgetsState extends State<Gadgets> {
   late Future<List<dynamic>> futureAlbums;
 
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums();
+    futureAlbums = fetchAlbums(link.server);
   }
 
 
@@ -27,7 +29,7 @@ class _FashionState extends State<Fashion> {
     return Scaffold(
         appBar: new AppBar(
           backgroundColor: Color(0xff00eaff),
-          title: new Text("Fashion & Clothing"),
+          title: new Text("Tech & Gadgets"),
         ),
         body: new Center(
           child: FutureBuilder<List<dynamic>>(
@@ -100,9 +102,9 @@ class _FashionState extends State<Fashion> {
   }
 }
 
-Future<List<dynamic>> fetchAlbums() async {
+Future<List<dynamic>> fetchAlbums(String server) async {
   final response = await http.get(Uri.parse(
-      'http://10.74.239.230:8000/get-shops/category/Fashion & Clothing'));
+      '${link.server}get-shops/category/Tech & Gadgets'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

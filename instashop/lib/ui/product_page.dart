@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:instashop/ui/util/cart.dart';
+import '../config/link.dart' as link;
 
 /*
 import '../ui/wishlist.dart';
@@ -23,7 +24,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums();
+    futureAlbums = fetchAlbums(link.server);
   }
 
   @override
@@ -49,6 +50,7 @@ class _ProductPageState extends State<ProductPage> {
             future: futureAlbums,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+
                 return GridView.builder(
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 400,
@@ -159,9 +161,9 @@ class _ProductPageState extends State<ProductPage> {
   }
 }
 
-Future<List<dynamic>> fetchAlbums() async {
+Future<List<dynamic>> fetchAlbums(String server) async {
   final response = await http
-      .get(Uri.parse("http://10.74.239.230:8000/view-shop-products/Kate's Fashion"));
+      .get(Uri.parse("${link.server}view-shop-products/Kate's Fashion"));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
