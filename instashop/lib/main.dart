@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import './ui/home.dart';
+// import 'package:instashop/ui/sign_in_page.dart';
+// import 'package:instashop/ui/loading_screen.dart';
+import 'ui/home.dart';
 
 void main() => runApp(new MyApp());
 
@@ -14,6 +16,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      /*initialRoute: '/',
+      routes: {
+        '/': (context) => Home(),
+        '/second': (context) => SignInPage(),
+      },*/
     );
   }
 }

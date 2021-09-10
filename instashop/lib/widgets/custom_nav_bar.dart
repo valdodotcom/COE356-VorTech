@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:instashop/ui/settings.dart';
-import 'package:instashop/ui/shop_page.dart';
-import 'package:instashop/ui/wishlist.dart';
+import 'package:instashop/ui/settings/settings.dart';
+import 'package:instashop/ui/categories.dart';
+import 'package:instashop/ui/util/wishlist.dart';
 
 class CustomNavBar extends StatefulWidget {
   final int index;
@@ -18,7 +18,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
     });
     if (i == 0) {
       var router = new MaterialPageRoute(
-          builder: (BuildContext context) => new ShopPage());
+          builder: (BuildContext context) => new Categories());
 
       Navigator.of(context).push(router);
     }
