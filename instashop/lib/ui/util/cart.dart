@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:instashop/config/link.dart' as link;
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 
@@ -49,12 +50,12 @@ class _CartPageState extends State<CartPage> {
                           child: Stack(
                             children: <Widget>[
                               new Center(
-                                  /*child: ClipRRect(
+                                  child: ClipRRect(
                               child: Image.network(
-                                  '${snapshot.data!.toList()[position].image}',
+                                  '${snapshot.data!.toList()[position].productPicture}',
                                   fit: BoxFit.fill),
                               borderRadius: BorderRadius.circular(8.0),
-                            ),*/
+                            ),
                                   ),
                               new Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,7 +69,7 @@ class _CartPageState extends State<CartPage> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
-                                      '${snapshot.data!.toList()[position].date}',
+                                      '${snapshot.data!.toList()[position].product}',
                                       style: new TextStyle(
                                           fontSize: 20, color: Colors.white),
                                       textAlign: TextAlign.center,
@@ -81,7 +82,7 @@ class _CartPageState extends State<CartPage> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: new Text(
-                                      '${snapshot.data!.toList()[position].id}',
+                                      '¢ ${snapshot.data!.toList()[position].productPrice}',
                                       style: new TextStyle(
                                           fontSize: 20, color: Colors.white),
                                     ),
@@ -130,6 +131,9 @@ class _CartPageState extends State<CartPage> {
                                       Padding(padding: EdgeInsets.all(10)),
                                       ElevatedButton(
                                           onPressed: () {
+
+
+
                                             final addedToWishlist = SnackBar(
                                               content:
                                                   new Text("Removed from cart"),
@@ -140,6 +144,8 @@ class _CartPageState extends State<CartPage> {
                                             );
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(addedToWishlist);
+
+
                                           },
                                           child: new Icon(Icons.cancel_outlined)),
                                     ],
@@ -179,7 +185,7 @@ class _CartPageState extends State<CartPage> {
                                         child:
                                         new Text("Accept")),
 
-                                    ElevatedButton(
+                                    TextButton(
                                         onPressed: () {},
                                         child:
                                         new Text("Cancel"))
@@ -229,7 +235,7 @@ class _CartPageState extends State<CartPage> {
 }
 
 Future<List<dynamic>> fetchAlbums() async {
-  final response = await http.get(Uri.parse('https://fakestoreapi.com/carts'));
+  final response = await http.get(Uri.parse('${link.server}view-customer-cart/1'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -245,53 +251,36 @@ Future<List<dynamic>> fetchAlbums() async {
 
 class Album {
   Album({
-    required this.id,
-    required this.userId,
-    required this.date,
-    required this.products,
-    required this.v,
+    required this.cartId,
+    required this.customerFirstName,
+    required this.customerLastName,
+    required this.product,
+    required this.productPicture,
+    required this.productPrice,
   });
 
-  final int id;
-  final int userId;
-  final DateTime date;
-  final List<Product> products;
-  final int v;
+  final String cartId;
+  final String customerFirstName;
+  final String customerLastName;
+  final String product;
+  final String productPicture;
+  final double productPrice;
 
   factory Album.fromJson(Map<String, dynamic> json) => Album(
-        id: json["id"],
-        userId: json["userId"],
-        date: DateTime.parse(json["date"]),
-        products: List<Product>.from(
-            json["products"].map((x) => Product.fromJson(x))),
-        v: json["__v"],
-      );
+    cartId: json["CartID"],
+    customerFirstName: json["CustomerFirstName"],
+    customerLastName: json["CustomerLastName"],
+    product: json["Product"],
+    productPicture: json["ProductPicture"],
+    productPrice: json["ProductPrice"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "userId": userId,
-        "date": date.toIso8601String(),
-        "products": List<dynamic>.from(products.map((x) => x.toJson())),
-        "__v": v,
-      };
-}
-
-class Product {
-  Product({
-    required this.productId,
-    required this.quantity,
-  });
-
-  final int productId;
-  final int quantity;
-
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
-        productId: json["productId"],
-        quantity: json["quantity"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "productId": productId,
-        "quantity": quantity,
-      };
+    "CartID": cartId,
+    "CustomerFirstName": customerFirstName,
+    "CustomerLastName": customerLastName,
+    "Product": product,
+    "ProductPicture": productPicture,
+    "ProductPrice": productPrice,
+  };
 }

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 
+
 class WishlistPage extends StatefulWidget {
   const WishlistPage({Key? key}) : super(key: key);
 
@@ -69,8 +70,7 @@ class _WishlistPageState extends State<WishlistPage> {
                           child: Stack(
                             children: <Widget>[
                               new Center(
-                                  child: ClipRRect(child: Image.network('https://drive.google.com/uc?export=view&id=1WELyBDOrZKbP6qPZgzHdtD82yr8ba4Ip',
-                              fit: BoxFit.fill),
+                                  child: ClipRRect(child: Image.network('${snapshot.data!.toList()[position].productPicture}'),
                                   borderRadius: BorderRadius.circular(8.0)),),
 
 
@@ -86,7 +86,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
-                                      '${snapshot.data!.toList()[position].shopName}',
+                                      '${snapshot.data!.toList()[position].product}',
                                       style: new TextStyle(
                                           fontSize: 20, color: Colors.white),
                                       textAlign: TextAlign.center,
@@ -99,7 +99,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: new Text(
-                                      '\$ ${snapshot.data!.toList()[position].vendorEmail}',
+                                      '\$ ${snapshot.data!.toList()[position].customerFirstName}',
                                       style: new TextStyle(
                                           fontSize: 20, color: Colors.white),
                                     ),
@@ -110,36 +110,51 @@ class _WishlistPageState extends State<WishlistPage> {
                                     children: <Widget>[
                                       ElevatedButton(
                                           onPressed: () {
-                                            final addedToCart = SnackBar(
-                                              content: new Text("View item in page"),
-                                              action: SnackBarAction(
-                                                label: "View",
-                                                onPressed: () => debugPrint("Yes")/*{
-                                                var router = new MaterialPageRoute(
-                                                    builder: (BuildContext context) =>
-                                                    new CartPage());
 
-                                                Navigator.of(context).push(router);
-                                              }*/,
-                                              ),
-                                            );
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(addedToCart);
+                                           /* var router = new MaterialPageRoute(
+                                                builder: (BuildContext context) =>
+                                                new ProductPage(name: '${snapshot.data!.toList()[position].shopName}'));
+
+                                            Navigator.of(context).push(router);*/
+
                                           },
                                           child:
                                           new Icon(Icons.grid_view)),
                                       Padding(padding: EdgeInsets.all(10)),
                                       ElevatedButton(
                                           onPressed: () {
-                                            final addedToWishlist = SnackBar(
-                                              content: new Text("Removed from wishlist"),
-                                              action: SnackBarAction(
-                                                label: "Undo",
-                                                onPressed: () {},
-                                              ),
-                                            );
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(addedToWishlist);
+
+
+
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return new AlertDialog(
+                                                    title: new Text(
+                                                        "Remove from wishlist"),
+                                                    content: new Text(
+                                                        "Are you sure you want to remove this item from your wishlist? "
+                                                            "This cannot be undone."),
+                                                    actions: <Widget>[
+                                                      Padding(
+                                                          padding:
+                                                          EdgeInsets.all(
+                                                              10)),
+                                                      ElevatedButton(
+                                                          onPressed: () {},
+                                                          child:
+                                                          new Text("Yes")),
+
+                                                      TextButton(
+                                                          onPressed: () {},
+                                                          child:
+                                                          new Text("Cancel"))
+                                                    ],
+                                                  );
+                                                });
+
+
                                           },
 
                                           child: new Icon(Icons.highlight_remove_outlined)),
@@ -173,7 +188,7 @@ class _WishlistPageState extends State<WishlistPage> {
 
 Future<List<dynamic>> fetchAlbums(String server) async {
   final response = await http
-      .get(Uri.parse('${link.server}get-all-vendors'));
+      .get(Uri.parse('${link.server}view-customer-wishlist/1'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -189,44 +204,32 @@ Future<List<dynamic>> fetchAlbums(String server) async {
 
 class Album {
   Album({
-    required this.shopName,
-    required this.vendorAddress,
-    required this.vendorEmail,
-    required this.vendorFirstName,
-    required this.vendorId,
-    required this.vendorLastName,
-    required this.vendorPassword,
-    required this.vendorPhoneNo,
+    required this.customerFirstName,
+    required this.customerLastName,
+    required this.product,
+    required this.productPicture,
+    required this.wishlistId,
   });
 
-  final String shopName;
-  final String vendorAddress;
-  final String vendorEmail;
-  final String vendorFirstName;
-  final String vendorId;
-  final String vendorLastName;
-  final String vendorPassword;
-  final int vendorPhoneNo;
+  final String customerFirstName;
+  final String customerLastName;
+  final String product;
+  final String productPicture;
+  final String wishlistId;
 
   factory Album.fromJson(Map<String, dynamic> json) => Album(
-    shopName: json["ShopName"],
-    vendorAddress: json["VendorAddress"],
-    vendorEmail: json["VendorEmail"],
-    vendorFirstName: json["VendorFirstName"],
-    vendorId: json["VendorID"],
-    vendorLastName: json["VendorLastName"],
-    vendorPassword: json["VendorPassword"],
-    vendorPhoneNo: json["VendorPhoneNo"],
+    customerFirstName: json["CustomerFirstName"],
+    customerLastName: json["CustomerLastName"],
+    product: json["Product"],
+    productPicture: json["ProductPicture"],
+    wishlistId: json["WishlistID"],
   );
 
   Map<String, dynamic> toJson() => {
-    "ShopName": shopName,
-    "VendorAddress": vendorAddress,
-    "VendorEmail": vendorEmail,
-    "VendorFirstName": vendorFirstName,
-    "VendorID": vendorId,
-    "VendorLastName": vendorLastName,
-    "VendorPassword": vendorPassword,
-    "VendorPhoneNo": vendorPhoneNo,
+    "CustomerFirstName": customerFirstName,
+    "CustomerLastName": customerLastName,
+    "Product": product,
+    "ProductPicture": productPicture,
+    "WishlistID": wishlistId,
   };
 }
