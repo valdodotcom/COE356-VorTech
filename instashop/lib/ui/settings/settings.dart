@@ -100,6 +100,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         )),
                   ),
                   new Padding(padding: EdgeInsets.all(10)),
+/*
                   new InkWell(
                     onTap: () {
                       return debugPrint("Button pressed");
@@ -128,7 +129,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           ],
                         )),
                   ),
-                  new Padding(padding: EdgeInsets.all(10)),
+*/
+                  // new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
 
