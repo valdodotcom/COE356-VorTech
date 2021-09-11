@@ -130,7 +130,7 @@ Widget tempWidget2(String nameOfShop) {
                                           .showSnackBar(addedToCart);
                                     },
                                     child:
-                                    new Icon(Icons.shopping_cart_outlined)),
+                                    new Icon(Icons.add_shopping_cart)),
                                 Padding(padding: EdgeInsets.all(10)),
                                 ElevatedButton(
                                     onPressed: () {
