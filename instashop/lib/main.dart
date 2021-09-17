@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "InstaShop",
+      debugShowCheckedModeBanner:false,
       home: Home(),
       theme: ThemeData(
         primarySwatch: Colors.blue,

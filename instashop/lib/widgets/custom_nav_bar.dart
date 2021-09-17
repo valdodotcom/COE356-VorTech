@@ -51,7 +51,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
               label: 'Shop',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark_add),
+              icon: Icon(Icons.bookmarks),
               label: 'Wishlist',
             ),
             BottomNavigationBarItem(

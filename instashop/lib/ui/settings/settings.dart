@@ -6,6 +6,7 @@ import 'package:instashop/ui/settings/my_account.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 import '../home.dart';
+import '../order_history.dart';
 // import 'package:instashop/config/back_twice_to_close_app.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -74,12 +75,12 @@ class _SettingsPageState extends State<SettingsPage> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-                      return debugPrint("Button pressed");
-                      // var router = new MaterialPageRoute(
-                      //     builder: (BuildContext context) =>
-                      //         new ItemInCategory());
-                      //
-                      // Navigator.of(context).push(router);
+                      // return debugPrint("Button pressed");
+                      var router = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              new OrderHistory());
+
+                      Navigator.of(context).push(router);
                     },
                     child: new Container(
                         decoration: tempBoxDecoration(),
@@ -93,7 +94,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: Colors.blue,
                             ),
                             new Text(
-                              "    Orders",
+                              "    Order History",
                               style: tempStyle ()
                             ),
                           ],
