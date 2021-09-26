@@ -1,6 +1,7 @@
 // import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:instashop/config/link.dart' as link;
 import '../ui/categories.dart';
 import '../ui/sign_in_page.dart';
 
@@ -181,7 +182,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
 }
 
 Future<void> login() async {
-  await http.post(Uri.parse("http://10.74.237.27:8000/new-vendor-info"));
+  await http.post(Uri.parse("${link.server}new-vendor-info"));
 }
 
 /*
