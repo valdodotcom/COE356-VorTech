@@ -161,9 +161,17 @@ class _WishlistPageState extends State<WishlistPage> {
                                                                       .all(10)),
                                                           ElevatedButton(
                                                               onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
+
+                                                                var router = new MaterialPageRoute(
+                                                                    builder: (BuildContext context) =>
+                                                                    new WishlistPage());
+                                                                Navigator.of(context).push(router);
+
+
+                                                                setState(() {
+                                                                  futureAlbums =
+                                                                      deleteAlbum(link.server, snapshot.data!.toList()[position].wishlistId) as Future<List>;
+                                                                });
                                                               },
                                                               child: new Text(
                                                                   "Yes")),
@@ -223,6 +231,25 @@ Future<List<dynamic>> fetchAlbums(String server) async {
   }
 }
 
+Future<Album> deleteAlbum(String server, String idOfWishlist) async {
+  final http.Response response = await http.delete(
+    Uri.parse('${link.server}delete-wishlist-item/$idOfWishlist'),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON. After deleting,
+    // you'll get an empty JSON `{}` response.
+    // Don't return `null`, otherwise `snapshot.hasData`
+    // will always return false on `FutureBuilder`.
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a "200 OK response",
+    // then throw an exception.
+    throw Exception('Failed to delete album.');
+  }
+}
+
 class Album {
   Album({
     required this.customerFirstName,
@@ -255,7 +282,6 @@ class Album {
   Map<String, dynamic> toJson() => {
         "CustomerFirstName": customerFirstName,
         "CustomerLastName": customerLastName,
-        "Product": product,
         "Product": product,
         "ProductPicture": productPicture,
         "ProductPrice": productPrice,

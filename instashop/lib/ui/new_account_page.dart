@@ -1,4 +1,4 @@
-// import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:instashop/config/link.dart' as link;
@@ -16,24 +16,51 @@ class _NewAccountPageState extends State<NewAccountPage> {
   // key to access the form
   final _formKey = GlobalKey<FormState>();
 
+  // controllers for form input
+  var _firstNameController = TextEditingController();
+  var _lastNameController = TextEditingController();
+  var _emailController = TextEditingController();
+  var _phoneNumberController = TextEditingController();
+  var _addressController = TextEditingController();
+  var _passwordController = TextEditingController();
+  var _secondPasswordController = TextEditingController();
+
+
   String _userEmail = '';
   String _userName = '';
   String _password = '';
   String _confirmPassword = '';
 
   // function triggered when user presses sign up
-  void _trySubmitForm() {
+  Future<void> _trySubmitForm() async {
     final isValid = _formKey.currentState!.validate();
     if (isValid) {
+      var response = await http.post(Uri.parse("${link.server}new-customer-info"),
+          body: ({
+            "CustomerFirstName": _firstNameController.text,
+            "CustomerLastName": _lastNameController.text,
+            "CustomerEmail": _emailController.text,
+            "CustomerPhoneNo": _phoneNumberController.text,
+            "CustomerPassword": _passwordController.text,
+            "CustomerAddress": _addressController.text
+          }));
+      if (response.statusCode == 200) {
+        var router = new MaterialPageRoute(
+            builder: (BuildContext context) =>
+            new Categories());
+        Navigator.of(context).push(router);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Invalid Credentials")));
+      }
+
       print('Everything looks good!');
       print(_userEmail);
       print(_userName);
       print(_password);
       print(_confirmPassword);
 
-      var router = new MaterialPageRoute(
-          builder: (BuildContext context) => new Categories());
-      Navigator.of(context).push(router);
+
 
       /*
       Continue processing the provided information with your own logic
@@ -44,11 +71,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _emailController = TextEditingController();
-    var _passwordController = TextEditingController();
-    var _secondPasswordController = TextEditingController();
-    var _firstNameController = TextEditingController();
-    var _lastNameController = TextEditingController();
 
     return new Scaffold(
       backgroundColor: Color(0xff00eaff),
@@ -124,6 +146,44 @@ class _NewAccountPageState extends State<NewAccountPage> {
                           onChanged: (value) => _userEmail = value,
                         ),
                         new TextFormField(
+                          keyboardType: TextInputType.number,
+                          controller: _phoneNumberController,
+                          decoration: new InputDecoration(
+                            labelText: "Phone Number",
+                          ),
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'This field is required';
+                            }
+                            if (!RegExp(r'^\d{10}$').hasMatch(value)) {
+                              return 'Please enter a valid phone number';
+                            }
+                            // Return null if the entered username is valid
+                            return null;
+                          },
+                          onChanged: (value) => _userName = value,
+                        ),
+
+                        new TextFormField(
+                          controller: _addressController,
+                          decoration: new InputDecoration(
+                            labelText: "Address",
+                          ),
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'This field is required';
+                            }
+                            if (value.trim().length < 5) {
+                              return 'Address must be at least 5 characters in length';
+                            }
+                            // Return null if the entered username is valid
+                            return null;
+                          },
+                          onChanged: (value) => _userName = value,
+                        ),
+
+
+                        new TextFormField(
                           controller: _passwordController,
                           decoration: new InputDecoration(
                             labelText: "Password (6 or more characters)",
@@ -181,9 +241,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
   }
 }
 
-Future<void> login() async {
-  await http.post(Uri.parse("${link.server}new-vendor-info"));
-}
 
 /*
 Future<void> makePostRequest() async {
