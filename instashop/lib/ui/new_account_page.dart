@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:instashop/config/link.dart' as link;
 import '../ui/categories.dart';
@@ -148,6 +149,9 @@ class _NewAccountPageState extends State<NewAccountPage> {
                         new TextFormField(
                           keyboardType: TextInputType.number,
                           controller: _phoneNumberController,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                          ],
                           decoration: new InputDecoration(
                             labelText: "Phone Number",
                           ),
