@@ -164,7 +164,7 @@ class _WishlistPageState extends State<WishlistPage> {
 
                                           },
 
-                                          child: new Icon(Icons.highlight_remove_outlined)),
+                                          child: new Icon(Icons.delete_forever)),
                                     ],
                                   )
                                 ],

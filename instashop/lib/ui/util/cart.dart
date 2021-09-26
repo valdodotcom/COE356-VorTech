@@ -163,7 +163,7 @@ class _CartPageState extends State<CartPage> {
                                                           addedToWishlist);
                                                 },
                                                 child: new Icon(
-                                                    Icons.cancel_outlined)),
+                                                    Icons.delete_forever)),
                                           ],
                                         )
                                       ],

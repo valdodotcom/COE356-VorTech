@@ -1,3 +1,3 @@
-final String server = "http://10.74.24.68:8000/";
+final String server = "http://192.168.43.121:8000/";
 final defaultCategory = "Fashion & Clothing";
 final defaultNameOfShop = "Brimms Bay";
