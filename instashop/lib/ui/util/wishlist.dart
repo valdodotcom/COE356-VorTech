@@ -24,7 +24,7 @@ class _WishlistPageState extends State<WishlistPage> {
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums(link.server);
+    futureAlbums = fetchAlbums();
   }
 
   DateTime _lastQuitTime = DateTime(0);
@@ -215,7 +215,7 @@ class _WishlistPageState extends State<WishlistPage> {
   }
 }
 
-Future<List<dynamic>> fetchAlbums(String server) async {
+Future<List<dynamic>> fetchAlbums() async {
   final response =
       await http.get(Uri.parse('${link.server}view-customer-wishlist/1'));
 

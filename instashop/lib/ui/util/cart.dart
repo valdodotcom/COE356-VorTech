@@ -137,7 +137,11 @@ class _CartPageState extends State<CartPage> {
                                                                             10)),
                                                             ElevatedButton(
                                                                 onPressed:
-                                                                    () {},
+                                                                    () {
+                                                                      Navigator.of(
+                                                                          context)
+                                                                          .pop();
+                                                                    },
                                                                 child: new Text(
                                                                     "Enter"))
                                                           ],
@@ -147,6 +151,56 @@ class _CartPageState extends State<CartPage> {
                                                 child: new Icon(Icons.add)),
                                             Padding(
                                                 padding: EdgeInsets.all(10)),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (BuildContext context) {
+                                                        return new AlertDialog(
+                                                          title: new Text(
+                                                              "Remove from cart"),
+                                                          content: new Text(
+                                                              "Are you sure you want to remove this item from your cart? "
+                                                                  "This cannot be undone."),
+                                                          actions: <Widget>[
+                                                            Padding(
+                                                                padding:
+                                                                EdgeInsets
+                                                                    .all(10)),
+                                                            ElevatedButton(
+                                                                onPressed: () {
+
+                                                                  var router = new MaterialPageRoute(
+                                                                      builder: (BuildContext context) =>
+                                                                      new CartPage());
+                                                                  Navigator.of(context).push(router);
+
+
+                                                                  setState(() {
+                                                                    futureAlbums =
+                                                                    deleteAlbum(link.server, snapshot.data!.toList()[position].cartId) as Future<List>;
+                                                                  });
+
+                                                                },
+                                                                child: new Text(
+                                                                    "Yes")),
+                                                            TextButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                      context)
+                                                                      .pop();
+                                                                },
+                                                                child: new Text(
+                                                                    "Cancel"))
+                                                          ],
+                                                        );
+                                                      });
+                                                },
+                                                child: new Icon(
+                                                    Icons.delete_forever)),
+
+/*
                                             ElevatedButton(
                                                 onPressed: () {
                                                   final addedToWishlist =
@@ -164,6 +218,7 @@ class _CartPageState extends State<CartPage> {
                                                 },
                                                 child: new Icon(
                                                     Icons.delete_forever)),
+*/
                                           ],
                                         )
                                       ],
@@ -262,6 +317,25 @@ Future<List<dynamic>> fetchAlbums() async {
     // If the server did not return a 200 OK response,
     // then throw an exception.
     throw Exception('Failed to load album');
+  }
+}
+
+Future<Album> deleteAlbum(String server, String idOfCart) async {
+  final http.Response response = await http.delete(
+    Uri.parse('${link.server}delete-from-cart/$idOfCart'),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON. After deleting,
+    // you'll get an empty JSON `{}` response.
+    // Don't return `null`, otherwise `snapshot.hasData`
+    // will always return false on `FutureBuilder`.
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a "200 OK response",
+    // then throw an exception.
+    throw Exception('Failed to delete album.');
   }
 }
 
