@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:instashop/config/link.dart' as link;
 import 'package:flutter/material.dart';
+import 'package:instashop/ui/settings/settings.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 
@@ -29,6 +30,14 @@ class _OrderHistoryState extends State<OrderHistory> {
   Widget build(BuildContext context) {
       return new Scaffold(
           appBar: new AppBar(
+            leading: new IconButton(
+                onPressed: () {
+                  var router = new MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                      new SettingsPage());
+                  Navigator.of(context).push(router);
+                },
+                icon: new Icon(Icons.arrow_back)),
             backgroundColor: Color(0xff00eaff),
             title: new Text("Order History"),
           ),

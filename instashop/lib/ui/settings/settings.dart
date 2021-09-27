@@ -1,12 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:instashop/ui/settings/info.dart';
 import 'package:instashop/ui/settings/my_account.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 import '../home.dart';
-import '../order_history.dart';
+import 'order_history.dart';
 // import 'package:instashop/config/back_twice_to_close_app.dart';
 
 class SettingsPage extends StatefulWidget {
