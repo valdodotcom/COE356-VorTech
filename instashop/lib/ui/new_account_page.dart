@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:instashop/config/link.dart' as link;
+// import 'package:instashop/config/link.dart' as link;
 import '../ui/categories.dart';
 import '../ui/sign_in_page.dart';
 
@@ -36,7 +36,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
   Future<void> _trySubmitForm() async {
     final isValid = _formKey.currentState!.validate();
     if (isValid) {
-      var response = await http.post(Uri.parse("${link.server}new-customer-info"),
+      var response = await http.post(Uri.parse("https://retoolapi.dev/Pw7xES/new-customer-info"),
           body: ({
             "CustomerFirstName": _firstNameController.text,
             "CustomerLastName": _lastNameController.text,
@@ -45,21 +45,26 @@ class _NewAccountPageState extends State<NewAccountPage> {
             "CustomerPassword": _passwordController.text,
             "CustomerAddress": _addressController.text
           }));
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         var router = new MaterialPageRoute(
             builder: (BuildContext context) =>
             new Categories());
         Navigator.of(context).push(router);
+
+        print('Everything looks good!');
+        print(_userEmail);
+        print(_userName);
+        print(_password);
+        print(_confirmPassword);
+
+
       } else {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text("Invalid Credentials")));
+
+        print(response.body);
       }
 
-      print('Everything looks good!');
-      print(_userEmail);
-      print(_userName);
-      print(_password);
-      print(_confirmPassword);
 
 
 
