@@ -22,7 +22,6 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   late Future<List<dynamic>> futureAlbums;
   Dio dio = new Dio();
-  var _productID = "1";
   var _customerID = "1";
 
   @override
@@ -31,8 +30,8 @@ class _ProductPageState extends State<ProductPage> {
     // futureAlbums = fetchAlbums(link.server, link.defaultNameOfShop);
   }
 
-  Future<void> _addToWishlist() async {
-    dynamic data = {"ProductID": _productID, "CustomerID": _customerID};
+  Future<void> _addToWishlist(String productId) async {
+    dynamic data = {"ProductID": "$productId", "CustomerID": _customerID};
 
     var response = await dio.post("${link.server}add-to-wishlist",
         data: data, options: Options());
@@ -58,8 +57,8 @@ class _ProductPageState extends State<ProductPage> {
     }
   }
 
-  Future<void> _addToCart() async {
-    dynamic data = {"ProductID": _productID, "CustomerID": _customerID};
+  Future<void> _addToCart(String productId) async {
+    dynamic data = {"ProductID": "$productId", "CustomerID": _customerID};
 
     var response = await dio.post("${link.server}add-to-cart",
         data: data, options: Options());
@@ -88,26 +87,25 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("${widget.name}"),
-          backgroundColor: Color(0xff00eaff),
-          actions: <Widget>[
-            new IconButton(
-                onPressed: () {
-                  var router = new MaterialPageRoute(
-                      builder: (BuildContext context) => new CartPage());
-                  Navigator.of(context).push(router);
+      appBar: new AppBar(
+        title: new Text("${widget.name}"),
+        backgroundColor: Color(0xff00eaff),
+        actions: <Widget>[
+          new IconButton(
+              onPressed: () {
+                var router = new MaterialPageRoute(
+                    builder: (BuildContext context) => new CartPage());
+                Navigator.of(context).push(router);
 
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-                },
-                icon: new Icon(Icons.shopping_cart_outlined))
-          ],
-        ),
-        body: new Center(
-          child: tempWidget2("${widget.name}"),
-        ),
-        bottomNavigationBar: CustomNavBar(index: 0),
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              },
+              icon: new Icon(Icons.shopping_cart_outlined))
+        ],
+      ),
+      body: new Center(
+        child: tempWidget2("${widget.name}"),
+      ),
+      bottomNavigationBar: CustomNavBar(index: 0),
     );
     // ),
   }
@@ -164,7 +162,7 @@ class _ProductPageState extends State<ProductPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: new Text(
-                              '¢ ${snapshot.data!.toList()[position].productPrice}',
+                              '¢ ${snapshot.data!.toList()[position].productPrice.toStringAsFixed(2)}',
                               style: new TextStyle(
                                   fontSize: 20, color: Colors.white),
                             ),
@@ -174,11 +172,23 @@ class _ProductPageState extends State<ProductPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               ElevatedButton(
-                                  onPressed: _addToCart,
+                                  onPressed: () {
+                                    setState(() {
+                                      futureAlbums = _addToCart(
+                                              "${snapshot.data!.toList()[position].productId}")
+                                          as Future<List>;
+                                    });
+                                  },
                                   child: new Icon(Icons.add_shopping_cart)),
                               Padding(padding: EdgeInsets.all(10)),
                               ElevatedButton(
-                                  onPressed: _addToWishlist,
+                                  onPressed: () {
+                                    setState(() {
+                                      futureAlbums = _addToWishlist(
+                                              "${snapshot.data!.toList()[position].productId}")
+                                          as Future<List>;
+                                    });
+                                  },
                                   child: new Icon(Icons.bookmark_add_outlined)),
                             ],
                           )
@@ -222,6 +232,7 @@ class Album {
     required this.product,
     required this.productCategory,
     required this.productDescription,
+    required this.productId,
     required this.productPicture,
     required this.productPrice,
     required this.shopName,
@@ -231,6 +242,7 @@ class Album {
   final String product;
   final String productCategory;
   final String productDescription;
+  final int productId;
   final String productPicture;
   final double productPrice;
   final String shopName;
@@ -240,6 +252,7 @@ class Album {
         product: json["Product"],
         productCategory: json["ProductCategory"],
         productDescription: json["ProductDescription"],
+        productId: json["ProductID"],
         productPicture: json["ProductPicture"],
         productPrice: json["ProductPrice"],
         shopName: json["ShopName"],
@@ -250,6 +263,7 @@ class Album {
         "Product": product,
         "ProductCategory": productCategory,
         "ProductDescription": productDescription,
+        "ProductID": productId,
         "ProductPicture": productPicture,
         "ProductPrice": productPrice,
         "ShopName": shopName,

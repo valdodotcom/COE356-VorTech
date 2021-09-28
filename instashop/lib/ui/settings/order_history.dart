@@ -90,7 +90,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: new Text(
-                                      '¢ ${snapshot.data!.toList()[position].productPrice}',
+                                      '¢ ${snapshot.data!.toList()[position].productPrice.toStringAsFixed(2)}',
                                       style: new TextStyle(
                                           fontSize: 20, color: Colors.white),
                                     ),
