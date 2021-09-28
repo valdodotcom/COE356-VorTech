@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:instashop/ui/util/cart.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import '../config/link.dart' as link;
+import 'package:dio/dio.dart';
 
 
 class ProductPage extends StatefulWidget {
@@ -19,12 +20,44 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   late Future<List<dynamic>> futureAlbums;
+  Dio dio = new Dio();
+  var _productID = "1";
+  var _customerID = "1";
 
   @override
   void initState() {
     super.initState();
     // futureAlbums = fetchAlbums(link.server, link.defaultNameOfShop);
   }
+
+
+  Future<void> _addToWishlist() async {
+
+    dynamic data = {
+    "ProductID" : _productID,
+    "CustomerID" : _customerID
+    };
+
+    var response = await dio.post("${link.server}add-to-wishlist",
+        data: data, options: Options());
+
+    if (response.statusCode == 200) {
+      final addedToWishlist = SnackBar(
+        content: new Text("Item added to wishlist!"),
+        action: SnackBarAction(
+          label: "Undo",
+          onPressed: () {return debugPrint("Undo");},
+        ),
+      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(addedToWishlist);
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Unable to add to wishlist")));
+    }
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,123 +82,115 @@ class _ProductPageState extends State<ProductPage> {
         ));
     // ),
   }
+
+  Widget tempWidget2(String nameOfShop) {
+    var futureAlbums = fetchAlbums(link.server, nameOfShop);
+    return new FutureBuilder<List<dynamic>>(
+      future: futureAlbums,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+
+          return GridView.builder(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 400,
+                  childAspectRatio: 2 / 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 20),
+              itemCount: snapshot.data!.toList().length,
+              padding: EdgeInsets.all(15),
+              itemBuilder: (BuildContext ctx, int position) {
+                return Container(
+                  alignment: Alignment.center,
+                  child: Stack(
+                    children: <Widget>[
+                      new Center( child: ClipRRect(child: Image.network('${snapshot.data!.toList()[position].productPicture}',
+                          fit: BoxFit.fill),
+                        borderRadius: BorderRadius.circular(8.0), ),
+                      ),
+
+                      new Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          new Container(
+                            padding: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              color: Colors.black54,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              '${snapshot.data!.toList()[position].product}',
+                              style: new TextStyle(
+                                  fontSize: 20, color: Colors.white),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          new Container(
+                            padding: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              color: Colors.black54,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: new Text(
+                              '¢ ${snapshot.data!.toList()[position].productPrice}',
+                              style: new TextStyle(
+                                  fontSize: 20, color: Colors.white),
+                            ),
+                          ),
+                          new Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ElevatedButton(
+                                  onPressed: () {
+                                    final addedToCart = SnackBar(
+                                      content: new Text("Item added to cart!"),
+                                      action: SnackBarAction(
+                                        label: "View",
+                                        onPressed: () {
+                                          var router = new MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                              new CartPage());
+                                          Navigator.of(context).push(router);
+
+                                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                        },
+                                      ),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(addedToCart);
+                                  },
+                                  child:
+                                  new Icon(Icons.add_shopping_cart)),
+                              Padding(padding: EdgeInsets.all(10)),
+                              ElevatedButton(
+                                  onPressed: _addToWishlist,
+                                  child: new Icon(Icons.bookmark_add_outlined)),
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(15),
+                  decoration: tempBoxDecoration(),
+
+                );
+              });
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+        // By default, show a loading spinner.
+        return const CircularProgressIndicator();
+      },
+    );
+  }
+
+
 }
 
-Widget tempWidget2(String nameOfShop) {
-  var futureAlbums = fetchAlbums(link.server, nameOfShop);
-      return new FutureBuilder<List<dynamic>>(
-        future: futureAlbums,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-
-            return GridView.builder(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 400,
-                    childAspectRatio: 2 / 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 20),
-                itemCount: snapshot.data!.toList().length,
-                padding: EdgeInsets.all(15),
-                itemBuilder: (BuildContext ctx, int position) {
-                  return Container(
-                    alignment: Alignment.center,
-                    child: Stack(
-                      children: <Widget>[
-                        new Center( child: ClipRRect(child: Image.network('${snapshot.data!.toList()[position].productPicture}',
-                            fit: BoxFit.fill),
-                       borderRadius: BorderRadius.circular(8.0), ),
-                        ),
-
-                        new Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            new Container(
-                              padding: EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                color: Colors.black54,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                '${snapshot.data!.toList()[position].product}',
-                                style: new TextStyle(
-                                    fontSize: 20, color: Colors.white),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            new Container(
-                              padding: EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                color: Colors.black54,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: new Text(
-                                '¢ ${snapshot.data!.toList()[position].productPrice}',
-                                style: new TextStyle(
-                                    fontSize: 20, color: Colors.white),
-                              ),
-                            ),
-                            new Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                ElevatedButton(
-                                    onPressed: () {
-                                      final addedToCart = SnackBar(
-                                        content: new Text("Item added to cart!"),
-                                        action: SnackBarAction(
-                                          label: "View",
-                                          onPressed: () {
-                                            var router = new MaterialPageRoute(
-                                                builder: (BuildContext context) =>
-                                                new CartPage());
-                                            Navigator.of(context).push(router);
-
-                                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                          },
-                                        ),
-                                      );
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(addedToCart);
-                                    },
-                                    child:
-                                    new Icon(Icons.add_shopping_cart)),
-                                Padding(padding: EdgeInsets.all(10)),
-                                ElevatedButton(
-                                    onPressed: () {
-                                      final addedToWishlist = SnackBar(
-                                        content: new Text("Item added to wishlist!"),
-                                        action: SnackBarAction(
-                                          label: "Undo",
-                                          onPressed: () {},
-                                        ),
-                                      );
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(addedToWishlist);
-                                    },
-
-                                    child: new Icon(Icons.bookmark_add_outlined)),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(15),
-                    decoration: tempBoxDecoration(),
-
-                  );
-                });
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          }
-          // By default, show a loading spinner.
-          return const CircularProgressIndicator();
-        },
-      );
-}
 
 Future<List<dynamic>> fetchAlbums(String server, String nameOfShop) async {
   final response = await http
