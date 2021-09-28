@@ -32,7 +32,7 @@ class _SignInPageState extends State<SignInPage> {
     if (isValid) {
       var response = await dio.post("${link.server}customer-login",
           data: data, options: Options());
-      if (response.statusCode == 200) {
+      if (response.data != null) {
         var router = new MaterialPageRoute(
             builder: (BuildContext context) => new Categories());
         Navigator.of(context).push(router);
@@ -40,7 +40,6 @@ class _SignInPageState extends State<SignInPage> {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text("Invalid Credentials")));
       }
-
       print(_userEmail);
       print(_password);
       print(response.data);
