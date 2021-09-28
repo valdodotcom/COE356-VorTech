@@ -2,7 +2,6 @@ import '../ui/new_account_page.dart';
 import 'package:flutter/material.dart';
 import '../ui/categories.dart';
 import 'package:instashop/config/link.dart' as link;
-// import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
 class SignInPage extends StatefulWidget {
@@ -15,8 +14,8 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   Dio dio = new Dio();
 
-  var _emailController = TextEditingController();
-  var _passwordController = TextEditingController();
+  var _emailController = TextEditingController(text: "valdoato@gmail.com");
+  var _passwordController = TextEditingController(text: "insertrandomshithere");
   final _formKey = GlobalKey<FormState>();
 
   String _userEmail = '';

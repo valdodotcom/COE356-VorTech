@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
-// import 'package:instashop/config/link.dart' as link;
+import 'package:instashop/config/link.dart' as link;
+// import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import '../ui/categories.dart';
 import '../ui/sign_in_page.dart';
 
@@ -14,15 +15,17 @@ class NewAccountPage extends StatefulWidget {
 }
 
 class _NewAccountPageState extends State<NewAccountPage> {
+  Dio dio = new Dio();
+
   // key to access the form
   final _formKey = GlobalKey<FormState>();
 
   // controllers for form input
-  var _firstNameController = TextEditingController();
-  var _lastNameController = TextEditingController();
-  var _emailController = TextEditingController();
-  var _phoneNumberController = TextEditingController();
-  var _addressController = TextEditingController();
+  var _firstNameController = TextEditingController(text: "Test");
+  var _lastNameController = TextEditingController(text: "Subject");
+  var _emailController = TextEditingController(text: "test@subject.com");
+  var _phoneNumberController = TextEditingController(text: "0123456789");
+  var _addressController = TextEditingController(text: "Accra");
   var _passwordController = TextEditingController();
   var _secondPasswordController = TextEditingController();
 
@@ -35,20 +38,23 @@ class _NewAccountPageState extends State<NewAccountPage> {
   // function triggered when user presses sign up
   Future<void> _trySubmitForm() async {
     final isValid = _formKey.currentState!.validate();
+
+    dynamic data = {
+      "CustomerFirstName": _firstNameController.text,
+      "CustomerLastName": _lastNameController.text,
+      "CustomerEmail": _emailController.text,
+      "CustomerPhoneNo": _phoneNumberController.text,
+      "CustomerPassword": _passwordController.text,
+      "CustomerAddress": _addressController.text
+    };
+
     if (isValid) {
-      var response = await http.post(Uri.parse("https://retoolapi.dev/Pw7xES/new-customer-info"),
-          body: ({
-            "CustomerFirstName": _firstNameController.text,
-            "CustomerLastName": _lastNameController.text,
-            "CustomerEmail": _emailController.text,
-            "CustomerPhoneNo": _phoneNumberController.text,
-            "CustomerPassword": _passwordController.text,
-            "CustomerAddress": _addressController.text
-          }));
-      if (response.statusCode == 201) {
+      var response = await dio.post("${link.server}new-customer-info",
+          data: data, options: Options());
+
+      if (response.statusCode == 200) {
         var router = new MaterialPageRoute(
-            builder: (BuildContext context) =>
-            new Categories());
+            builder: (BuildContext context) => new Categories());
         Navigator.of(context).push(router);
 
         print('Everything looks good!');
@@ -56,17 +62,13 @@ class _NewAccountPageState extends State<NewAccountPage> {
         print(_userName);
         print(_password);
         print(_confirmPassword);
-
-
       } else {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Invalid Credentials")));
+            .showSnackBar(SnackBar(content: Text("An Error Occurred")));
 
-        print(response.body);
       }
 
-
-
+      print(response.data);
 
       /*
       Continue processing the provided information with your own logic
@@ -77,7 +79,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return new Scaffold(
       backgroundColor: Color(0xff00eaff),
       body: new ListView(
@@ -172,7 +173,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
                           },
                           onChanged: (value) => _userName = value,
                         ),
-
                         new TextFormField(
                           controller: _addressController,
                           decoration: new InputDecoration(
@@ -190,8 +190,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
                           },
                           onChanged: (value) => _userName = value,
                         ),
-
-
                         new TextFormField(
                           controller: _passwordController,
                           decoration: new InputDecoration(
@@ -249,7 +247,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
     );
   }
 }
-
 
 /*
 Future<void> makePostRequest() async {
