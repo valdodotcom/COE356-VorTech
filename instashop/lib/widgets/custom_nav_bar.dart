@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instashop/ui/settings/settings.dart';
-import 'package:instashop/ui/categories.dart';
+import 'package:instashop/ui/shops/categories.dart';
 import 'package:instashop/ui/util/wishlist.dart';
 
 class CustomNavBar extends StatefulWidget {
@@ -51,7 +51,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
               label: 'Shop',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark_add),
+              icon: Icon(Icons.bookmarks),
               label: 'Wishlist',
             ),
             BottomNavigationBarItem(

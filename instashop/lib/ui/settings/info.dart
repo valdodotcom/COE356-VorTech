@@ -71,7 +71,7 @@ class _InfoPageState extends State<InfoPage> {
                   new Text(
                     "\n"
                         "\"Why shouldn't I just stick to the norm?\" you may ask?\n\n"
-                        "Well, for starters, the stores are organised by category, making it"
+                        "Well, for starters, the stores are organised by category, making it "
                         "way easier to find a particular type of product you need.\n\n"
                         "Also, we have a wishlist feature which allows you to save stuff that "
                         "you are interested in but aren't ready to buy at the moment.\n\n"
