@@ -238,14 +238,29 @@ class _CartPageState extends State<CartPage> {
                                   showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
+                                        double _total = 0;
+                                        for (int i = 0; i < snapshot.data!.toList().length; i++) {
+                                          //   // print(snapshot.data!.toList().length);
+                                          _total += snapshot.data!.toList()[i].productPrice;
+                                          // _total ++;
+                                          print(_total);
+                                        }
                                         return new AlertDialog(
                                           title: new Text("Checkout"),
-                                          content: new Text("Total: ¢"),
+                                          content: new Text("Total: ¢$_total"),
                                           actions: <Widget>[
                                             Padding(
                                                 padding: EdgeInsets.all(10)),
                                             ElevatedButton(
                                                 onPressed: () {
+
+                                                 /* for (int i = 0; i <= snapshot.data!.toList().length; i++) {
+                                                  //   // print(snapshot.data!.toList().length);
+                                                  // _total = snapshot.data!.toList()[i].productPrice;
+                                                  print(_total);
+                                                  _total++;
+                                                  }*/
+
                                                   Navigator.of(context).pop();
                                                 },
                                                 child: new Text("Accept")),
