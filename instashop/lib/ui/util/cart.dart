@@ -18,7 +18,7 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums();
+    futureAlbums = fetchAlbums("1");
   }
 
   @override
@@ -172,15 +172,15 @@ class _CartPageState extends State<CartPage> {
                                                                 onPressed: () {
 
                                                                   var router = new MaterialPageRoute(
-                                                                      builder: (BuildContext context) =>
-                                                                      new CartPage());
+                                                                      builder: (BuildContext context) => new CartPage());
                                                                   Navigator.of(context).push(router);
+
 
 
                                                                   setState(() {
                                                                     futureAlbums =
-                                                                    deleteAlbum(link.server, snapshot.data!.toList()[position].cartId) as Future<List>;
-                                                                  });
+                                                                    deleteAlbum(snapshot.data!.toList()[position].cartId) as Future<List>;})
+                                                                  ;
 
                                                                 },
                                                                 child: new Text(
@@ -304,9 +304,9 @@ class _CartPageState extends State<CartPage> {
   }
 }
 
-Future<List<dynamic>> fetchAlbums() async {
+Future<List<dynamic>> fetchAlbums(String customerId) async {
   final response =
-      await http.get(Uri.parse('${link.server}view-customer-cart/1'));
+      await http.get(Uri.parse('${link.server}view-customer-cart/$customerId'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -320,7 +320,7 @@ Future<List<dynamic>> fetchAlbums() async {
   }
 }
 
-Future<Album> deleteAlbum(String server, String idOfCart) async {
+Future<Album> deleteAlbum(String idOfCart) async {
   final http.Response response = await http.delete(
     Uri.parse('${link.server}delete-from-cart/$idOfCart'),
   );

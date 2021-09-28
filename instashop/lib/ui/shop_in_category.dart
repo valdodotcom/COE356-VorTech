@@ -44,7 +44,7 @@ class _ShopInCategoryState extends State<ShopInCategory> {
 
 
 Widget tempWidget(String categoryName) {
-  var futureAlbums = fetchAlbums(link.server, categoryName);
+  var futureAlbums = fetchAlbums(categoryName);
   return new FutureBuilder<List<dynamic>>(
     future: futureAlbums,
     builder: (context, snapshot) {
@@ -121,7 +121,7 @@ Widget tempWidget(String categoryName) {
 }
 
 
-Future<List<dynamic>> fetchAlbums(String server, String categoryName) async {
+Future<List<dynamic>> fetchAlbums(String categoryName) async {
   final response = await http.get(Uri.parse(
       '${link.server}get-shops/category/$categoryName'));
 

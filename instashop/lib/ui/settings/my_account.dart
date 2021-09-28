@@ -18,7 +18,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum(link.server);
+    futureAlbum = fetchAlbum("1");
   }
 
   Widget build(BuildContext context) {
@@ -98,9 +98,9 @@ class _MyAccountPageState extends State<MyAccountPage> {
   }
 }
 
-Future<Album> fetchAlbum(String server) async {
+Future<Album> fetchAlbum(String customerId) async {
   final response = await http
-      .get(Uri.parse('${link.server}get-customer-info/1'));
+      .get(Uri.parse('${link.server}get-customer-info/$customerId'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

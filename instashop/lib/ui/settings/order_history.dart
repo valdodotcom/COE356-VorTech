@@ -22,7 +22,7 @@ class _OrderHistoryState extends State<OrderHistory> {
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums(link.server);
+    futureAlbums = fetchAlbums("1");
   }
 
 
@@ -196,9 +196,9 @@ class _OrderHistoryState extends State<OrderHistory> {
   }
 }
 
-Future<List<dynamic>> fetchAlbums(String server) async {
+Future<List<dynamic>> fetchAlbums(String customerId) async {
   final response = await http
-      .get(Uri.parse('${link.server}view-customer-history/1'));
+      .get(Uri.parse('${link.server}view-customer-history/$customerId'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

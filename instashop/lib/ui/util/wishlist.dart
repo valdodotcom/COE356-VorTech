@@ -24,7 +24,7 @@ class _WishlistPageState extends State<WishlistPage> {
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums();
+    futureAlbums = fetchAlbums("1");
   }
 
   DateTime _lastQuitTime = DateTime(0);
@@ -163,14 +163,17 @@ class _WishlistPageState extends State<WishlistPage> {
                                                               onPressed: () {
 
                                                                 var router = new MaterialPageRoute(
-                                                                    builder: (BuildContext context) =>
-                                                                    new WishlistPage());
+                                                                    builder: (BuildContext context) => new WishlistPage());
                                                                 Navigator.of(context).push(router);
+
+                                                                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+
 
 
                                                                 setState(() {
                                                                   futureAlbums =
-                                                                      deleteAlbum(link.server, snapshot.data!.toList()[position].wishlistId) as Future<List>;
+                                                                      deleteAlbum(snapshot.data!.toList()[position].wishlistId) as Future<List>;
                                                                 });
                                                               },
                                                               child: new Text(
@@ -215,9 +218,9 @@ class _WishlistPageState extends State<WishlistPage> {
   }
 }
 
-Future<List<dynamic>> fetchAlbums() async {
+Future<List<dynamic>> fetchAlbums(String customerId) async {
   final response =
-      await http.get(Uri.parse('${link.server}view-customer-wishlist/1'));
+      await http.get(Uri.parse('${link.server}view-customer-wishlist/$customerId'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -231,7 +234,7 @@ Future<List<dynamic>> fetchAlbums() async {
   }
 }
 
-Future<Album> deleteAlbum(String server, String idOfWishlist) async {
+Future<Album> deleteAlbum(String idOfWishlist) async {
   final http.Response response = await http.delete(
     Uri.parse('${link.server}delete-wishlist-item/$idOfWishlist'),
   );
