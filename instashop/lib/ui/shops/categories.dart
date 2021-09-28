@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:instashop/ui/shop_in_category.dart';
+import 'package:instashop/ui/shops/shop_in_category.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
-import 'util/cart.dart';
+import '../util/cart.dart';
 
 class Categories extends StatefulWidget {
   const Categories({Key? key}) : super(key: key);

@@ -9,7 +9,7 @@ import 'package:instashop/ui/util/wishlist_item.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 
-import '../product_page.dart';
+import '../shops/product_page.dart';
 
 class WishlistPage extends StatefulWidget {
   const WishlistPage({Key? key}) : super(key: key);

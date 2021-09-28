@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:instashop/widgets/box_decoration.dart';
-import '../config/link.dart' as link;
+import '../../config/link.dart' as link;
 import 'package:flutter/material.dart';
-import 'package:instashop/ui/product_page.dart';
+import 'package:instashop/ui/shops/product_page.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 
 class ShopInCategory extends StatefulWidget {

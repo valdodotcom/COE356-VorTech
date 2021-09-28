@@ -7,7 +7,7 @@ import 'package:instashop/ui/util/cart.dart';
 import 'package:instashop/ui/util/wishlist.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
-import '../config/link.dart' as link;
+import '../../config/link.dart' as link;
 import 'package:dio/dio.dart';
 
 class ProductPage extends StatefulWidget {

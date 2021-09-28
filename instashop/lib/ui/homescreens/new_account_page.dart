@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:instashop/config/link.dart' as link;
 // import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
-import '../ui/categories.dart';
-import '../ui/sign_in_page.dart';
+import '../shops/categories.dart';
+import 'sign_in_page.dart';
 
 class NewAccountPage extends StatefulWidget {
   const NewAccountPage({Key? key}) : super(key: key);

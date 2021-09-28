@@ -1,6 +1,6 @@
-import '../ui/new_account_page.dart';
+import 'new_account_page.dart';
 import 'package:flutter/material.dart';
-import '../ui/categories.dart';
+import '../shops/categories.dart';
 import 'package:instashop/config/link.dart' as link;
 import 'package:dio/dio.dart';
 

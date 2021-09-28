@@ -4,7 +4,7 @@ import 'package:instashop/ui/settings/info.dart';
 import 'package:instashop/ui/settings/my_account.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
-import '../home.dart';
+import '../homescreens/home.dart';
 import 'order_history.dart';
 // import 'package:instashop/config/back_twice_to_close_app.dart';
 
