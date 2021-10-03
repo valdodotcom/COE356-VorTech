@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:instashop/config/link.dart' as link;
+import 'package:instashop/ui/shops/categories.dart';
 import 'package:instashop/widgets/box_decoration.dart';
+import 'package:instashop/widgets/custom_nav_bar.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 
 class CartPage extends StatefulWidget {
@@ -14,11 +17,40 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   late Future<List<dynamic>> futureAlbums;
+  Dio dio = new Dio();
+  var _customerID = "1";
 
   @override
   void initState() {
     super.initState();
     futureAlbums = fetchAlbums("1");
+  }
+
+  Future<void> _addToOrderHistory(String productId) async {
+    dynamic data = {"ProductID": "$productId", "CustomerID": _customerID};
+
+    var response = await dio.post("${link.server}new-order-history",
+        data: data, options: Options());
+
+    if (response.statusCode == 200) {
+      new AlertDialog(
+        title: new Text("Success!"),
+        content: new Text("Your order has been placed successfully "
+            "and you will be contacted by the respective vendor(s) shortly."),
+        actions: <Widget>[
+          ElevatedButton(
+              onPressed: () {
+                var router = new MaterialPageRoute(
+                    builder: (BuildContext context) => new Categories());
+                Navigator.of(context).push(router);
+              },
+              child: new Text("Continue shopping"))
+        ],
+      );
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Unable to add to wishlist")));
+    }
   }
 
   @override
@@ -136,12 +168,11 @@ class _CartPageState extends State<CartPage> {
                                                                         .all(
                                                                             10)),
                                                             ElevatedButton(
-                                                                onPressed:
-                                                                    () {
-                                                                      Navigator.of(
+                                                                onPressed: () {
+                                                                  Navigator.of(
                                                                           context)
-                                                                          .pop();
-                                                                    },
+                                                                      .pop();
+                                                                },
                                                                 child: new Text(
                                                                     "Enter"))
                                                           ],
@@ -155,40 +186,45 @@ class _CartPageState extends State<CartPage> {
                                                 onPressed: () {
                                                   showDialog(
                                                       context: context,
-                                                      builder:
-                                                          (BuildContext context) {
+                                                      builder: (BuildContext
+                                                          context) {
                                                         return new AlertDialog(
                                                           title: new Text(
                                                               "Remove from cart"),
                                                           content: new Text(
                                                               "Are you sure you want to remove this item from your cart? "
-                                                                  "This cannot be undone."),
+                                                              "This cannot be undone."),
                                                           actions: <Widget>[
                                                             Padding(
                                                                 padding:
-                                                                EdgeInsets
-                                                                    .all(10)),
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            10)),
                                                             ElevatedButton(
                                                                 onPressed: () {
-
                                                                   var router = new MaterialPageRoute(
-                                                                      builder: (BuildContext context) => new CartPage());
-                                                                  Navigator.of(context).push(router);
-
-
+                                                                      builder: (BuildContext
+                                                                              context) =>
+                                                                          new CartPage());
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .push(
+                                                                          router);
 
                                                                   setState(() {
-                                                                    futureAlbums =
-                                                                    deleteAlbum(snapshot.data!.toList()[position].cartId) as Future<List>;})
-                                                                  ;
-
+                                                                    futureAlbums = deleteAlbum(snapshot
+                                                                        .data!
+                                                                        .toList()[
+                                                                            position]
+                                                                        .cartId) as Future<List>;
+                                                                  });
                                                                 },
                                                                 child: new Text(
                                                                     "Yes")),
                                                             TextButton(
                                                                 onPressed: () {
                                                                   Navigator.of(
-                                                                      context)
+                                                                          context)
                                                                       .pop();
                                                                 },
                                                                 child: new Text(
@@ -199,26 +235,6 @@ class _CartPageState extends State<CartPage> {
                                                 },
                                                 child: new Icon(
                                                     Icons.delete_forever)),
-
-/*
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  final addedToWishlist =
-                                                      SnackBar(
-                                                    content: new Text(
-                                                        "Removed from cart"),
-                                                    action: SnackBarAction(
-                                                      label: "Undo",
-                                                      onPressed: () {},
-                                                    ),
-                                                  );
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                          addedToWishlist);
-                                                },
-                                                child: new Icon(
-                                                    Icons.delete_forever)),
-*/
                                           ],
                                         )
                                       ],
@@ -239,11 +255,14 @@ class _CartPageState extends State<CartPage> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         double _total = 0;
-                                        for (int i = 0; i < snapshot.data!.toList().length; i++) {
-                                          //   // print(snapshot.data!.toList().length);
-                                          _total += snapshot.data!.toList()[i].productPrice;
-                                          // _total ++;
+                                        for (int i = 0;
+                                            i < snapshot.data!.toList().length;
+                                            i++) {
+                                          _total += snapshot.data!
+                                              .toList()[i]
+                                              .productPrice;
                                           print(_total);
+                                          print("${snapshot.data!.toList()[i].productId}");
                                         }
                                         return new AlertDialog(
                                           title: new Text("Checkout"),
@@ -254,14 +273,17 @@ class _CartPageState extends State<CartPage> {
                                             ElevatedButton(
                                                 onPressed: () {
 
-                                                 /* for (int i = 0; i <= snapshot.data!.toList().length; i++) {
-                                                  //   // print(snapshot.data!.toList().length);
-                                                  // _total = snapshot.data!.toList()[i].productPrice;
-                                                  print(_total);
-                                                  _total++;
-                                                  }*/
-
-                                                  Navigator.of(context).pop();
+                                                    for (int i = 0;
+                                                        i <
+                                                            snapshot.data!
+                                                                .toList()
+                                                                .length;
+                                                        i++) {
+                                                    futureAlbums =
+                                                        _addToOrderHistory(
+                                                                "${snapshot.data!.toList()[i].productId}")
+                                                            as Future<List>;
+                                                  }
                                                 },
                                                 child: new Text("Accept")),
                                             TextButton(
@@ -315,6 +337,7 @@ class _CartPageState extends State<CartPage> {
           },
         ),
       ),
+      bottomNavigationBar: CustomNavBar(index: 0),
     );
   }
 }
@@ -358,24 +381,30 @@ class Album {
   Album({
     required this.cartId,
     required this.customerFirstName,
+    required this.customerId,
     required this.customerLastName,
     required this.product,
+    required this.productId,
     required this.productPicture,
     required this.productPrice,
   });
 
   final String cartId;
   final String customerFirstName;
+  final int customerId;
   final String customerLastName;
   final String product;
+  final int productId;
   final String productPicture;
   final double productPrice;
 
   factory Album.fromJson(Map<String, dynamic> json) => Album(
         cartId: json["CartID"],
         customerFirstName: json["CustomerFirstName"],
+        customerId: json["CustomerID"],
         customerLastName: json["CustomerLastName"],
         product: json["Product"],
+        productId: json["ProductID"],
         productPicture: json["ProductPicture"],
         productPrice: json["ProductPrice"],
       );
@@ -383,8 +412,10 @@ class Album {
   Map<String, dynamic> toJson() => {
         "CartID": cartId,
         "CustomerFirstName": customerFirstName,
+        "CustomerID": customerId,
         "CustomerLastName": customerLastName,
         "Product": product,
+        "ProductID": productId,
         "ProductPicture": productPicture,
         "ProductPrice": productPrice,
       };
