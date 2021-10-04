@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../shops/categories.dart';
 import 'package:instashop/config/link.dart' as link;
 import 'package:dio/dio.dart';
+import 'package:instashop/config/customerID.dart' as id;
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -32,10 +33,12 @@ class _SignInPageState extends State<SignInPage> {
     if (isValid) {
       var response = await dio.post("${link.server}customer-login",
           data: data, options: Options());
+
       if (response.data != null) {
         var router = new MaterialPageRoute(
             builder: (BuildContext context) => new Categories());
         Navigator.of(context).push(router);
+
       } else {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text("Invalid Credentials")));
@@ -43,6 +46,9 @@ class _SignInPageState extends State<SignInPage> {
       print(_userEmail);
       print(_password);
       print(response.data);
+      id.customer = response.data.toString();
+      print(id.customer);
+
       /*
       Continue processing the provided information with your own logic
       such us sending HTTP requests, saving to SQLite database, etc.

@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:instashop/config/link.dart' as link;
+import 'package:instashop/config/customerID.dart' as id;
 import 'package:instashop/ui/shops/categories.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
@@ -18,16 +19,15 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   late Future<List<dynamic>> futureAlbums;
   Dio dio = new Dio();
-  var _customerID = "1";
 
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums("1");
+    futureAlbums = fetchAlbums(id.customer);
   }
 
   Future<void> _addToOrderHistory(String productId) async {
-    dynamic data = {"ProductID": "$productId", "CustomerID": _customerID};
+    dynamic data = {"ProductID": "$productId", "CustomerID": id.customer};
 
     var response = await dio.post("${link.server}new-order-history",
         data: data, options: Options());

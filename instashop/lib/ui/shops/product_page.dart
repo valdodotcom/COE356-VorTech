@@ -8,6 +8,7 @@ import 'package:instashop/ui/util/wishlist.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 import '../../config/link.dart' as link;
+import 'package:instashop/config/customerID.dart' as id;
 import 'package:dio/dio.dart';
 
 class ProductPage extends StatefulWidget {
@@ -22,7 +23,6 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   late Future<List<dynamic>> futureAlbums;
   Dio dio = new Dio();
-  var _customerID = "1";
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   Future<void> _addToWishlist(String productId) async {
-    dynamic data = {"ProductID": "$productId", "CustomerID": _customerID};
+    dynamic data = {"ProductID": "$productId", "CustomerID": id.customer};
 
     var response = await dio.post("${link.server}add-to-wishlist",
         data: data, options: Options());
@@ -58,7 +58,7 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   Future<void> _addToCart(String productId) async {
-    dynamic data = {"ProductID": "$productId", "CustomerID": _customerID};
+    dynamic data = {"ProductID": "$productId", "CustomerID": id.customer};
 
     var response = await dio.post("${link.server}add-to-cart",
         data: data, options: Options());

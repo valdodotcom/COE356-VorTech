@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:instashop/config/link.dart' as link;
+import 'package:instashop/config/customerID.dart' as id;
+
 
 import 'dart:convert';
 
@@ -18,7 +20,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum("1");
+    futureAlbum = fetchAlbum(id.customer);
   }
 
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:instashop/config/link.dart' as link;
+import 'package:instashop/config/customerID.dart' as id;
 import 'package:flutter/material.dart';
 import 'package:instashop/ui/settings/settings.dart';
 import 'package:instashop/widgets/box_decoration.dart';
@@ -21,7 +22,7 @@ class _OrderHistoryState extends State<OrderHistory> {
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums("1");
+    futureAlbums = fetchAlbums(id.customer);
   }
 
   DateFormat dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss a");
