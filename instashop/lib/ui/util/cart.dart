@@ -212,7 +212,7 @@ class _CartPageState extends State<CartPage> {
                                                                           router);
 
                                                                   setState(() {
-                                                                    futureAlbums = deleteAlbum(snapshot
+                                                                    futureAlbums = deleteCartItem(snapshot
                                                                         .data!
                                                                         .toList()[
                                                                             position]
@@ -282,6 +282,9 @@ class _CartPageState extends State<CartPage> {
                                                         _addToOrderHistory(
                                                                 "${snapshot.data!.toList()[i].productId}");
                                                   }
+
+                                                    deleteEntireCart(id.customer);
+
                                                 },
                                                 child: new Text("Accept")),
                                             TextButton(
@@ -322,6 +325,7 @@ class _CartPageState extends State<CartPage> {
                                 )),
                           ),
                         ),
+
                       ],
                     ),
                   ),
@@ -356,7 +360,28 @@ Future<List<dynamic>> fetchAlbums(String customerId) async {
   }
 }
 
-Future<Album> deleteAlbum(String idOfCart) async {
+
+Future<Album> deleteEntireCart(String idOfCustomer) async {
+  final http.Response response = await http.delete(
+    Uri.parse('${link.server}delete-customer-cart/$idOfCustomer'),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON. After deleting,
+    // you'll get an empty JSON `{}` response.
+    // Don't return `null`, otherwise `snapshot.hasData`
+    // will always return false on `FutureBuilder`.
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a "200 OK response",
+    // then throw an exception.
+    throw Exception('Failed to delete album.');
+  }
+}
+
+
+Future<Album> deleteCartItem(String idOfCart) async {
   final http.Response response = await http.delete(
     Uri.parse('${link.server}delete-from-cart/$idOfCart'),
   );
