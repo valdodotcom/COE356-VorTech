@@ -279,10 +279,8 @@ class _CartPageState extends State<CartPage> {
                                                                 .toList()
                                                                 .length;
                                                         i++) {
-                                                    futureAlbums =
                                                         _addToOrderHistory(
-                                                                "${snapshot.data!.toList()[i].productId}")
-                                                            as Future<List>;
+                                                                "${snapshot.data!.toList()[i].productId}");
                                                   }
                                                 },
                                                 child: new Text("Accept")),
