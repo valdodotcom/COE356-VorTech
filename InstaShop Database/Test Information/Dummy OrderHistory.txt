@@ -1,0 +1,5 @@
+{
+        "ProductID" : "1",
+        "CustomerID" : "2",
+        "OrderDate" : "NOW"
+    }

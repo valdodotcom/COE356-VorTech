@@ -1,14 +1,16 @@
 {   
-    "CustomerName" : "Valdo Abruquah",
+    "CustomerFirstName" : "Valdo",
+    "CustomerLastName" : "Abruquah",
     "CustomerEmail" : "valdoato@gmail.com",
     "CustomerPhoneNo" : "0504147090",
     "CustomerPassword" : "insertrandomshithere",
-    "CustomerAddress" : "complex 79S",
+    "CustomerAddress" : "complex 79S"
     "CustomerID" : "1"
     }
 
 {   
-    "CustomerName" : "Yoocee Ansah",
+    "CustomerFirstName" : "Yoocee",
+    "CustomerLastName" : "Ansah",
     "CustomerEmail" : "yooceeansah@gmail.com",
     "CustomerPhoneNo" : "0269807325",
     "CustomerPassword" : "ihopethisworks",
@@ -17,10 +19,11 @@
     }
 
 {   
-    "CustomerName" : "Yasmeen Dubiure",
+    "CustomerFirstName" : "Yasmeen",
+    "CustomerLastName" : "Dubiure",
     "CustomerEmail" : "yazyduby@gmail.com",
     "CustomerPhoneNo" : "0266677730",
     "CustomerPassword" : "ihateyooceesomuch",
-    "CustomerAddress" : "complex 118R",
+    "CustomerAddress" : "complex 118R"
     "CustomerID" : "3"
     }

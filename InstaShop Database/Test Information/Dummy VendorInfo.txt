@@ -1,39 +1,119 @@
-{
-    "VendorName" : "Kate Enyama Arhinful",
+{   
+    "VendorFirstName" : "Kate Enyama",
+    "VendorLastName" : "Arhinful",
     "VendorEmail" : "arhinfulenyamakate@gmail.com",
+    "ShopName" : "Kate's Fashion",
+    "ShopPicture" :"https://drive.google.com/uc?export=view&id=1WELyBDOrZKbP6qPZgzHdtD82yr8ba4Ip",
     "VendorPhoneNo" : "0242615970",
     "VendorPassword" : "katrina",
-    "VendorAddress" : "brunei complex",
+    "VendorAddress" : "brunei complex"
     "VendorID" : "1"
     
     }
 
-{
-    "VendorName" : "Carol Antwi",
+{   
+    "VendorFirstName" : "Carol",
+    "VendorLastName" : " Antwi",
     "VendorEmail" : "carolantwi92@gmail.com",
+    "ShopName" : "Craves & Chill",
+    "ShopPicture" :"https://drive.google.com/uc?export=view&id=19Mx38VtDyF2Hy4pFSKpcATGHrstg_Q-Q",
     "VendorPhoneNo" : "0559504390",
     "VendorPassword" : "kinggggggggg",
-    "VendorAddress" : "brunei complex 118R",
+    "VendorAddress" : "brunei complex 118R
     "VendorID" : "2"
     
     }
 
 {   
-    "VendorName" : "Deborah Boakye",
+    "VendorFirstName" : "Deborah",
+    "VendorLastName" : "Boakye",
     "VendorEmail" : "afiab990@gmail.com",
+    "ShopName" : "The Snack Haven",
+    "ShopPicture" :"https://drive.google.com/uc?export=view&id=1dtTifiNiDmVkUvzQNPMRW-9woaEwPPpf",
     "VendorPhoneNo" : "0509499799",
     "VendorPassword" : "illberichsoon",
-    "VendorAddress" : "complex 62Q",
+    "VendorAddress" : "complex 62Q"
     "VendorID" : "3"
     }
 
 
- {
-    "VendorName" : "Cedric Bansah",
+ {   
+    "VendorFirstName" : "Cedric",
+    "VendorLastName" : "Bansah",
     "VendorEmail" : "ceddybans@gmail.com",
+    "ShopName" : "Brimms Bay",
+    "ShopPicture" :"https://drive.google.com/uc?export=view&id=1oCpE46tRpEH095L3FZAFzva_oOQg3_q1",
     "VendorPhoneNo" : "0209521715",
     "VendorPassword" : "THEweeKndisABEL",
     "VendorAddress" : "brunei complex 79s",
     "VendorID" : "4"
 
  }
+
+{   
+    "VendorFirstName" : "Hezekiah",
+    "VendorLastName" : "Boadu",
+    "VendorEmail" : "hezzyboadu@gmail.com",
+    "ShopName" : "Apple Coinnessuer",
+    "ShopPicture" :"https://drive.google.com/uc?export=view&id=1vx0YUgDkIoBy69wdrMnSj62NFKcyi67d",
+    "VendorPhoneNo" : "0509027424",
+    "VendorPassword" : "wizKiiiidooooo",
+    "VendorAddress" : "brunei complex 21",
+    "VendorID" : "5"
+
+
+}
+
+
+{
+    
+    "VendorFirstName" : "Mark",
+    "VendorLastName" : "Tantuo",
+    "VendorEmail" : "tantuomark@gmail.com",
+    "ShopName" : "Mark's Lotions",
+    "ShopPicture" :"https://drive.google.com/uc?export=view&id=1ZoRZYKk19yNO5jEw5GxOQbX0itcbT-2F",
+    "VendorPhoneNo" : "0208466670",
+    "VendorPassword" : "j5isdabestmidfielder",
+    "VendorAddress" : "Adom Bi Hostels Inc.",
+    "VendorID" : "6"
+}
+
+
+   {
+    "VendorFirstName" : "Stephon",
+    "VendorLastName" : "Boapeah",
+    "VendorEmail" : "boapeahstephon@gmail.com",
+    "ShopName" : "Glassic Placques",
+    "ShopPicture" :"https://drive.google.com/uc?export=view&id=1HnJYq762iMbS7zjgk-hLn6v-1_lAM4r8",
+    "VendorPhoneNo" : "0243555025",
+    "VendorPassword" : "cr7herewegoooo",
+    "VendorAddress" : "Adom Bi Hostels Inc."
+    "VendorID" : "7"
+
+}
+
+   {
+     "VendorFirstName" : "Kirston ",
+    "VendorLastName" : "Kwasi Kumah",
+    "VendorEmail" : "kirstonkk@gmail.com",
+    "ShopName" : "4K's AutoShop",
+    "ShopPicture" :"https://drive.google.com/uc?export=view&id=15QZv2ZzH9W328-bYPpz-7KbwgBrFuoU7",
+    "VendorPhoneNo" : "0578484353",
+    "VendorPassword" : "mishorny",
+    "VendorAddress" : "Complex 257 S"
+    "VendorID" : "8"
+}
+
+    {
+    "VendorFirstName" : "Beatrice",
+    "VendorLastName" : "Asihene",
+    "VendorEmail" : "beatriceasihene21@gmail.com",
+    "ShopName" : "Bea's Cosmetics",
+    "ShopPicture" :"https://drive.google.com/uc?export=view&id=1zavyKdMnUPrQ2CTVL1mZ8H-PMZrHpJ3F",
+    "VendorPhoneNo" : "0541025047",
+    "VendorPassword" : "password",
+    "VendorAddress" : "SunCity "
+    "VendorID" : "9"
+}
+
+ 

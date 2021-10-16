@@ -39,15 +39,58 @@
     "ProductDescription" : "a 6 pack of condoms"
 }
 
-##TO TEST THE DELETE PRODUCT FUNCTION, THE ENTRY ABOVE WAS DELETED AND RE-ENTERED INTO THE DATABASE
-##THE PRODUCT ID CHANGED FROM 4 TO 5, AAS EXPECTED
 
 {
     "ProductID" : "5",
-    "VendorID" : "4",
-    "Product" : "Durex Condoms",
+    "VendorID" : "5",
+    "Product" : "Macbook pro 16",
+    "ProductCategory" : "Tech & Gadgets",
+    "ProductPicture" : "https://drive.google.com/uc?export=view&id=117yr1wfi-iqsA2iT7zWyuaLa6quXrjMq",
+    "ProductPrice" : "5400",
+    "ProductDescription" : "16 inch laptop from 2019"
+}
+
+
+{   
+    "ProductID" : "6",
+    "VendorID" : "6",
+    "Product" : "Vaseline Petroleum Jelly",
+    "ProductCategory" : "Beauty & Personal Care",
+    "ProductPicture" : "https://drive.google.com/uc?export=view&id=1gtyZE4DRcsOYqnf26sHq2UPfW-h0wsm8",
+    "ProductPrice" : "15",
+    "ProductDescription" : "Comes with complimentary socks"
+}
+
+
+
+{    
+    "ProductID" : "7",
+    "VendorID" : "7",
+    "Product" : "East Atlanta Love Letter by 6LACK and Future (Spotify)",
+    "ProductCategory" : "Arts & Crafts",
+    "ProductPicture" : "https://drive.google.com/uc?export=view&id=1T1mKUvLY_ozNoHnvFKfRl8b7Ka_oD2CV",
+    "ProductPrice" : "125",
+    "ProductDescription" : "Placque is fragile and must be handled with extreme care"
+}
+
+
+{
+    "ProductID" : "8",
+    "VendorID" : "8",
+    "Product" : "Mercedez Benz Headlights",
     "ProductCategory" : "Other",
-    "ProductPicture" : "Insertlinkhere",
-    "ProductPrice" : "30",
-    "ProductDescription" : "a 6 pack of condoms"
-} 
+    "ProductPicture" : "https://drive.google.com/uc?export=view&id=1vv6hnPj4AGBhm63M-_5VoT100xb5ZP3j",
+    "ProductPrice" : "750",
+    "ProductDescription" : "Authentic From Germany"
+}
+
+{
+    "ProductID" : "9",
+    "VendorID" : "9",
+    "Product" : "FENTY PRO FILT'R SOFT MATTE LONGWEAR FOUNDATION",
+    "ProductCategory" : "Beauty & Personal Care",
+    "ProductPicture" : "https://drive.google.com/uc?export=view&id=1fv8sV93sTSkOLFP18KkMXhq00ub68GtL",
+    "ProductPrice" : "217",
+    "ProductDescription" : "Authentic make up"
+}
+
