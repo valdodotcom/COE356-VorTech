@@ -27,7 +27,6 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     super.initState();
-    // futureAlbums = fetchAlbums(link.server, link.defaultNameOfShop);
   }
 
   Future<void> _addToWishlist(String productId) async {
