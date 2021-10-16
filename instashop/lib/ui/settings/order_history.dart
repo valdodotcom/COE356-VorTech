@@ -27,7 +27,6 @@ class _OrderHistoryState extends State<OrderHistory> {
 
   DateFormat dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss");
 
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

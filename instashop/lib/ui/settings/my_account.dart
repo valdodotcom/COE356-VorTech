@@ -3,8 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:instashop/config/link.dart' as link;
 import 'package:instashop/config/customerID.dart' as id;
-
-
 import 'dart:convert';
 
 class MyAccountPage extends StatefulWidget {
@@ -26,7 +24,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        // leading: new Container(),
         backgroundColor: Color(0xff00eaff),
         title: new Text("Settings"),
       ),
@@ -50,7 +47,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
                   ),
                   new Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 10)),
 
-
                   new Container(
                     decoration: new BoxDecoration(
                         // color: Colors.grey,
@@ -68,7 +64,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
 
                         new Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 10)),
 
-
                         new Text("Email: " + snapshot.data!.customerEmail,
                             style: new TextStyle(fontSize: 16)),
 
@@ -80,7 +75,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             style: new TextStyle(fontSize: 16)),
 
                         new Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 10)),
-
 
                         new Text("Address: " + snapshot.data!.customerAddress,
                             style: new TextStyle(fontSize: 16)),
@@ -114,26 +108,6 @@ Future<Album> fetchAlbum(String customerId) async {
     throw Exception('Failed to load album');
   }
 }
-
-/*class Album {
-  final int userId;
-  final int id;
-  final String title;
-
-  Album({
-    required this.userId,
-    required this.id,
-    required this.title,
-  });
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-    );
-  }
-}*/
 
 class Album {
   Album({
