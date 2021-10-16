@@ -25,7 +25,7 @@ class _OrderHistoryState extends State<OrderHistory> {
     futureAlbums = fetchAlbums(id.customer);
   }
 
-  DateFormat dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss a");
+  DateFormat dateFormat = DateFormat("dd-MM-yyyy HH:mm:ss");
 
 
   @override
@@ -112,55 +112,6 @@ class _OrderHistoryState extends State<OrderHistory> {
                                 new Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    /*ElevatedButton(
-                                          onPressed: () {
-
-                                             var router = new MaterialPageRoute(
-                                                builder: (BuildContext context) =>
-                                                new ProductPage(name: '${snapshot.data!.toList()[position].shopName}'));
-
-                                            Navigator.of(context).push(router);
-
-                                          },
-                                          child:
-                                          new Icon(Icons.grid_view)),*/
-                                    Padding(padding: EdgeInsets.all(10)),
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return new AlertDialog(
-                                                  title: new Text(
-                                                      "Remove from history"),
-                                                  content: new Text(
-                                                      "Are you sure you want to remove this item from your history? "
-                                                      "This cannot be undone."),
-                                                  actions: <Widget>[
-                                                    Padding(
-                                                        padding:
-                                                            EdgeInsets.all(10)),
-                                                    ElevatedButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: new Text("Yes")),
-                                                    TextButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child:
-                                                            new Text("Cancel"))
-                                                  ],
-                                                );
-                                              });
-                                        },
-                                        child: new Icon(
-                                            Icons.highlight_remove_outlined)),
-                                  ],
                                 )
                               ],
                             ),
