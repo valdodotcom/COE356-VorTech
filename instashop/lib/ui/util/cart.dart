@@ -285,6 +285,10 @@ class _CartPageState extends State<CartPage> {
 
                                                     deleteEntireCart(id.customer);
 
+                                                    var router = new MaterialPageRoute(
+                                                        builder: (BuildContext context) => new Categories());
+                                                    Navigator.of(context).push(router);
+
                                                 },
                                                 child: new Text("Accept")),
                                             TextButton(
