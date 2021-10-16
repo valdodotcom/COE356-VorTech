@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:instashop/config/link.dart' as link;
-// import 'package:http/http.dart' as http;
+import 'package:instashop/config/customerID.dart' as id;
 import 'package:dio/dio.dart';
 import '../shops/categories.dart';
 import 'sign_in_page.dart';
@@ -39,7 +39,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
   Future<void> _trySubmitForm() async {
     final isValid = _formKey.currentState!.validate();
 
-    dynamic data = {
+    dynamic newData = {
       "CustomerFirstName": _firstNameController.text,
       "CustomerLastName": _lastNameController.text,
       "CustomerEmail": _emailController.text,
@@ -48,32 +48,35 @@ class _NewAccountPageState extends State<NewAccountPage> {
       "CustomerAddress": _addressController.text
     };
 
+    dynamic loginData = {
+      "CustomerEmail": _emailController.text,
+      "CustomerPassword": _passwordController.text
+    };
+
     if (isValid) {
-      var response = await dio.post("${link.server}new-customer-info",
-          data: data, options: Options());
+       await dio.post("${link.server}new-customer-info",
+          data: newData, options: Options());
 
-      if (response.statusCode == 200) {
-        var router = new MaterialPageRoute(
-            builder: (BuildContext context) => new Categories());
-        Navigator.of(context).push(router);
+       var response = await dio.post("${link.server}customer-login",
+           data: loginData, options: Options());
 
-        print('Everything looks good!');
-        print(_userEmail);
-        print(_userName);
-        print(_password);
-        print(_confirmPassword);
-      } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("An Error Occurred")));
+       if (response.data != null) {
+         var router = new MaterialPageRoute(
+             builder: (BuildContext context) => new Categories());
+         Navigator.of(context).push(router);
 
-      }
+       } else {
+         ScaffoldMessenger.of(context)
+             .showSnackBar(SnackBar(content: Text("An Error Occurred")));
+       }
+       print(_userEmail);
+       print(_userName);
+       print(_password);
+       print(_confirmPassword);
+       print(response.data);
+       id.customer = response.data.toString();
+       print(id.customer);
 
-      print(response.data);
-
-      /*
-      Continue processing the provided information with your own logic
-      such us sending HTTP requests, saving to SQLite database, etc.
-      */
     }
   }
 
@@ -247,17 +250,3 @@ class _NewAccountPageState extends State<NewAccountPage> {
     );
   }
 }
-
-/*
-Future<void> makePostRequest() async {
-  const urlPrefix = 'http://10.74.236.15:8000/';
-
-  final url = Uri.parse('$urlPrefix/new-customer-info');
-  final headers = {"Content-type": "application/json"};
-  final json =
-      '{"CustomerName": "John Smith", "CustomerEmail": johnsmith@trial.com, "CustomerPhoneNo": 0234360065, "CustomerPassword": password1, "CustomerAddress": hall 7 }';
-  final response = await post(url, headers: headers, body: json);
-  print('Status code: ${response.statusCode}');
-  print('Body: ${response.body}');
-}
-*/

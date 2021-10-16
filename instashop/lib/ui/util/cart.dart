@@ -1,8 +1,12 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:instashop/config/link.dart' as link;
+import 'package:instashop/config/customerID.dart' as id;
+import 'package:instashop/ui/shops/categories.dart';
 import 'package:instashop/widgets/box_decoration.dart';
+import 'package:instashop/widgets/custom_nav_bar.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 
 class CartPage extends StatefulWidget {
@@ -14,11 +18,39 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   late Future<List<dynamic>> futureAlbums;
+  Dio dio = new Dio();
 
   @override
   void initState() {
     super.initState();
-    futureAlbums = fetchAlbums("1");
+    futureAlbums = fetchAlbums(id.customer);
+  }
+
+  Future<void> _addToOrderHistory(String productId) async {
+    dynamic data = {"ProductID": "$productId", "CustomerID": id.customer};
+
+    var response = await dio.post("${link.server}new-order-history",
+        data: data, options: Options());
+
+    if (response.statusCode == 200) {
+      new AlertDialog(
+        title: new Text("Success!"),
+        content: new Text("Your order has been placed successfully "
+            "and you will be contacted by the respective vendor(s) shortly."),
+        actions: <Widget>[
+          ElevatedButton(
+              onPressed: () {
+                var router = new MaterialPageRoute(
+                    builder: (BuildContext context) => new Categories());
+                Navigator.of(context).push(router);
+              },
+              child: new Text("Continue shopping"))
+        ],
+      );
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Unable to add to wishlist")));
+    }
   }
 
   @override
@@ -136,12 +168,11 @@ class _CartPageState extends State<CartPage> {
                                                                         .all(
                                                                             10)),
                                                             ElevatedButton(
-                                                                onPressed:
-                                                                    () {
-                                                                      Navigator.of(
+                                                                onPressed: () {
+                                                                  Navigator.of(
                                                                           context)
-                                                                          .pop();
-                                                                    },
+                                                                      .pop();
+                                                                },
                                                                 child: new Text(
                                                                     "Enter"))
                                                           ],
@@ -155,40 +186,45 @@ class _CartPageState extends State<CartPage> {
                                                 onPressed: () {
                                                   showDialog(
                                                       context: context,
-                                                      builder:
-                                                          (BuildContext context) {
+                                                      builder: (BuildContext
+                                                          context) {
                                                         return new AlertDialog(
                                                           title: new Text(
                                                               "Remove from cart"),
                                                           content: new Text(
                                                               "Are you sure you want to remove this item from your cart? "
-                                                                  "This cannot be undone."),
+                                                              "This cannot be undone."),
                                                           actions: <Widget>[
                                                             Padding(
                                                                 padding:
-                                                                EdgeInsets
-                                                                    .all(10)),
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            10)),
                                                             ElevatedButton(
                                                                 onPressed: () {
-
                                                                   var router = new MaterialPageRoute(
-                                                                      builder: (BuildContext context) => new CartPage());
-                                                                  Navigator.of(context).push(router);
-
-
+                                                                      builder: (BuildContext
+                                                                              context) =>
+                                                                          new CartPage());
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .push(
+                                                                          router);
 
                                                                   setState(() {
-                                                                    futureAlbums =
-                                                                    deleteAlbum(snapshot.data!.toList()[position].cartId) as Future<List>;})
-                                                                  ;
-
+                                                                    futureAlbums = deleteCartItem(snapshot
+                                                                        .data!
+                                                                        .toList()[
+                                                                            position]
+                                                                        .cartId) as Future<List>;
+                                                                  });
                                                                 },
                                                                 child: new Text(
                                                                     "Yes")),
                                                             TextButton(
                                                                 onPressed: () {
                                                                   Navigator.of(
-                                                                      context)
+                                                                          context)
                                                                       .pop();
                                                                 },
                                                                 child: new Text(
@@ -199,26 +235,6 @@ class _CartPageState extends State<CartPage> {
                                                 },
                                                 child: new Icon(
                                                     Icons.delete_forever)),
-
-/*
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  final addedToWishlist =
-                                                      SnackBar(
-                                                    content: new Text(
-                                                        "Removed from cart"),
-                                                    action: SnackBarAction(
-                                                      label: "Undo",
-                                                      onPressed: () {},
-                                                    ),
-                                                  );
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                          addedToWishlist);
-                                                },
-                                                child: new Icon(
-                                                    Icons.delete_forever)),
-*/
                                           ],
                                         )
                                       ],
@@ -239,11 +255,14 @@ class _CartPageState extends State<CartPage> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         double _total = 0;
-                                        for (int i = 0; i < snapshot.data!.toList().length; i++) {
-                                          //   // print(snapshot.data!.toList().length);
-                                          _total += snapshot.data!.toList()[i].productPrice;
-                                          // _total ++;
+                                        for (int i = 0;
+                                            i < snapshot.data!.toList().length;
+                                            i++) {
+                                          _total += snapshot.data!
+                                              .toList()[i]
+                                              .productPrice;
                                           print(_total);
+                                          print("${snapshot.data!.toList()[i].productId}");
                                         }
                                         return new AlertDialog(
                                           title: new Text("Checkout"),
@@ -254,14 +273,18 @@ class _CartPageState extends State<CartPage> {
                                             ElevatedButton(
                                                 onPressed: () {
 
-                                                 /* for (int i = 0; i <= snapshot.data!.toList().length; i++) {
-                                                  //   // print(snapshot.data!.toList().length);
-                                                  // _total = snapshot.data!.toList()[i].productPrice;
-                                                  print(_total);
-                                                  _total++;
-                                                  }*/
+                                                    for (int i = 0;
+                                                        i <
+                                                            snapshot.data!
+                                                                .toList()
+                                                                .length;
+                                                        i++) {
+                                                        _addToOrderHistory(
+                                                                "${snapshot.data!.toList()[i].productId}");
+                                                  }
 
-                                                  Navigator.of(context).pop();
+                                                    deleteEntireCart(id.customer);
+
                                                 },
                                                 child: new Text("Accept")),
                                             TextButton(
@@ -275,16 +298,7 @@ class _CartPageState extends State<CartPage> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      boxShadow: [
-                                        // BoxShadow(
-                                        //   color: Colors.white.withOpacity(0.5),
-                                        //   spreadRadius: 5,
-                                        //   blurRadius: 7,
-                                        //   offset: Offset(0, 3),
-                                        // )
-                                      ],
                                       color: Colors.blue,
-                                      // borderRadius: BorderRadius.circular(15),
                                       border:
                                           Border.all(color: Colors.white12)),
                                   padding: EdgeInsets.all(15.0),
@@ -302,6 +316,7 @@ class _CartPageState extends State<CartPage> {
                                 )),
                           ),
                         ),
+
                       ],
                     ),
                   ),
@@ -315,6 +330,7 @@ class _CartPageState extends State<CartPage> {
           },
         ),
       ),
+      bottomNavigationBar: CustomNavBar(index: 0),
     );
   }
 }
@@ -335,7 +351,28 @@ Future<List<dynamic>> fetchAlbums(String customerId) async {
   }
 }
 
-Future<Album> deleteAlbum(String idOfCart) async {
+
+Future<Album> deleteEntireCart(String idOfCustomer) async {
+  final http.Response response = await http.delete(
+    Uri.parse('${link.server}delete-customer-cart/$idOfCustomer'),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON. After deleting,
+    // you'll get an empty JSON `{}` response.
+    // Don't return `null`, otherwise `snapshot.hasData`
+    // will always return false on `FutureBuilder`.
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a "200 OK response",
+    // then throw an exception.
+    throw Exception('Failed to delete album.');
+  }
+}
+
+
+Future<Album> deleteCartItem(String idOfCart) async {
   final http.Response response = await http.delete(
     Uri.parse('${link.server}delete-from-cart/$idOfCart'),
   );
@@ -358,24 +395,30 @@ class Album {
   Album({
     required this.cartId,
     required this.customerFirstName,
+    required this.customerId,
     required this.customerLastName,
     required this.product,
+    required this.productId,
     required this.productPicture,
     required this.productPrice,
   });
 
   final String cartId;
   final String customerFirstName;
+  final int customerId;
   final String customerLastName;
   final String product;
+  final int productId;
   final String productPicture;
   final double productPrice;
 
   factory Album.fromJson(Map<String, dynamic> json) => Album(
         cartId: json["CartID"],
         customerFirstName: json["CustomerFirstName"],
+        customerId: json["CustomerID"],
         customerLastName: json["CustomerLastName"],
         product: json["Product"],
+        productId: json["ProductID"],
         productPicture: json["ProductPicture"],
         productPrice: json["ProductPrice"],
       );
@@ -383,8 +426,10 @@ class Album {
   Map<String, dynamic> toJson() => {
         "CartID": cartId,
         "CustomerFirstName": customerFirstName,
+        "CustomerID": customerId,
         "CustomerLastName": customerLastName,
         "Product": product,
+        "ProductID": productId,
         "ProductPicture": productPicture,
         "ProductPrice": productPrice,
       };

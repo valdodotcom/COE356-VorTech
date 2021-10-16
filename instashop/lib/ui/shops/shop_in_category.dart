@@ -21,10 +21,7 @@ class _ShopInCategoryState extends State<ShopInCategory> {
   @override
   void initState() {
     super.initState();
-    // futureAlbums = fetchAlbums(link.server, link.defaultCategory);
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +35,7 @@ class _ShopInCategoryState extends State<ShopInCategory> {
         ),
         bottomNavigationBar: new CustomNavBar(index: 0));
   }
-
-
 }
-
 
 Widget tempWidget(String categoryName) {
   var futureAlbums = fetchAlbums(categoryName);
@@ -107,8 +101,6 @@ Widget tempWidget(String categoryName) {
                     margin: EdgeInsets.all(10),
                     padding: EdgeInsets.all(23),
                     decoration: tempBoxDecoration(),
-
-
                   ));
             });
       } else if (snapshot.hasError) {

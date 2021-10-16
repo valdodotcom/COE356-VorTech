@@ -57,7 +57,6 @@ class _CategoriesState extends State<Categories> {
                   style: new TextStyle(
                     fontSize: 20, color: Colors.blue.shade900,
                   )),),),
-             
 
               new Column(
                 children: <Widget>[

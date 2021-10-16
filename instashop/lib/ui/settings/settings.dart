@@ -6,7 +6,6 @@ import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
 import '../homescreens/home.dart';
 import 'order_history.dart';
-// import 'package:instashop/config/back_twice_to_close_app.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -74,7 +73,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   new Padding(padding: EdgeInsets.all(10)),
                   new InkWell(
                     onTap: () {
-                      // return debugPrint("Button pressed");
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
                               new OrderHistory());
@@ -100,41 +98,9 @@ class _SettingsPageState extends State<SettingsPage> {
                         )),
                   ),
                   new Padding(padding: EdgeInsets.all(10)),
-/*
+
                   new InkWell(
                     onTap: () {
-                      return debugPrint("Button pressed");
-
-                      // var router = new MaterialPageRoute(
-                      //     builder: (BuildContext context) =>
-                      //         new ItemInCategory());
-                      //
-                      // Navigator.of(context).push(router);
-                    },
-                    child: new Container(
-                        decoration: tempBoxDecoration(),
-
-                        padding: EdgeInsets.all(15.0),
-                        child: new Row(
-                          children: <Widget>[
-                            new Icon(
-                              Icons.app_settings_alt,
-                              size: 40,
-                              color: Colors.blue,
-                            ),
-                            new Text(
-                              "    Device Settings",
-                              style: tempStyle ()
-                            ),
-                          ],
-                        )),
-                  ),
-*/
-                  // new Padding(padding: EdgeInsets.all(10)),
-                  new InkWell(
-                    onTap: () {
-
-
                       var router = new MaterialPageRoute(
                           builder: (BuildContext context) =>
                               new InfoPage());
