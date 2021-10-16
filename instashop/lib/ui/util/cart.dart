@@ -298,16 +298,7 @@ class _CartPageState extends State<CartPage> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      boxShadow: [
-                                        // BoxShadow(
-                                        //   color: Colors.white.withOpacity(0.5),
-                                        //   spreadRadius: 5,
-                                        //   blurRadius: 7,
-                                        //   offset: Offset(0, 3),
-                                        // )
-                                      ],
                                       color: Colors.blue,
-                                      // borderRadius: BorderRadius.circular(15),
                                       border:
                                           Border.all(color: Colors.white12)),
                                   padding: EdgeInsets.all(15.0),
