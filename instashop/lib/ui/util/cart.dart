@@ -49,7 +49,7 @@ class _CartPageState extends State<CartPage> {
       );
     } else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Unable to add to wishlist")));
+          .showSnackBar(SnackBar(content: Text("Unable to place order")));
     }
   }
 
