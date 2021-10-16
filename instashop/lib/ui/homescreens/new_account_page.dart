@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:instashop/config/link.dart' as link;
 import 'package:instashop/config/customerID.dart' as id;
-// import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import '../shops/categories.dart';
 import 'sign_in_page.dart';
@@ -77,11 +76,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
        print(response.data);
        id.customer = response.data.toString();
        print(id.customer);
-
-      /*
-      Continue processing the provided information with your own logic
-      such us sending HTTP requests, saving to SQLite database, etc.
-      */
 
     }
   }
@@ -256,17 +250,3 @@ class _NewAccountPageState extends State<NewAccountPage> {
     );
   }
 }
-
-/*
-Future<void> makePostRequest() async {
-  const urlPrefix = 'http://10.74.236.15:8000/';
-
-  final url = Uri.parse('$urlPrefix/new-customer-info');
-  final headers = {"Content-type": "application/json"};
-  final json =
-      '{"CustomerName": "John Smith", "CustomerEmail": johnsmith@trial.com, "CustomerPhoneNo": 0234360065, "CustomerPassword": password1, "CustomerAddress": hall 7 }';
-  final response = await post(url, headers: headers, body: json);
-  print('Status code: ${response.statusCode}');
-  print('Body: ${response.body}');
-}
-*/

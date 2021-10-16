@@ -49,10 +49,6 @@ class _SignInPageState extends State<SignInPage> {
       id.customer = response.data.toString();
       print(id.customer);
 
-      /*
-      Continue processing the provided information with your own logic
-      such us sending HTTP requests, saving to SQLite database, etc.
-      */
     }
   }
 
@@ -64,8 +60,6 @@ class _SignInPageState extends State<SignInPage> {
         padding: EdgeInsets.all(40.0),
         children: <Widget>[
           new Column(
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
-              //   mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Padding(padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0)),
                 new Icon(Icons.shopping_cart_rounded, size: 140.0),
