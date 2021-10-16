@@ -7,7 +7,6 @@ import 'package:instashop/config/customerID.dart' as id;
 import 'package:flutter/material.dart';
 import 'package:instashop/widgets/box_decoration.dart';
 import 'package:instashop/widgets/custom_nav_bar.dart';
-
 import '../shops/product_page.dart';
 
 class WishlistPage extends StatefulWidget {
@@ -158,9 +157,6 @@ class _WishlistPageState extends State<WishlistPage> {
                                                               Navigator.of(context).push(router);
 
                                                               ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-
-
 
                                                               setState(() {
                                                                 futureAlbums =
